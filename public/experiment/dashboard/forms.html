@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Admin Page</title>
+    <title>Form Page</title>
 
     <!-- Bootstrap core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
@@ -37,7 +37,12 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#">Username</a></li>
                 <li><a href="#">Logout</a></li>
+                <!-- <li><a href="#">Username</a></li>
+                <li><a href="#">Logout</a></li> -->
             </ul>
+            <!--<form class="navbar-form navbar-right">
+                <input type="text" class="form-control" placeholder="Search...">
+            </form> -->
         </div>
     </div>
 </nav>
@@ -46,87 +51,71 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li ><a href="#">Home </a></li>
+                <li><a href="#">Home </a></li>
                 <li><a href="#">Profile</a></li>
-                <li class="active"><a href="#">Admin <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">Forms</a></li>
+                <li><a href="#">Admin</a></li>
+                <li class="active"><a href="#">Forms <span class="sr-only">(current)</span></a></li>
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1>Admin</h1>
-            <h2>Users</h2>
+            <h1>Forms</h1>
+            <ul class="nav nav-tabs">
+                <li role="presentation" class="active"><a href="#">Forms</a></li>
+                <li role="presentation"><a href="#">Fields</a></li>
+            </ul>
             <div class="table-responsive">
-            <table border="1" class="table table-striped">
-                <th>
-                    <button>
-                        <span class="glyphicon glyphicon-triangle-bottom"></span>
-                    </button>
-                    Username</th>
-                <th>
-                    <button>
-                        <span class="glyphicon glyphicon-triangle-bottom"></span>
-                    </button>
-                    Password</th>
-                <th>
-                    <button>
-                        <span class="glyphicon glyphicon-triangle-bottom"></span>
-                    </button>
-                    Role</th>
-                <th>Actions</th>
-                <tr>
-                    <td> <input placeholder="username"></td>
-                    <td> <input placeholder="password"></td>
-                    <td> <input placeholder="role1,role2"></td>
-                    <td>
+                <table border="1" class="table table-striped">
+                    <th>
                         <button>
+                            <span class="glyphicon glyphicon-triangle-bottom"></span>
+                        </button>
+                        Form Name</th>
+                    <th>
+                        <button>
+                            <span class="glyphicon glyphicon-triangle-bottom"></span>
+                        </button>
+                        Action</th>
+                    <tr>
+                        <td> <input placeholder="name"></td>
+                        <td><button>
                             <span class="glyphicon glyphicon-plus"></span>
                         </button>
-                        <button type="button">
-                            <span class="glyphicon glyphicon-ok"></span>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>alice</td>
-                    <td></td>
-                    <td>student</td>
-                    <td>
-                        <button>
+                            <button type="button">
+                                <span class="glyphicon glyphicon-ok"></span>
+                            </button></td>
+                    </tr>
+                    <tr>
+                        <td>Registration Form</td>
+                        <td><button>
                             <span class="glyphicon glyphicon-remove"></span>
                         </button>
-                        <button type="button">
-                            <span class="glyphicon glyphicon-pencil"></span>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>bob</td>
-                    <td></td>
-                    <td>faculty|admin</td>
-                    <td>
-                        <button>
+                            <button type="button">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </button></td>
+                    </tr>
+                    <tr>
+                        <td>Contact List</td>
+                        <td><button>
                             <span class="glyphicon glyphicon-remove"></span>
                         </button>
-                        <button type="button">
-                            <span class="glyphicon glyphicon-pencil"></span>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>charlie</td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                        <button>
+                            <button type="button">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </button></td>
+                    </tr>
+                    <tr>
+                        <td>To Do List</td>
+                        <td><button>
                             <span class="glyphicon glyphicon-remove"></span>
                         </button>
-                        <button type="button">
-                            <span class="glyphicon glyphicon-pencil"></span>
-                        </button>
-                    </td>
-                </tr>
+                            <button type="button">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </button></td>
+                    </tr>
+
+
             </table>
             </div>
+
         </div>
     </div>
 </div>
