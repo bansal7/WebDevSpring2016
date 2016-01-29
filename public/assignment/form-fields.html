@@ -37,6 +37,7 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#">Username</a></li>
+                <li><a>|</a></li>
                 <li><a href="#">Logout</a></li>
             </ul>
         </div>
@@ -47,17 +48,17 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li><a href="#">Home </a></li>
-                <li><a href="#">Profile</a></li>
-                <li><a href="#">Admin</a></li>
-                <li class="active"><a href="#">Forms <span class="sr-only">(current)</span></a></li>
+                <li><a href="home.html">Home </a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="admin.html">Admin</a></li>
+                <li class="active"><a href="forms.html">Forms <span class="sr-only">(current)</span></a></li>
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1>Forms</h1>
             <ul class="nav nav-tabs">
-                <li role="presentation" ><a href="#">Forms</a></li>
-                <li role="presentation" class="active"><a href="#">Fields</a></li>
+                <li role="presentation" ><a href="forms.html">Forms</a></li>
+                <li role="presentation" class="active"><a href="form-fields.html">Fields</a></li>
             </ul>
             <div class="container">
                 <br/>
@@ -73,8 +74,116 @@
                             <span class="glyphicon glyphicon-remove arrangeicons"></span>
                             <span class="glyphicon glyphicon-align-justify arrangeicons"></span>
                         </div>
+                    </div><br/>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Last Name:</label><br/>
+                            <input type="text" placeholder="Last Name">
+                        </div>
+                        <div class="col-md-6"><br/>
+                            <span class="glyphicon glyphicon-pencil arrangeicons"></span>
+                            <span class="glyphicon glyphicon-plus arrangeicons"></span>
+                            <span class="glyphicon glyphicon-remove arrangeicons"></span>
+                            <span class="glyphicon glyphicon-align-justify arrangeicons"></span>
+                        </div>
+                    </div><br/>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Date of Birth:</label><br/>
+                            <input type="date" placeholder="Select Date">
+                        </div>
+                        <div class="col-md-6"><br/>
+                            <span class="glyphicon glyphicon-pencil arrangeicons"></span>
+                            <span class="glyphicon glyphicon-plus arrangeicons"></span>
+                            <span class="glyphicon glyphicon-remove arrangeicons"></span>
+                            <span class="glyphicon glyphicon-align-justify arrangeicons"></span>
+                        </div>
+                    </div><br/>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Gender:</label><br/>
+                            <select>
+                            <option>Male</option>
+                            <option>Female</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6"><br/>
+                            <span class="glyphicon glyphicon-pencil arrangeicons"></span>
+                            <span class="glyphicon glyphicon-plus arrangeicons"></span>
+                            <span class="glyphicon glyphicon-remove arrangeicons"></span>
+                            <span class="glyphicon glyphicon-align-justify arrangeicons"></span>
+                        </div>
+                    </div><br/>
+                    <div class="row">
+                        <div class="col-md-6">
+                        <label>Roles:</label><br/>
+                            <div class="checkbox">
+                                <label>
+                                <input type="checkbox" value="">
+                                    Admin
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" value="">
+                                    Student
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" value="">
+                                    User
+                                </label>
+                            </div>
+                            </div>
+                            <div class="col-md-6">
+                                <span class="glyphicon glyphicon-pencil arrangeicons"></span>
+                                <span class="glyphicon glyphicon-plus arrangeicons"></span>
+                                <span class="glyphicon glyphicon-remove arrangeicons"></span>
+                                <span class="glyphicon glyphicon-align-justify arrangeicons"></span>
+                            </div>
+                        </div><br/>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>License Agreement:</label>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                                   Yes
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                                    No
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6"><br/>
+                            <span class="glyphicon glyphicon-pencil arrangeicons"></span>
+                            <span class="glyphicon glyphicon-plus arrangeicons"></span>
+                            <span class="glyphicon glyphicon-remove arrangeicons"></span>
+                            <span class="glyphicon glyphicon-align-justify arrangeicons"></span>
+                        </div>
                     </div>
-                    </form>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Add New Field:</label><br/>
+                            <select>
+                                <option>Single Line Text</option>
+                                <option>Date</option>
+                                <option>Dropdown</option>
+                                <option>Checkboxes</option>
+                                <option>Radio buttons</option>
+                                <option>Paragraph Text Field</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6"><br/>
+                            <span class="glyphicon glyphicon-plus arrangeicons"></span>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
 </div>
