@@ -1,3 +1,8 @@
-.iconright{
-    float:right;
+.arrangeicons{
+    vertical-align: bottom;
+    margin:0;
+}
+
+.responsive{
+    white-space: nowrap;
 }

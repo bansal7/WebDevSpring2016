@@ -17,6 +17,7 @@
 
     <!-- Custom styles for this template -->
     <link href="css/dashboard.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 
 </head>
 
@@ -37,12 +38,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#">Username</a></li>
                 <li><a href="#">Logout</a></li>
-                <!-- <li><a href="#">Username</a></li>
-                <li><a href="#">Logout</a></li> -->
             </ul>
-            <!--<form class="navbar-form navbar-right">
-                <input type="text" class="form-control" placeholder="Search...">
-            </form> -->
         </div>
     </div>
 </nav>
@@ -63,29 +59,24 @@
                 <li role="presentation" ><a href="#">Forms</a></li>
                 <li role="presentation" class="active"><a href="#">Fields</a></li>
             </ul>
-            <div class="table-responsive">
-                <table border="1" class="table table-striped">
-                    <tr>
-                        <td>
-                            <form>
-                                <label>Username:</label>
-                                <div>
-                                    <input type="username" placeholder="Username">
-                                </div>
-                            </form>
-                            <p align="right">
-                                <span class="glyphicon glyphicon-pencil"></span>
-                                <span class="glyphicon glyphicon-plus"></span>
-                                <span class="glyphicon glyphicon-remove"></span>
-                                <span class="glyphicon glyphicon-align-justify"></span>
-                            </p>
-                        </td>
-                    </tr>
-                </table>
+            <div class="container">
+                <br/>
+                <form>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>First Name:</label><br/>
+                            <input type="text" placeholder="First Name">
+                        </div>
+                        <div class="col-md-6 responsive"><br/>
+                            <span class="glyphicon glyphicon-pencil arrangeicons"></span>
+                            <span class="glyphicon glyphicon-plus arrangeicons"></span>
+                            <span class="glyphicon glyphicon-remove arrangeicons"></span>
+                            <span class="glyphicon glyphicon-align-justify arrangeicons"></span>
+                        </div>
+                    </div>
+                    </form>
             </div>
-
         </div>
-    </div>
 </div>
 
 <!-- Bootstrap core JavaScript
