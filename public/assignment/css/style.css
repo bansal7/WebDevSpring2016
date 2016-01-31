@@ -5,4 +5,9 @@
 
 .responsive{
     white-space: nowrap;
+    overflow: hidden;
+}
+
+.blackicon{
+    color:black;
 }
