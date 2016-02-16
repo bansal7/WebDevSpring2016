@@ -6,24 +6,19 @@
     function Configure($routeProvider) {
         $routeProvider
             .when("/home",{
-                templateUrl: "home.html"
+                templateUrl: "/views/home/home.view.html"
             })
             .when("/register", {
-                templateUrl: "register.html"
-            })
-            .when("/courses", {
-                templateUrl: "courses.html",
-                controller: "CourseController"
-            })
-            .when("/courseEdit/:count", {
-                templateUrl: "courseEdit.html",
-                controller: "CourseEditController"
+                templateUrl: "/views/users/register.view.html"
             })
             .when("/login", {
-                templateUrl: "login.html"
+                templateUrl: "/views/users/login.view.html"
             })
-            .otherwise({
-                redirectTo: "/home"
+            .when("profile", {
+                templateUrl: "/views/users/profile.view.html"
+            })
+            .when("/admin", {
+                templateUrl: "/views/admin/admin.view.html"
             });
     }
 })();
