@@ -1,29 +1,56 @@
 (function(){
     angular
-        .module("MovieAdminApp",[])
+        .module("MovieAdminApp", [])
         .controller("MovieController", MovieController);
 
-    function MovieController($scope){
+    function MovieController($scope) {
         $scope.movies = [
-            {id:123, title:"Star Wars", director: "JJ Adams"},
-            {id:234, title:"Blade Runner", director: "Alice Wonder"},
-            {id:345, title:"Aliens", director: "James Dawn"}
-
+            {id: 123, title: "Star Wars", director: "JJ Abrams"},
+            {id: 234, title: "Blade Runner", director: "Ridley Scott"},
+            {id: 345, title: "Aliens", director: "James Cameron"}
         ];
 
-        $scope.addMovie = function(movie){
-            // $scope.title when we have id on the element as title
-            // $scope.movie.title is the OO approach for the movie object having title function as its id
-         //   console.log("addMovie: " + movie.title);
+        // event handler declarations
+        $scope.addMovie = addMovie;
+        $scope.deleteMovie = deleteMovie;
+        $scope.selectMovie = selectMovie;
+        $scope.updateMovie = updateMovie;
 
+        // event handler implementation
+        function updateMovie(movie) {
+            $scope.movies[selectedMovieIndex] = {
+                id: movie.id,
+                title: movie.title,
+                director: movie.director
+            };
+            $scope.movie = {};
+        }
+
+        function addMovie(movie) {
             var newMovie = {
-                id:movie.id,
-                title:movie.title,
-                director:movie.director
-            }
+                id: movie.id,
+                title: movie.title,
+                director: movie.director
+            };
             $scope.movies.push(newMovie);
+            $scope.movie = {};
+        }
 
-            $scope.movie= {};
+        function deleteMovie(movie) {
+            var index = $scope.movies.indexOf(movie);
+            $scope.movies.splice(index, 1);
+        }
+
+        var selectedMovieIndex = null;
+        function selectMovie(movie) {
+            console.log(movie);
+            selectedMovieIndex = $scope.movies.indexOf(movie);
+
+            $scope.movie = {
+                id: movie.id,
+                title: movie.title,
+                director: movie.director
+            };
         }
     }
 })();
