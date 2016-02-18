@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" ng-app="FormBuilderApp">
 <head>
@@ -7,36 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+    <link rel="icon" href="../../node_modules/connect/lib/public/favicon.ico">
 
     <title>Assignment</title>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.0/angular.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.0/angular-route.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.9/angular-route.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="css/dashboard.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+
     <script src="app.js"></script>
     <script src="config.js"></script>
-    <script src="views/main/main.controller.js"></script>
-    <script src="views/header/header.controller.js"></script>
-    <script src="views/sidebar/sidebar.controller.js"></script>
+    <script src="../assignment/views/main/main.controller.js"></script>
+    <script src="../assignment/views/header/header.controller.js"></script>
+    <script src="../assignment/views/sidebar/sidebar.controller.js"></script>
+
 </head>
 
 <body ng-controller="MainController">
+
+<div ng-include="'../assignment/views/header/header.view.html'"></div>
+
 <div class="container">
     <div class="row">
-        <div class="col-sm-12">
-            <div ng-include="'views/header/header.view.html'"></div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-2">
-            <div ng-include="'views/sidebar/sidebar.view.html'"></div>
-        </div>
-        <div class="col-sm-10" ng-view>
-        </div>
+        <div ng-include="'../assignment/views/sidebar/sidebar.view.html'"></div>
+        <div ng-view></div>
     </div>
 </div>
 
