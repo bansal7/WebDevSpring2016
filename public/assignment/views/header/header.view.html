@@ -16,7 +16,7 @@
                 <li ng-show="checkRootScope()"><a href="#/login">Login</a></li>
                 <li ng-show="!checkRootScope()" ng-click="updateRootScope()"><a href="#/home">Logout</a></li>
                 <li ng-show="!checkRootScope()"><a href="#/profile">{{username}}</a></li>
-                <li ng-show="isAdmin()"><a href="#/admin">Admin</a></li>
+                <li ng-click="isAdmin()" ng-hide="checkRootScope()"><a>Admin</a></li>
             </ul>
         </div>
     </div>

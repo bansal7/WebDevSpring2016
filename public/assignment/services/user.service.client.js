@@ -18,7 +18,7 @@
         ];
 
         var api = {
-            findUserByUsernameAndPassword : findUserByUsernameAndPassword,
+            findUserByCredentials : findUserByCredentials,
             findAllUsers : findAllUsers,
             createUser : createUser,
             deleteUserById : deleteUserById,
@@ -27,7 +27,7 @@
 
         return api;
 
-        function findUserByUsernameAndPassword (username, password, callback){
+        function findUserByCredentials (username, password, callback){
             var user = null;
             for(var index in users){
                 if(users[index].username==username && users[index].password==password){
@@ -68,8 +68,6 @@
                     break;
                 }
             }
-
-
         }
     }
 })();

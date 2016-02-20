@@ -12,16 +12,17 @@
         $scope.username = currentUser.username;
         $scope.firstName = currentUser.firstName;
         $scope.lastName = currentUser.lastName;
+        $scope.password = currentUser.password;
 
 
-        function update(username, password, firstName, lastName, email) {
+        function update(password, firstName, lastName, email) {
 
             var newUser = {
                 "_id": currentUser._id,
-                "firstName": currentUser.firstName,
-                "lastName": currentUser.lastName,
+                "firstName": firstName,
+                "lastName": lastName,
                 "username": currentUser.username,
-                "password": currentUser.password,
+                "password": password,
                 "roles": currentUser.roles
             }
 

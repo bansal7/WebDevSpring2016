@@ -1,4 +1,4 @@
-
+<div ng-controller="FormController">
             <h1>Forms</h1>
             <ul class="nav nav-tabs">
                 <li role="presentation" class="active"><a href="#/forms">Forms</a></li>
@@ -11,51 +11,27 @@
                         Form Name</th>
                     <th>Action</th>
                     <tr>
-                        <td> <input class="form-control" type=text placeholder="name"></td>
+                        <td> <input ng-model="name" class="form-control" type=text placeholder="name"></td>
                         <td>
-                            <a href="#">
-                                <span class="glyphicon glyphicon-plus blackicon btn btn-default"></span>
+                            <a>
+                                <span ng-click="addForm(name)" class="glyphicon glyphicon-plus blackicon btn btn-default"></span>
                             </a>
-                            <a href="#">
-                                <span class="glyphicon glyphicon-ok blackicon btn btn-default"></span>
+                            <a>
+                                <span ng-click="updateForm(name)" class="glyphicon glyphicon-ok blackicon btn btn-default"></span>
                             </a>
                         </td>
                     </tr>
-                    <tr>
-                        <td><a href="fields.view.html">Registration Form</a></td>
+                    <tr ng-show="data" ng-repeat="form in data">
+                        <td><a href="#/fields">{{form.title}}</a></td>
                         <td>
-                            <a href="#">
+                            <a ng-click="deleteForm($index)">
                                 <span class="glyphicon glyphicon-remove blackicon btn btn-default"></span>
                             </a>
-                            <a href="#">
+                            <a  ng-click="selectForm($index)">
                                 <span class="glyphicon glyphicon-pencil blackicon btn btn-default"></span>
                             </a>
                         </td>
                     </tr>
-                    <tr>
-                        <td><a href="fields.view.html">Contact List</a></td>
-                        <td>
-                            <a href="#">
-                                <span class="glyphicon glyphicon-remove blackicon btn btn-default"></span>
-                            </a>
-                            <a href="#">
-                                <span class="glyphicon glyphicon-pencil blackicon btn btn-default"></span>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><a href="fields.view.html">To Do List</a></td>
-                        <td>
-                            <a href="#">
-                                <span class="glyphicon glyphicon-remove blackicon btn btn-default"></span>
-                            </a>
-                            <a href="#">
-                                <span class="glyphicon glyphicon-pencil blackicon btn btn-default"></span>
-                            </a>
-                        </td>
-                    </tr>
-
-
             </table>
             </div>
-
+</div>

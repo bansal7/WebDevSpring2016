@@ -3,7 +3,7 @@
         .module("FormBuilderApp")
         .controller("HeaderController",HeaderController);
 
-    function HeaderController($scope) {
+    function HeaderController($scope,$location) {
 
         $rootScope=null;
 
@@ -33,12 +33,11 @@
                 if(roles!=null){
                     for(var index in roles){
                         if(roles[index] == "admin"){
-                            return true;
+                            $location.path('/admin')
                         }
                     }
                 }
             }
-            return false;
         }
     }
 })();
