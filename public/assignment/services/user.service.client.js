@@ -17,13 +17,59 @@
                 "username":"ed",     "password":"ed",      "roles": ["student"]		}
         ];
 
-        var service = {
-            getAllCourses: getAllUsers
-        };
-        return service;
+        var api = {
+            findUserByUsernameAndPassword : findUserByUsernameAndPassword,
+            findAllUsers : findAllUsers,
+            createUser : createUser,
+            deleteUserById : deleteUserById,
+            updateUser : updateUser
+        }
 
-        function getAllUsers() {
-            return users;
+        return api;
+
+        function findUserByUsernameAndPassword (username, password, callback){
+            var user = null;
+            for(var index in users){
+                if(users[index].username==username && users[index].password==password){
+                    user = users[index];
+                    break;
+                }
+            }
+
+            callback(user);
+
+        }
+
+        function findAllUsers(callback) {
+           callback(users);
+        }
+
+        function createUser(user,callback){
+            users.push(user);
+            callback(user);
+        }
+
+        function deleteUserById(userId,callback){
+            for(var index in users){
+                if(users[index]._id==userId){
+                    users.splice(index,1);
+                    break;
+                }
+            }
+
+            callback(users);
+        }
+
+        function updateUser(userId,user,callback){
+            for(var index in users){
+                if(users[index]._id==userId){
+                    users[index] = user;
+                    callback(users[index]);
+                    break;
+                }
+            }
+
+
         }
     }
 })();

@@ -20,20 +20,32 @@
 
     <script src="app.js"></script>
     <script src="config.js"></script>
-    <script src="../assignment/views/main/main.controller.js"></script>
-    <script src="../assignment/views/header/header.controller.js"></script>
-    <script src="../assignment/views/sidebar/sidebar.controller.js"></script>
+
+    <script src="views/main/main.controller.js"></script>
+    <script src="views/header/header.controller.js"></script>
+    <script src="views/sidebar/sidebar.controller.js"></script>
+    <script src="views/users/register.controller.js"></script>
+    <script src="views/users/profile.controller.js"></script>
+    <script src="views/users/login.controller.js"></script>
+
+    <script src="services/user.service.client.js"></script>
 
 </head>
 
 <body ng-controller="MainController">
-
-<div ng-include="'../assignment/views/header/header.view.html'"></div>
-
 <div class="container">
     <div class="row">
-        <div ng-include="'../assignment/views/sidebar/sidebar.view.html'"></div>
-        <div ng-view></div>
+        <div class="col-sm-12">
+            <div ng-include="'../assignment/views/header/header.view.html'"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <div ng-include="'../assignment/views/sidebar/sidebar.view.html'"></div>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <div ng-view></div>
+        </div>
     </div>
 </div>
 
