@@ -17,34 +17,39 @@
         $scope.selectForm = selectForm;
         var selectedIndex = null;
 
-        function addForm(name){
-            var newForm = {
-                "title" : name
-            }
+        function addForm(name) {
+            if (name != null){
+                var newForm = {
+                    "title": name
+                }
 
-            FormService.createFormForUser($rootScope._id,newForm,renderAddForm)
+                FormService.createFormForUser($rootScope._id, newForm, renderAddForm)
+            }
         }
 
         function renderAddForm(response){
             $scope.data.push(response);
-            $scope.name= "";
+            $scope.name= null;
         }
 
-        function updateForm(name){
-            var form = $scope.data[selectedIndex];
-            var newForm = {
-                "_id" : form._id,
-                "title" : name,
-                "userId" : form.userId
+        function updateForm(name) {
+            if (name != null) {
+                var form = $scope.data[selectedIndex];
+                var newForm = {
+                    "_id": form._id,
+                    "title": name,
+                    "userId": form.userId
+                }
+
+                FormService.updateFormById(form._id, newForm, renderUpdateForm)
+
             }
-
-            FormService.updateFormById(form._id,newForm,renderUpdateForm)
-
         }
 
         function renderUpdateForm(response){
-            $scope.data = response;
-            $scope.name= "";
+            $scope.data[selectedIndex] = response;
+            $scope.name= null;
+            selectedIndex = null;
         }
 
         function deleteForm(index){

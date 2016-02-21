@@ -61,7 +61,8 @@
                 }
             }
 
-            findAllFormsForUser($rootScope._id,callback);
+            //findAllFormsForUser($rootScope._id,callback);
+            callback(newForm);
         }
 
     }
