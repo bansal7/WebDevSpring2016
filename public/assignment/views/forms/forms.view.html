@@ -13,22 +13,22 @@
                     <tr>
                         <td> <input ng-model="name" class="form-control" type=text placeholder="name"></td>
                         <td>
-                            <a>
-                                <span ng-click="addForm(name)" class="glyphicon glyphicon-plus blackicon btn btn-default"></span>
+                            <a class="btn btn-default"  ng-click="addForm(name)">
+                                <span class="glyphicon glyphicon-plus"></span>
                             </a>
-                            <a>
-                                <span ng-click="updateForm(name)" class="glyphicon glyphicon-ok blackicon btn btn-default"></span>
+                            <a ng-click="updateForm(name)" class="btn btn-default">
+                                <span  class="glyphicon glyphicon-ok"></span>
                             </a>
                         </td>
                     </tr>
                     <tr ng-show="data" ng-repeat="form in data">
                         <td><a href="#/fields">{{form.title}}</a></td>
                         <td>
-                            <a ng-click="deleteForm($index)">
-                                <span class="glyphicon glyphicon-remove blackicon btn btn-default"></span>
+                            <a ng-click="deleteForm($index)" class="btn btn-default">
+                                <span class="glyphicon glyphicon-remove "></span>
                             </a>
-                            <a  ng-click="selectForm($index)">
-                                <span class="glyphicon glyphicon-pencil blackicon btn btn-default"></span>
+                            <a  ng-click="selectForm($index)" ng-model="selectedIndex" class="btn btn-default">
+                                <span class="glyphicon glyphicon-pencil"></span>
                             </a>
                         </td>
                     </tr>

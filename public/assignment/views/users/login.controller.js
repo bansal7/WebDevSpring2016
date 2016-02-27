@@ -1,4 +1,5 @@
 (function(){
+    "use strict";
     angular
         .module("FormBuilderApp")
         .controller("LoginController",LoginController);
@@ -15,7 +16,7 @@
 
             function render(user) {
                 if(user !=null){
-                    $rootScope = user;
+                    UserService.setCurrentUser(user);
                     $location.path('/profile');
             }
         }

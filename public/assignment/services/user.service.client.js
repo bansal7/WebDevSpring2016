@@ -1,10 +1,15 @@
 (function(){
+    "use script";
     angular
         .module("FormBuilderApp")
         .factory("UserService", UserService);
 
-    function UserService() {
-        var users =[
+    function UserService($rootScope) {
+
+        // stores the data about all the users
+        var users = {};
+
+        users= [
             {	"_id":123, "firstName":"Alice",            "lastName":"Wonderland",
                 "username":"alice",  "password":"alice",   "roles": ["student"]		},
             {	"_id":234, "firstName":"Bob",              "lastName":"Hope",
@@ -22,11 +27,14 @@
             findAllUsers : findAllUsers,
             createUser : createUser,
             deleteUserById : deleteUserById,
-            updateUser : updateUser
+            updateUser : updateUser,
+            setCurrentUser: setCurrentUser,
+            getCurrentUser: getCurrentUser
         }
 
         return api;
 
+        // funtion finds the user based on username and password
         function findUserByCredentials (username, password, callback){
             var user = null;
             for(var index in users){
@@ -40,15 +48,18 @@
 
         }
 
+        // function finds all the users
         function findAllUsers(callback) {
            callback(users);
         }
 
+        // function creates a new user
         function createUser(user,callback){
             users.push(user);
             callback(user);
         }
 
+        // function deletes a user
         function deleteUserById(userId,callback){
             for(var index in users){
                 if(users[index]._id==userId){
@@ -60,6 +71,7 @@
             callback(users);
         }
 
+        // function updates a user entry
         function updateUser(userId,user,callback){
             for(var index in users){
                 if(users[index]._id==userId){
@@ -68,6 +80,14 @@
                     break;
                 }
             }
+        }
+
+        function setCurrentUser (user) {
+            $rootScope.currentUser = user;
+        }
+
+        function getCurrentUser () {
+            return $rootScope.currentUser;
         }
     }
 })();

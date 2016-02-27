@@ -1,4 +1,5 @@
 (function(){
+    "use strict";
     angular
         .module("FormBuilderApp")
         .controller("RegisterController",RegisterController);
@@ -7,7 +8,7 @@
 
         $scope.register = register;
 
-
+        // function that registers a new user
         function register(username, password, verifyPassword, email) {
 
             if (password == verifyPassword) {
@@ -21,13 +22,12 @@
                     "roles": []
                 }
             }
-
             UserService.createUser(newUser, render);
-
         }
 
+       // function that actually adds a new user to static data
         function render(user) {
-            $rootScope = user;
+            UserService.setCurrentUser(user);
             $location.path('/profile');
         }
     }

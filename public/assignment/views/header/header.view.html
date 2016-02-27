@@ -8,7 +8,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="">Form Maker</a>
+            <a class="navbar-brand" href="#/home">Form Maker</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -16,7 +16,7 @@
                 <li ng-show="checkRootScope()"><a href="#/login">Login</a></li>
                 <li ng-show="!checkRootScope()" ng-click="updateRootScope()"><a href="#/home">Logout</a></li>
                 <li ng-show="!checkRootScope()"><a href="#/profile">{{username}}</a></li>
-                <li ng-click="isAdmin()" ng-hide="checkRootScope()"><a>Admin</a></li>
+                <li ng-show="isAdmin()"><a href="#/admin">Admin</a></li>
             </ul>
         </div>
     </div>

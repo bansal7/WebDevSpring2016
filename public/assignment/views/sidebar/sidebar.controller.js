@@ -1,17 +1,18 @@
 (function(){
+    "use strict";
     angular
         .module("FormBuilderApp")
         .controller("SidebarController",SidebarController);
 
-    function SidebarController($scope) {
-        $rootScope=null;
+    function SidebarController($scope, UserService) {
+        UserService.setCurrentUser(null);
 
         $scope.checkRootScope=checkRootScope;
         $scope.isAdmin=isAdmin;
 
 
         function checkRootScope() {
-            if($rootScope==null){
+            if(UserService.getCurrentUser()==null){
                 return true;
             }
             else{
@@ -20,9 +21,9 @@
         }
 
         function isAdmin(){
-            if($rootScope!=null)
+            if(UserService.getCurrentUser()!=null)
             {
-                var roles=$rootScope.roles;
+                var roles=UserService.getCurrentUser().roles;
                 if(roles!=null){
                     for(var index in roles){
                         if(roles[index] == "admin"){

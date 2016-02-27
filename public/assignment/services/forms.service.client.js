@@ -1,10 +1,14 @@
 (function() {
+    "use strict";
     angular
         .module("FormBuilderApp")
         .factory("FormService", FormService);
 
     function FormService() {
-        var forms = [
+
+        // stores the data of all forms
+        var forms = {};
+        forms = [
             {"_id": "000", "title": "Contacts", "userId": 123},
             {"_id": "010", "title": "ToDo", "userId": 123},
             {"_id": "020", "title": "CDs", "userId": 234},
@@ -16,11 +20,10 @@
             deleteFormById: deleteFormById,
             updateFormById: updateFormById
         }
-
         return api;
 
+        // function that creates a new form for a particular user
         function createFormForUser(userId, form, callback) {
-
             var newForm = {
                 "_id" : (new Date).getTime(),
                 "title" : form.title,
@@ -31,6 +34,7 @@
 
         }
 
+        // function that finds all the users' forms
         function findAllFormsForUser(userId, callback) {
             var form = [];
             for(var index in forms){
@@ -42,6 +46,7 @@
 
         }
 
+        // function that deletes a form by its id
         function deleteFormById(formId, callback) {
             for(var index in forms){
                 if(forms[index]._id==formId){
@@ -49,10 +54,10 @@
                     break;
                 }
             }
-
-            findAllFormsForUser($rootScope._id,callback);
+            callback(forms);
         }
 
+        // function that updates a form by its id
         function updateFormById(formId, newForm, callback) {
             for(var index in forms){
                 if(forms[index]._id==formId){
@@ -60,7 +65,6 @@
                     break;
                 }
             }
-
             //findAllFormsForUser($rootScope._id,callback);
             callback(newForm);
         }

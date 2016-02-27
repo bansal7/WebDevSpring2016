@@ -1,4 +1,5 @@
 (function(){
+    "use strict";
     angular
         .module("FormBuilderApp")
         .controller("ProfileController",ProfileController);
@@ -7,29 +8,30 @@
 
         $scope.update = update;
 
-        var currentUser = $rootScope;
+        //var currentUser = UserService.getCurrentUser();
 
-        $scope.username = currentUser.username;
-        $scope.firstName = currentUser.firstName;
-        $scope.lastName = currentUser.lastName;
-        $scope.password = currentUser.password;
+        $scope.username = UserService.getCurrentUser().username;
+        $scope.firstName = UserService.getCurrentUser().firstName;
+        $scope.lastName = UserService.getCurrentUser().lastName;
+        $scope.password = UserService.getCurrentUser().password;
 
-
+        // function that updates a profile of the user with new details
         function update(password, firstName, lastName, email) {
 
             var newUser = {
-                "_id": currentUser._id,
+                "_id": UserService.getCurrentUser()._id,
                 "firstName": firstName,
                 "lastName": lastName,
-                "username": currentUser.username,
+                "username": UserService.getCurrentUser().username,
                 "password": password,
-                "roles": currentUser.roles
+                "roles": UserService.getCurrentUser().roles
             }
 
-            UserService.updateUser(currentUser._id, newUser, render);
+            UserService.updateUser(UserService.getCurrentUser()._id, newUser, render);
 
+            // function that actually updates the new info about the user from response of the service
             function render(user) {
-                $rootScope = user;
+                UserService.setCurrentUser(user);
             }
         }
     }
