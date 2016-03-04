@@ -1,7 +1,7 @@
 (function(){
     "use script";
     angular
-        .module("FormBuilderApp")
+        .module("SplitUpApp")
         .factory("UserService", UserService);
 
     function UserService($rootScope) {

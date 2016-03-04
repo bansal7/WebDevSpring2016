@@ -1,0 +1,30 @@
+<div>
+    <h1>Users</h1>
+    <div class="table-responsive box">
+        <table border="1" class="table table-striped">
+            <th>User Name</th>
+            <th>Action</th>
+            <tr>
+                <td> <input ng-model="name" class="form-control" type=text placeholder="name"></td>
+                <td>
+                    <a class="btn btn-success"  ng-click="addUser(name)">
+                        Add
+                    </a>
+                    <a ng-click="updateUser(name)" class="btn btn-warning">
+                        Update
+                    </a>
+                </td>
+            </tr>
+            <tr ng-show="data" ng-repeat="user in data">
+                <td>
+                    <a ng-click="deleteUser($index)" class="btn btn-danger">
+                        Delete
+                    </a>
+                    <a  ng-click="selectUser($index)" ng-model="selectedIndex" class="btn btn-primary">
+                        Edit
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
