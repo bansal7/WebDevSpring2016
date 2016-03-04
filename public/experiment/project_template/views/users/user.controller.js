@@ -6,11 +6,14 @@
 
     function UserController($scope,UserService) {
 
+        $scope.data = {};
         UserService.findAllUsers(renderUsers);
+
+
 
         // renders all the forms of the logged in user
         function renderUsers(response) {
-            console.log(response);
+            //console.log(response);
             $scope.data = response;
         }
 
@@ -21,10 +24,14 @@
         $scope.selectedIndex = -1;
 
         // function that adds a new form to the users' list
-        function addUser(name) {
-            if (name != null){
+        function addUser(fName,lName,username,email) {
+            if (fName != null || lName != null || username != null || email != null){
                 var newUser = {
-                    "firstName": name
+                    "_id" : (new Date).getTime(),
+                    "firstName": fName,
+                    "lastName" : lName,
+                    "username" : username,
+                    "email" : email
                 }
 
                 UserService.createUser(newUser,renderAddUser)
@@ -33,29 +40,38 @@
 
         // function that actually adds a form after getting a response from the service
         function renderAddUser(response){
-            $scope.data.push(response);
-            $scope.name= null;
+            //console.log(response)
+            //$scope.data.push(response);
+            $scope.fName= null;
+            $scope.lName= null;
+            $scope.username= null;
+            $scope.email= null;
         }
 
         // function that updates a form of the user
-        function updateUser(name) {
-            if (name != null && $scope.selectedIndex != -1) {
-                var form = $scope.data[$scope.selectedIndex];
-                var newForm = {
-                    "_id": form._id,
-                    "title": name,
-                    "userId": form.userId
+        function updateUser(fName,lName,username,email) {
+            if ((fName != null || lName != null || username != null || email != null) && $scope.selectedIndex != -1) {
+                var user = $scope.data[$scope.selectedIndex];
+                var newUser = {
+                    "_id": user._id,
+                    "firstName": fName,
+                    "lastName": lName,
+                    "username": username,
+                    "email": email
                 }
 
-                FormService.updateFormById(form._id, newForm, renderUpdateUser)
+                UserService.updateUser(user._id, newUser, renderUpdateUser)
 
             }
         }
 
         // function that actually updates a form afer getting response from the service
         function renderUpdateUser(response){
-            $scope.data[$scope.selectedIndex] = response;
-            $scope.name= null;
+            //$scope.data[$scope.selectedIndex] = response;
+            $scope.fName= null;
+            $scope.lName= null;
+            $scope.username= null;
+            $scope.email= null;
             $scope.selectedIndex = -1;
         }
 
@@ -75,7 +91,11 @@
         function selectUser(index) {
             $scope.selectedIndex = index;
             var user = $scope.data[index];
-            $scope.name= user.title;
+            $scope.fName= user.firstName;
+            $scope.lName= user.lastName;
+            $scope.username= user.username;
+            $scope.email= user.email;
+
 
         }
     }

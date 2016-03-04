@@ -1,21 +1,31 @@
-<div>
+<div ng-controller="UserController">
     <h1>Users</h1>
     <div class="table-responsive box">
-        <table border="1" class="table table-striped">
-            <th>User Name</th>
-            <th>Action</th>
+        <table border="1" class="table table-striped table-responsive">
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th></th>
             <tr>
-                <td> <input ng-model="name" class="form-control" type=text placeholder="name"></td>
+                <td> <input ng-model="fName" class="form-control" type=text placeholder="First Name"></td>
+                <td> <input ng-model="lName" class="form-control" type=text placeholder="Last Name"></td>
+                <td> <input ng-model="username" class="form-control" type=text placeholder="Username"></td>
+                <td> <input ng-model="email" class="form-control" type=email placeholder="Email"></td>
                 <td>
-                    <a class="btn btn-success"  ng-click="addUser(name)">
+                    <a class="btn btn-success"  ng-click="addUser(fName,lName,username,email)">
                         Add
                     </a>
-                    <a ng-click="updateUser(name)" class="btn btn-warning">
+                    <a ng-click="updateUser(fName,lName,username,email)" class="btn btn-warning" style="white-space: nowrap">
                         Update
                     </a>
                 </td>
             </tr>
             <tr ng-show="data" ng-repeat="user in data">
+                <td><a href="#">{{user.firstName}}</a></td>
+                <td><a href="#">{{user.lastName}}</a></td>
+                <td><a href="#">{{user.username}}</a></td>
+                <td><a href="#">{{user.email}}</a></td>
                 <td>
                     <a ng-click="deleteUser($index)" class="btn btn-danger">
                         Delete
