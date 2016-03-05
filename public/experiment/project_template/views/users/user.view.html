@@ -12,11 +12,11 @@
                 <td> <input ng-model="lName" class="form-control" type=text placeholder="Last Name"></td>
                 <td> <input ng-model="username" class="form-control" type=text placeholder="Username"></td>
                 <td> <input ng-model="email" class="form-control" type=email placeholder="Email"></td>
-                <td>
-                    <a class="btn btn-success"  ng-click="addUser(fName,lName,username,email)">
+                <td class="sameline">
+                    <a class="btn btn-success " type="submit" ng-click="addUser(fName,lName,username,email)" >
                         Add
                     </a>
-                    <a ng-click="updateUser(fName,lName,username,email)" class="btn btn-warning" style="white-space: nowrap">
+                    <a ng-click="updateUser(fName,lName,username,email)" type="submit" class="btn btn-warning">
                         Update
                     </a>
                 </td>
