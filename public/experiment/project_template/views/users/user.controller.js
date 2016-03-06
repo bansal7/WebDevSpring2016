@@ -25,7 +25,7 @@
 
         // function that adds a new form to the users' list
         function addUser(fName,lName,username,email) {
-            if (fName != null || lName != null || username != null || email != null){
+            if (fName != null && lName != null && username != null && email != null){
                 var newUser = {
                     "_id" : (new Date).getTime(),
                     "firstName": fName,
@@ -35,6 +35,9 @@
                 }
 
                 UserService.createUser(newUser,renderAddUser)
+            }
+            else {
+                alert("Please Enter a proper value in the fields.\nNames and Username cannot be empty and Email format should be a@b.com")
             }
         }
 
@@ -50,7 +53,7 @@
 
         // function that updates a form of the user
         function updateUser(fName,lName,username,email) {
-            if ((fName != null || lName != null || username != null || email != null) && $scope.selectedIndex != -1) {
+            if ((fName != null && lName != null && username != null && email != null) && $scope.selectedIndex != -1) {
                 var user = $scope.data[$scope.selectedIndex];
                 var newUser = {
                     "_id": user._id,
@@ -62,6 +65,9 @@
 
                 UserService.updateUser(user._id, newUser, renderUpdateUser)
 
+            }
+            else {
+                alert("Please Enter a proper value in the fields.\nNames and Username cannot be empty and Email format should be a@b.com")
             }
         }
 
@@ -77,9 +83,9 @@
 
         // function that deletes a form
         function deleteUser(index){
-            var form = $scope.data[index];
+            var user = $scope.data[index];
 
-            UserService.deleteUserById(form._id,renderDeleteUser)
+            UserService.deleteUserById(user._id,renderDeleteUser)
         }
 
         // function that actually deletes the form and gets the rest of the form from the service
@@ -95,8 +101,6 @@
             $scope.lName= user.lastName;
             $scope.username= user.username;
             $scope.email= user.email;
-
-
         }
     }
 })();
