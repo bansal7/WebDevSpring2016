@@ -61,7 +61,7 @@
 
             }
             else {
-                alert("Please Enter a proper value in the fields.\nNames and Username cannot be empty and Email format should be a@b.com")
+                alert("Please Enter a proper value in the fields.\nNames and Members cannot be empty")
             }
         }
 

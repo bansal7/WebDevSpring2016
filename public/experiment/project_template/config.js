@@ -21,6 +21,10 @@
                 templateUrl: "views/groups/group.view.html",
                 controller : "GroupController"
             })
+            .when("/note",{
+                templateUrl: "views/notes/note.view.html",
+                controller : "NoteController"
+            })
             .otherwise({
                 redirectTo: "/home"
             });
