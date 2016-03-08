@@ -9,13 +9,15 @@
         $scope.data = {};
         UserService.findAllUsers(renderUsers);
 
-        //$http.jsonp(' https://secure.splitwise.com/api/v3.0/get_current_user&&callback=JSON_CALLBACK')
-         //   .success(callback);
+        $http.get('https://secure.splitwise.com/api/v3.0/get_current_user')
+            .success(callback);
 
-        /*function callback(response)
-        {
+        function callback(response){
             console.log(response);
-        }*/
+        }
+
+
+
 
         // renders all the forms of the logged in user
         function renderUsers(response) {
