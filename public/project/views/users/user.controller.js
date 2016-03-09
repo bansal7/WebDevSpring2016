@@ -9,62 +9,6 @@
         $scope.data = {};
         UserService.findAllUsers(renderUsers);
 
-        //$.ajax({
-        //        type: "POST",
-        //        dataType: 'text',
-        //        url: 'https://secure.splitwise.com/api/v3.0/get_current_user',
-        //        crossDomain : true,
-        //        xhrFields: {
-        //            withCredentials: false
-        //        }
-        //    })
-        //    .done(function( data ) {
-        //        console.log("done");
-        //    })
-        //    .fail( function(xhr, textStatus, errorThrown) {
-        //        alert(xhr.responseText);
-        //        alert(textStatus);
-        //    });
-
-        //$http.get('https://secure.splitwise.com/api/v3.0/get_current_user')
-        //    .success(callback);
-        //
-        //function callback(response){
-        //    console.log(response);
-        //}
-
-        //function createCORSRequest(method, url) {
-        //    var xhr = new XMLHttpRequest();
-        //    if ("withCredentials" in xhr) {
-        //
-        //        // Check if the XMLHttpRequest object has a "withCredentials" property.
-        //        // "withCredentials" only exists on XMLHTTPRequest2 objects.
-        //        xhr.open(method, url, true);
-        //
-        //    } else if (typeof XDomainRequest != "undefined") {
-        //
-        //        // Otherwise, check if XDomainRequest.
-        //        // XDomainRequest only exists in IE, and is IE's way of making CORS requests.
-        //        xhr = new XDomainRequest();
-        //        xhr.open(method, url);
-        //
-        //    } else {
-        //
-        //        // Otherwise, CORS is not supported by the browser.
-        //        xhr = null;
-        //
-        //    }
-        //    return xhr;
-        //}
-        //
-        //var xhr = createCORSRequest('GET', url);
-        //if (!xhr) {
-        //    throw new Error('CORS not supported');
-        //}
-
-
-
-
         // renders all the forms of the logged in user
         function renderUsers(response) {
             //console.log(response);
