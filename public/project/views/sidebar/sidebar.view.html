@@ -1,4 +1,4 @@
-<div class="navbar-default sidebar sidebar-nav navbar-collapse">
+<div ng-controller="SidebarController" class="navbar-default sidebar sidebar-nav navbar-collapse">
     <ul class="nav" id="side-menu">
         <li>
             <a href="#/user"><i class="fa fa-user fa-fw"></i> User CRUD</a>
@@ -11,6 +11,9 @@
         </li>
         <li>
             <a href="#/note"><i class="fa fa-tasks fa-fw"></i> Notes CRUD</a>
+        </li>
+        <li>
+            <a class="btn" ng-click="callApi()"><i class="fa fa-tasks fa-fw"></i> Use of API</a>
         </li>
     </ul>
 </div>
