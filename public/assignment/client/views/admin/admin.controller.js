@@ -1,3 +1,9 @@
-/**
- * Created by dell on 2/16/2016.
- */
+"use strict";
+
+(function() {
+    angular
+        .module("FormBuilderApp")
+        .controller("AdminController", AdminController);
+
+    function AdminController() {}
+})();
