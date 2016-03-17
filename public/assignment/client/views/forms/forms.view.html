@@ -13,7 +13,7 @@
                     <tr>
                         <td> <input ng-model="name" class="form-control" type=text placeholder="name"></td>
                         <td>
-                            <a class="btn btn-default"  ng-click="addForm(name)">
+                            <a class="btn btn-default"  ng-click="addForm(UserService.getCurrentUser()._id,name)">
                                 <span class="glyphicon glyphicon-plus"></span>
                             </a>
                             <a ng-click="updateForm(name)" class="btn btn-default">

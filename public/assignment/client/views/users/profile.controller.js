@@ -25,14 +25,19 @@
                 "username": UserService.getCurrentUser().username,
                 "password": password,
                 "roles": UserService.getCurrentUser().roles
-            }
+            };
 
-            UserService.updateUser(UserService.getCurrentUser()._id, newUser, render);
-
-            // function that actually updates the new info about the user from response of the service
-            function render(user) {
-                UserService.setCurrentUser(user);
-            }
+            UserService
+                .updateUser(UserService.getCurrentUser()._id, newUser)
+                .then(function(){
+                    return UserService.findUserByCredentials(newUser.username, newUser.password);
+                })
+                .then(function(response){
+                if (response.data){
+                    UserService.setCurrentUser(response.data);
+                    console.log("hooray!");
+                }
+            });
         }
     }
 })();

@@ -6,13 +6,19 @@
 
     function FormController($scope,FormService, UserService) {
 
-        FormService.findAllFormsForUser(UserService.getCurrentUser()._id, renderForms);
-
         // renders all the forms of the logged in user
-        function renderForms(response) {
-            $scope.data = response;
+        function retrieveForms () {
+            FormService
+                .findAllFormsForUser(UserService.getCurrentUser()._id)
+                .then(function(response) {
+                    if (response.data) {
+                        $scope.data = response.data;
+                    }
+                });
         }
+        retrieveForms();
 
+        $scope.name = {};
         $scope.addForm = addForm;
         $scope.updateForm = updateForm;
         $scope.deleteForm = deleteForm;
@@ -20,20 +26,15 @@
         $scope.selectedIndex = -1;
 
         // function that adds a new form to the users' list
-        function addForm(name) {
-            if (name != null){
-                var newForm = {
-                    "title": name
-                }
-
-                FormService.createFormForUser(UserService.getCurrentUser()._id, newForm, renderAddForm)
-            }
-        }
-
-        // function that actually adds a form after getting a response from the service
-        function renderAddForm(response){
-            $scope.data.push(response);
-            $scope.name= null;
+        function addForm(userId, form) {
+            FormService
+                .createFormForUser(userId, form)
+                .then(function(response){
+                    if (response.data) {
+                        $scope.name = {};
+                        retrieveForms();
+                    }
+                });
         }
 
         // function that updates a form of the user
@@ -44,32 +45,32 @@
                     "_id": form._id,
                     "title": name,
                     "userId": form.userId
-                }
+                };
 
-                FormService.updateFormById(form._id, newForm, renderUpdateForm)
-
+                FormService
+                    .updateFormById(form._id, newForm)
+                    .then(function(response){
+                        if (response.data) {
+                            $scope.data[$scope.selectedIndex] = response;
+                            $scope.name= null;
+                            $scope.selectedIndex = -1;
+                        }
+                    })
             }
         }
 
-        // function that actually updates a form afer getting response from the service
-        function renderUpdateForm(response){
-            $scope.data[$scope.selectedIndex] = response;
-            $scope.name= null;
-            $scope.selectedIndex = -1;
-        }
-
         // function that deletes a form
-        function deleteForm(index){
+        function deleteForm(index) {
             var form = $scope.data[index];
 
-            FormService.deleteFormById(form._id,renderDeleteForm)
-        }
-
-        // function that actually deletes the form and gets the rest of the form from the service
-        function renderDeleteForm(response){
-            //$scope.data = response;
-
-            FormService.findAllFormsForUser(UserService.getCurrentUser()._id,renderForms);
+            FormService
+                .deleteFormById(form._id)
+                .then(function (response) {
+                    if (response.data) {
+                        retrieveForms();
+                        $scope.name = {};
+                    }
+                });
         }
 
         // function that selects the form to be updated

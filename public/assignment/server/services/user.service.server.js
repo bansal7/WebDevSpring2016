@@ -4,7 +4,7 @@ module.exports = function (app, model) {
     app.get("/api/assignment/user", getAllUsers);
     app.get("/api/assignment/user/:id", getUserById);
     app.get("/api/assignment/user?username=username", getUserByUsername);
-    app.get("/api/assignment/user?username=alice&password=wonderland", getUserByCredentials);
+    app.get("/api/assignment/user?username=username&password=password", getUserByCredentials);
     app.delete("/api/assignment/user/:id", deleteUserById);
     app.put("/api/assignment/user/:id", updateUserById);
 
@@ -24,7 +24,7 @@ module.exports = function (app, model) {
         var user = req.body;
         var now = new Date();
         user._id = now.getTime();
-        res.send (model.createUser(users));
+        res.send (model.createUser(user));
     }
 
     function getAllUsers (req, res) {
@@ -79,7 +79,7 @@ module.exports = function (app, model) {
     }
 
     function getUserByCredentials(req, res) {
-        console.log("Inside user by credentials");
+        //console.log("Inside user by credentials");
         var username = req.query.username;
         var password = req.query.password;
         var credentials = {

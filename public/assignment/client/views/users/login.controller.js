@@ -10,15 +10,15 @@
 
         function login(username, password) {
 
-            UserService.findUserByCredentials(username, password, render);
+            UserService
+                .findUserByCredentials(username, password)
+                .then(function(response){
+                    if(response.data){
+                        UserService.setCurrentUser(user);
+                        $location.path('/profile');
+                    }
+                })
 
-        }
-
-            function render(user) {
-                if(user !=null){
-                    UserService.setCurrentUser(user);
-                    $location.path('/profile');
-            }
         }
     }
 })();

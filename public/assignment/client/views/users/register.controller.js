@@ -22,13 +22,19 @@
                     "roles": []
                 }
             }
-            UserService.createUser(newUser, render);
-        }
+            UserService
+                .createUser(newUser)
+                .then(function(response){
+                    if(response.data) {
+                        //$scope.user = response.data;
+                        UserService.setCurrentUser(response.data);
+                        $location.path("/profile");
+                        console.log("current user is: " + response.data);
+                    } else {
+                        console.log("no data received!");
+                    }
+                });
 
-       // function that actually adds a new user to static data
-        function render(user) {
-            UserService.setCurrentUser(user);
-            $location.path('/profile');
         }
     }
 })();
