@@ -22,8 +22,8 @@ module.exports = function (app, model) {
 
     function createUser (req, res) {
         var user = req.body;
-        var now = new Date();
-        user._id = now.getTime();
+        //var now = new Date();
+        //user._id = now.getTime();
         res.send (model.createUser(user));
     }
 
