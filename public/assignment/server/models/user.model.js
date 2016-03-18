@@ -15,15 +15,16 @@ module.exports = function() {
     function createUser (newUser) {
         //var now = new Date();
         //newUser._id = "id" + now.getTime();
+        //newUser.roles =[];
         users.push (newUser);
 
-        return users;
+        return newUser;
     }
 
     function updateUser (id, user) {
         for (var index in users) {
-            if (users[index]._id === id) {
-                users[index].email = user.email;
+            if (users[index]._id == id) {
+                users[index] = user;
             }
         }
     }
@@ -45,7 +46,7 @@ module.exports = function() {
 
     function deleteUser (id) {
         for (var index in users) {
-            if (users[index]._id === id) {
+            if (users[index]._id == id) {
                 users.splice(index, 1);
                 return true;
             }
@@ -56,7 +57,7 @@ module.exports = function() {
     function findUserByUsername(username) {
         for (var index in users) {
             var currentUser = users[index];
-            if (currentUser.username === username) {
+            if (currentUser.username == username) {
                 return currentUser;
             }
         }
@@ -67,7 +68,7 @@ module.exports = function() {
     function findUserByCredentials(credentials) {
         for (var index in users) {
             var currentUser = users[index];
-            if (currentUser.username === credentials.username && currentUser.password === credentials.password) {
+            if (currentUser.username == credentials.username && currentUser.password == credentials.password) {
                 return currentUser;
             }
         }

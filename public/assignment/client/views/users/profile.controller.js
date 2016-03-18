@@ -1,43 +1,28 @@
+"use strict";
+
 (function(){
-    "use strict";
     angular
         .module("FormBuilderApp")
-        .controller("ProfileController",ProfileController);
+        .controller("ProfileController", profileController);
 
-    function ProfileController($scope,UserService,$location) {
-
+    function profileController(UserService, $scope, $rootScope) {
         $scope.update = update;
+        $scope.loggedUser = UserService.getCurrentUser();
 
-        //var currentUser = UserService.getCurrentUser();
-
-        $scope.username = UserService.getCurrentUser().username;
-        $scope.firstName = UserService.getCurrentUser().firstName;
-        $scope.lastName = UserService.getCurrentUser().lastName;
-        $scope.password = UserService.getCurrentUser().password;
-
-        // function that updates a profile of the user with new details
-        function update(password, firstName, lastName, email) {
-
-            var newUser = {
-                "_id": UserService.getCurrentUser()._id,
-                "firstName": firstName,
-                "lastName": lastName,
-                "username": UserService.getCurrentUser().username,
-                "password": password,
-                "roles": UserService.getCurrentUser().roles
-            };
-
+        function update (user) {
+           // console.log("updating user" + us);
             UserService
-                .updateUser(UserService.getCurrentUser()._id, newUser)
-                .then(function(){
-                    return UserService.findUserByCredentials(newUser.username, newUser.password);
+                .updateUser(user._id, user)
+                .then(function() {
+                    return UserService.findUserByCredentials(user.username, user.password);
                 })
                 .then(function(response){
-                if (response.data){
-                    UserService.setCurrentUser(response.data);
-                    console.log("hooray!");
-                }
-            });
+                    if (response.data){
+                        UserService.setCurrentUser(response.data);
+                        UserService.getCurrentUser();
+                        console.log("hooray!");
+                    }
+                });
         }
     }
 })();

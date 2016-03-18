@@ -8,10 +8,10 @@
 
         $scope.login = login;
 
-        function login(username, password) {
+        function login(user) {
 
             UserService
-                .findUserByCredentials(username, password)
+                .findUserByCredentials(user.username, user.password)
                 .then(function(response){
                     if(response.data){
                         UserService.setCurrentUser(response.data);

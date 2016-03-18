@@ -11,23 +11,23 @@
                         Form Name</th>
                     <th>Action</th>
                     <tr>
-                        <td> <input ng-model="model.form.title" class="form-control" type=text placeholder="name"></td>
+                        <td> <input ng-model="form.title" class="form-control" type=text placeholder="name"></td>
                         <td>
-                            <a class="btn btn-default"  ng-click="model.addForm(model.form)">
+                            <a class="btn btn-default"  ng-click="addForm(form)">
                                 <span class="glyphicon glyphicon-plus"></span>
                             </a>
-                            <a ng-click="model.updateForm(model.form)" class="btn btn-default">
+                            <a ng-click="updateForm(form)" class="btn btn-default">
                                 <span  class="glyphicon glyphicon-ok"></span>
                             </a>
                         </td>
                     </tr>
-                    <tr ng-show="model.forms" ng-repeat="form in model.forms">
+                    <tr ng-show="forms" ng-repeat="form in forms">
                         <td><a href="#/fields">{{form.title}}</a></td>
                         <td>
-                            <a ng-click="model.deleteForm($index)" class="btn btn-default">
+                            <a ng-click="deleteForm($index)" class="btn btn-default">
                                 <span class="glyphicon glyphicon-remove "></span>
                             </a>
-                            <a  ng-click="model.selectForm($index)" ng-model="selectedIndex" class="btn btn-default">
+                            <a  ng-click="selectForm($index)" ng-model="selectedIndex" class="btn btn-default">
                                 <span class="glyphicon glyphicon-pencil"></span>
                             </a>
                         </td>

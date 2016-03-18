@@ -10,6 +10,7 @@
             </button>
             <a class="navbar-brand" href="#/home">Form Maker</a>
         </div>
+        <!--
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li ng-show="checkRootScope()"><a href="#/register">Register</a></li>
@@ -17,6 +18,16 @@
                 <li ng-show="!checkRootScope()" ng-click="updateRootScope()"><a href="#/home">Logout</a></li>
                 <li ng-show="!checkRootScope()"><a href="#/profile">{{username}}</a></li>
                 <li ng-show="isAdmin()"><a href="#/admin">Admin</a></li>
+            </ul>
+        </div>
+        -->
+        <div class="collapse navbar-collapse" id="nav-bar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li ng-show="currentUser.roles.indexOf('admin') >= 0"><a href="#/admin">Admin</a></li>
+                <li ng-hide="currentUser"><a href="#/register">Register</a></li>
+                <li ng-hide="currentUser"><a href="#/login">Login</a></li>
+                <li ng-show="currentUser"><a href="#/profile">Welcome, {{currentUser.username}}!</a></li>
+                <li ng-show="currentUser" ng-click="logout()"><a href="#/home">Logout</a></li>
             </ul>
         </div>
     </div>

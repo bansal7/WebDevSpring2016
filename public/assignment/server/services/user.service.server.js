@@ -22,8 +22,8 @@ module.exports = function(app, userModel) {
 
     function createUser(req, res) {
         var newUser = req.body;
-        var users = userModel.createUser(newUser);
-        res.json(users);
+        var user = userModel.createUser(newUser);
+        res.json(user);
     }
 
     function getUsers(req, res) {

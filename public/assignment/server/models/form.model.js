@@ -13,7 +13,7 @@ module.exports = function (app) {
 
     function findFormByTitle(title) {
         for (var f in forms) {
-            if (forms[f].title === title) {
+            if (forms[f].title == title) {
                 return forms[f];
             }
         }
@@ -21,7 +21,7 @@ module.exports = function (app) {
     }
 
     function findFormsByUserId(userId) {
-        console.log("Ho dkfbsjfd");
+        //console.log("Ho dkfbsjfd");
         var userForms = [];
         for (f in forms) {
             if (forms[f].userId == userId) {
@@ -33,7 +33,7 @@ module.exports = function (app) {
 
     function findFormById (id) {
         for (var f in forms) {
-            if (forms[f]._id === id) {
+            if (forms[f]._id == id) {
                 return forms[f];
             }
         }
@@ -46,12 +46,12 @@ module.exports = function (app) {
 
     function deleteFormById (id) {
         for (var f in forms) {
-            if (forms[f]._id === id) {
+            if (forms[f]._id == id) {
                 forms.splice(f, 1);
             }
         }
-        console.log("form.model.js");
-        console.log(forms);
+        //console.log("form.model.js");
+        //console.log(forms);
     }
 
     function createFormForUser (userId, newForm) {
@@ -67,7 +67,7 @@ module.exports = function (app) {
 
     function updateForm (id, form) {
         for (var f in forms) {
-            if (forms[f]._id === id) {
+            if (forms[f]._id == id) {
                 forms[f] = form;
             }
         }

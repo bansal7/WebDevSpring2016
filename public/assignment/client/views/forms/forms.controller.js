@@ -16,6 +16,7 @@
                 .findAllFormsForUser(userId)
                 .then(function(response) {
                     if (response.data) {
+                        //console.log(response.data);
                         $scope.forms = response.data;
                     }
                 });
@@ -42,30 +43,23 @@
         }
 
         // function that updates a form of the user
-        function updateForm(name) {
-            if (name != null && $scope.selectedIndex != -1) {
-                var form = $scope.data[$scope.selectedIndex];
-                var newForm = {
-                    "_id": form._id,
-                    "title": name,
-                    "userId": form.userId
-                };
-
-                FormService
-                    .updateFormById(form._id, newForm)
-                    .then(function(response){
-                        if (response.data) {
-                            $scope.data[$scope.selectedIndex] = response;
-                            $scope.form= {};
-                            $scope.selectedIndex = -1;
-                        }
-                    })
-            }
+        function updateForm(form) {
+            var newForm = $scope.forms[$scope.selectedIndex];
+            newForm.title=form.title;
+            //console.log(newForm);
+            FormService
+                .updateFormById(newForm._id, newForm)
+                .then(function(response) {
+                    if (response.data) {
+                        $scope.form = {};
+                        $scope.forms = retrieveForms();
+                    }
+                });
         }
 
         // function that deletes a form
         function deleteForm(index) {
-            var form = $scope.data[index];
+            var form = $scope.forms[index];
 
             FormService
                 .deleteFormById(form._id)
@@ -80,9 +74,9 @@
         // function that selects the form to be updated
         function selectForm(index) {
             $scope.selectedIndex = index;
-            var form = $scope.data[index];
-            $scope.form= form.title;
-
+            var form = $scope.forms[index];
+            //console.log(form);
+            $scope.form.title = form.title;
         }
     }
 })();

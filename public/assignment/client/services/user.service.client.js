@@ -25,6 +25,7 @@
 
         // funtion finds the user based on username and password
         function findUserByCredentials(username, password) {
+            //console.log("inside login");
             return $http.get("/api/assignment/user?username=" + username + "&password=" + password);
         }
 

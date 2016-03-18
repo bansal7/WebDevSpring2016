@@ -1,40 +1,28 @@
+"use strict";
+
 (function(){
-    "use strict";
     angular
         .module("FormBuilderApp")
-        .controller("RegisterController",RegisterController);
+        .controller("RegisterController", registerController);
 
-    function RegisterController($scope,UserService,$location) {
-
+    function registerController($location, UserService, $scope, $rootScope) {
         $scope.register = register;
+        $scope.user = {};
 
-        // function that registers a new user
-        function register(username, password, verifyPassword, email) {
-
-            if (password == verifyPassword) {
-
-                var newUser = {
-                    "_id": (new Date).getTime(),
-                    "firstName": null,
-                    "lastName": null,
-                    "username": username,
-                    "password": password,
-                    "roles": []
-                }
-            }
+        function register (newUser) {
+            //$scope.user = registeredUser;
             UserService
                 .createUser(newUser)
-                .then(function(response){
+                .then(function(response) {
                     if(response.data) {
-                        //$scope.user = response.data;
+                        $scope.user = response.data;
                         UserService.setCurrentUser(response.data);
-                        $location.path("/profile");
+                        $location.url("/profile");
                         console.log("current user is: " + response.data);
                     } else {
                         console.log("no data received!");
                     }
                 });
-
         }
     }
 })();
