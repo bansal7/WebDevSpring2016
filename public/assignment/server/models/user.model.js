@@ -13,8 +13,8 @@ module.exports = function() {
     return api;
 
     function createUser (newUser) {
-        var now = new Date();
-        newUser._id = "id" + now.getTime();
+        //var now = new Date();
+        //newUser._id = "id" + now.getTime();
         users.push (newUser);
 
         return users;
@@ -33,9 +33,11 @@ module.exports = function() {
     }
 
     function findUserById (id) {
+        //console.log(users);
         for (var index in users) {
-            if (users[index]._id === id) {
+            if (users[index]._id == id) {
                 return users[index];
+                //console.log(users[index]);
             }
         }
         return null;

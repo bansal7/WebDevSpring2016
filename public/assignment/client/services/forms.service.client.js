@@ -24,6 +24,7 @@
 
         // function that finds all the users' forms
         function findAllFormsForUser(userId) {
+            console.log("sgdsg");
             return $http.get("/api/assignment/user/" + userId + "/form");
         }
 

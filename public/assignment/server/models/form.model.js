@@ -1,104 +1,75 @@
-module.exports = function() {
-    var forms = require("./form.mock.json");
-
+var forms = require("./form.mock.json");
+module.exports = function (app) {
     var api = {
-        createUser: createForm,
-        findUserById: findFormById,
-        findAllUsers: findAllForms,
-        updateUser: updateForm,
-        deleteUser: deleteForm,
+        createFormForUser: createFormForUser,
+        deleteFormById: deleteFormById,
+        findAllForms: findAllForms,
+        findFormById: findFormById,
+        updateForm: updateForm,
         findFormByTitle: findFormByTitle,
-        findFormsForUser: findFormsForUser,
-        findFieldsForForm: findFieldsForForm,
-        deleteFormFieldById: deleteFormFieldById
+        findFormsByUserId: findFormsByUserId
     };
-
     return api;
 
-    function createForm (newForm) {
-        var now = new Date();
-        newForm._id = "id" + now.getTime();
-        forms.push (newForm);
-
-        return forms;
-    }
-
-    function updateForm (id, form) {
-        for (var index in forms) {
-            if (forms[index]._id === id) {
-                forms[index] = form;
+    function findFormByTitle(title) {
+        for (var f in forms) {
+            if (forms[f].title === title) {
+                return forms[f];
             }
         }
+        return null;
+    }
+
+    function findFormsByUserId(userId) {
+        console.log("Ho dkfbsjfd");
+        var userForms = [];
+        for (f in forms) {
+            if (forms[f].userId == userId) {
+                userForms.push(forms[f]);
+            }
+        }
+        return userForms;
+    }
+
+    function findFormById (id) {
+        for (var f in forms) {
+            if (forms[f]._id === id) {
+                return forms[f];
+            }
+        }
+        return null;
     }
 
     function findAllForms () {
         return forms;
     }
 
-    function findFormById (id) {
-        for (var index in forms) {
-            if (forms[index]._id === id) {
-                return forms[index];
+    function deleteFormById (id) {
+        for (var f in forms) {
+            if (forms[f]._id === id) {
+                forms.splice(f, 1);
             }
         }
-        return null;
+        console.log("form.model.js");
+        console.log(forms);
     }
 
-    function deleteForm (id) {
-        for (var index in forms) {
-            if (forms[index]._id === id) {
-                forms.splice(index, 1);
-                return true;
+    function createFormForUser (userId, newForm) {
+        var nForm = {
+            _id: "ID_" + (new Date).getTime(),
+            title: newForm.title,
+            userId: userId,
+            fields: []
+        };
+        forms.push(nForm);
+        return forms;
+    }
+
+    function updateForm (id, form) {
+        for (var f in forms) {
+            if (forms[f]._id === id) {
+                forms[f] = form;
             }
         }
-        return false;
     }
-
-    function findFormByTitle(title) {
-        for (var index in forms) {
-            var currentForm = forms[index];
-            if (currentForm.title === title) {
-                return currentForm;
-            }
-        }
-
-        return null;
-    }
-
-    function findFormsForUser(userId) {
-        var userForms = [];
-
-        for (var index in forms) {
-            var currentForm = forms[index];
-
-            if (currentForm.userId === userId) {
-                userForms.push(currentForm);
-            }
-        }
-
-        return userForms;
-    }
-
-    function deleteFormFieldById (formId, fieldId) {
-        var form = findFormById(formId);
-
-        for (var index in form.fields) {
-            if (form.fields._id === fieldId) {
-                form.fields.splice(index, 1);
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    function findFieldsForForm(formId) {
-        for (var index in forms) {
-            if (forms[index]._id === formId) {
-                return forms[index].fields;
-            }
-        }
-
-        return [];
-    }
-}
+};

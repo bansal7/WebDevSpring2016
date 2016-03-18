@@ -6,19 +6,23 @@
 
     function FormController($scope,FormService, UserService) {
 
+        $scope.forms = [];
+
         // renders all the forms of the logged in user
         function retrieveForms () {
+            var userId = UserService.getCurrentUser()._id;
+            //console.log(userId);
             FormService
-                .findAllFormsForUser(UserService.getCurrentUser()._id)
+                .findAllFormsForUser(userId)
                 .then(function(response) {
                     if (response.data) {
-                        $scope.data = response.data;
+                        $scope.forms = response.data;
                     }
                 });
         }
         retrieveForms();
 
-        $scope.name = {};
+        $scope.form = {};
         $scope.addForm = addForm;
         $scope.updateForm = updateForm;
         $scope.deleteForm = deleteForm;
@@ -26,12 +30,12 @@
         $scope.selectedIndex = -1;
 
         // function that adds a new form to the users' list
-        function addForm(userId, form) {
+        function addForm(form) {
             FormService
-                .createFormForUser(userId, form)
+                .createFormForUser(UserService.getCurrentUser()._id, form)
                 .then(function(response){
                     if (response.data) {
-                        $scope.name = {};
+                        $scope.form = {};
                         retrieveForms();
                     }
                 });
@@ -52,7 +56,7 @@
                     .then(function(response){
                         if (response.data) {
                             $scope.data[$scope.selectedIndex] = response;
-                            $scope.name= null;
+                            $scope.form= {};
                             $scope.selectedIndex = -1;
                         }
                     })
@@ -68,7 +72,7 @@
                 .then(function (response) {
                     if (response.data) {
                         retrieveForms();
-                        $scope.name = {};
+                        $scope.form = {};
                     }
                 });
         }
@@ -77,7 +81,7 @@
         function selectForm(index) {
             $scope.selectedIndex = index;
             var form = $scope.data[index];
-            $scope.name= form.title;
+            $scope.form= form.title;
 
         }
     }

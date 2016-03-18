@@ -1,97 +1,64 @@
-module.exports = function (app, model) {
-
+module.exports = function(app, userModel) {
     app.post("/api/assignment/user", createUser);
+    app.get("/api/assignment/user?username=username&password=password", getUserByCredentials);
     app.get("/api/assignment/user", getAllUsers);
     app.get("/api/assignment/user/:id", getUserById);
     app.get("/api/assignment/user?username=username", getUserByUsername);
-    app.get("/api/assignment/user?username=username&password=password", getUserByCredentials);
-    app.delete("/api/assignment/user/:id", deleteUserById);
     app.put("/api/assignment/user/:id", updateUserById);
+    app.delete("/api/assignment/user/:id", deleteUserById);
 
-    function updateUserById (req, res) {
-        var id = req.params.id;
-        var user = req.body;
-        user = model.updateUser(id, user);
 
-        if(user) {
-            res.json(user);
-            return;
+    function getAllUsers(req, res) {
+        if (req.query.username && req.query.password) {
+            getUserByCredentials(req, res);
         }
-        res.send(null);
-    }
-
-    function createUser (req, res) {
-        var user = req.body;
-        //var now = new Date();
-        //user._id = now.getTime();
-        res.send (model.createUser(user));
-    }
-
-    function getAllUsers (req, res) {
-        var username = req.query.username;
-        var password = req.query.password;
-
-        if (username && password) {
-            var credentials = {
-                username: username,
-                password: password
-            };
-            var user = model.findUserByCredentials(credentials);
-
-            if (user) {
-                res.json(user);
-                return;
-            }
-            res.send(null);
+        else if (req.query.username) {
+            getUserByUsername(req, res);
         }
         else {
-            var users = model.findAllUsers();
-            res.json(users);
+            getUsers(req, res);
         }
     }
 
-    function getUserById (req, res) {
-        var id = req.params.id;
-        var user = model.findUserById(id);
-        if(user) {
-            res.json(user);
-            return;
-        }
-        res.send(null);
+    function createUser(req, res) {
+        var newUser = req.body;
+        var users = userModel.createUser(newUser);
+        res.json(users);
     }
 
-    function deleteUserById (req, res) {
-        var id = req.params.id;
-        model.deleteUser(id);
-
-        res.json (model.findAllUsers());
+    function getUsers(req, res) {
+        res.json(userModel.findAllUsers());
     }
 
-    function getUserByUsername(req, res) {
-        var username = req.query.username;
-        var user = model.findUserByUsername(username);
+    function getUserById(req, res) {
+        var userId = req.params.id;
+        var user = userModel.findUserById(userId);
+        res.json(user);
+    }
 
-        if(user) {
-            res.json(user);
-            return;
-        }
-        res.send(null);
+    function updateUserById(req, res) {
+        var user = req.body;
+        var userId = req.params.id;
+        res.json(userModel.updateUser(userId, user));
     }
 
     function getUserByCredentials(req, res) {
-        //console.log("Inside user by credentials");
-        var username = req.query.username;
-        var password = req.query.password;
-        var credentials = {
-            username: username,
-            password: password
+        var cred = {
+            username: req.query.username,
+            password: req.query.password
         };
-        var user = model.findUserByCredentials(credentials);
-
-        if (user) {
-            res.json(user);
-            return;
-        }
-        res.send(null);
+        var user = userModel.findUserByCredentials(cred);
+        res.json(user);
     }
-}
+
+    function getUserByUsername(req, res) {
+        var uName = req.query.username;
+        res.json(userModel.findUserByUsername(uName));
+    }
+
+    function deleteUserById(req, res) {
+        var id = req.params.id;
+        res.json(userModel.deleteUserById(id));
+
+    }
+};
