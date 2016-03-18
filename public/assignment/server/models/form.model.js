@@ -7,7 +7,13 @@ module.exports = function (app) {
         findFormById: findFormById,
         updateForm: updateForm,
         findFormByTitle: findFormByTitle,
-        findFormsByUserId: findFormsByUserId
+        findFormsByUserId: findFormsByUserId,
+
+        createField: createField,
+        deleteField: deleteField,
+        findField: findField,
+        updateField: updateField,
+        findFieldsByFormId: findFieldsByFormId
     };
     return api;
 
@@ -69,6 +75,56 @@ module.exports = function (app) {
         for (var f in forms) {
             if (forms[f]._id == id) {
                 forms[f] = form;
+            }
+        }
+    }
+
+    function createField(formId, field) {
+        var form;
+        field._id = uuid.v1();
+        form = findFormById(formId);
+        form.fields.push(field);
+    }
+
+    function deleteField(formId, fieldId) {
+        var form;
+        var fields;
+        form = findFormById(formId);
+        fields = form.fields;
+        for (f in fields) {
+            if (fields[f]._id == fieldId) {
+                fields.splice(f, 1);
+            }
+        }
+    }
+
+    function findField(formId, fieldId) {
+        var form;
+        var fields;
+        form = findFormById(formId);
+        fields = form.fields;
+        for (f in fields) {
+            if (fields[f]._id == fieldId) {
+                return fields[f];
+            }
+        }
+    }
+
+    function findFieldsByFormId(formId) {
+        var form;
+        console.log(formId);
+        form = findFormById(formId);
+        return form.fields;
+    }
+
+    function updateField(formId, fieldId, field) {
+        var form;
+        var fields;
+        form = findFormById(formId);
+        fields = form.fields;
+        for (f in fields) {
+            if (fields[f]._id == fieldId) {
+                fields[f] = field;
             }
         }
     }

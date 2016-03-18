@@ -1,184 +1,165 @@
-<h1>Forms</h1>
-<ul class="nav nav-tabs">
-    <li role="presentation" ><a href="#/forms">Forms</a></li>
-    <li role="presentation" class="active"><a href="#/fields">Fields</a></li>
-</ul>
-<form>
-    <div class="container box">
-        <br/>
-        <form>
-            <div class="row">
-                <div class="col-sm-5">
-                    <label>First Name:</label><br/>
-                    <input type="text" class="form-control" placeholder="First Name">
-                </div>
-                <div class="col-sm-4 col-sm-offset-2 responsive"><br/>
-                    <a href="#">
-                        <span class="glyphicon glyphicon-pencil btn btn-default"></span>
-                    </a>
-                    <a href="#">
-                        <span class="glyphicon glyphicon-plus btn btn-default"></span>
-                    </a>
-                    <a href="#">
-                        <span class="glyphicon glyphicon-remove btn btn-default"></span>
-                    </a>
-                    <a href="#">
-                        <span class="glyphicon glyphicon-align-justify btn btn-default"></span>
-                    </a>
-                </div>
-            </div><br/>
-            <div class="row">
-                <div class="col-sm-5">
-                    <label>Last Name:</label><br/>
-                    <input type="text" class="form-control" placeholder="Last Name">
-                </div>
-                <div class="col-sm-4 col-sm-offset-2 responsive"><br/>
-                    <a href="#">
-                        <span class="glyphicon glyphicon-pencil btn btn-default"></span>
-                    </a>
-                    <a href="#">
-                        <span class="glyphicon glyphicon-plus btn btn-default"></span>
-                    </a>
-                    <a href="#">
-                        <span class="glyphicon glyphicon-remove btn btn-default"></span>
-                    </a>
-                    <a href="#">
-                        <span class="glyphicon glyphicon-align-justify btn btn-default"></span>
-                    </a>
-                </div>
-            </div><br/>
-            <div class="row">
-                <div class="col-sm-5">
-                    <label>Date of Birth:</label><br/>
-                    <input type="date" class="form-control" placeholder="Select Date">
-                </div>
-                <div class="col-sm-4 col-sm-offset-2 responsive"><br/>
-                    <a href="#">
-                        <span class="glyphicon glyphicon-pencil arrangeicons btn btn-default"></span>
-                    </a>
-                    <a href="#">
-                        <span class="glyphicon glyphicon-plus arrangeicons btn btn-default"></span>
-                    </a>
-                    <a href="#">
-                        <span class="glyphicon glyphicon-remove arrangeicons btn btn-default"></span>
-                    </a>
-                    <a href="#">
-                        <span class="glyphicon glyphicon-align-justify arrangeicons btn btn-default"></span>
-                    </a>
-                </div>
-            </div><br/>
-            <div class="row">
-                <div class="col-sm-5">
-                    <label>Gender:</label><br/>
-                    <select class="form-control">
-                        <option>Male</option>
-                        <option>Female</option>
-                    </select>
-                </div>
-                <div class="col-sm-4 col-sm-offset-2 responsive"><br/>
-                    <a href="#">
-                        <span class="glyphicon glyphicon-pencil arrangeicons btn btn-default"></span>
-                    </a>
-                    <a href="#">
-                        <span class="glyphicon glyphicon-plus arrangeicons btn btn-default"></span>
-                    </a>
-                    <a href="#">
-                        <span class="glyphicon glyphicon-remove arrangeicons btn btn-default"></span>
-                    </a>
-                    <a href="#">
-                        <span class="glyphicon glyphicon-align-justify arrangeicons btn btn-default"></span>
-                    </a>
-                </div>
-            </div><br/>
-            <div class="row">
-                <div class="col-sm-5">
-                    <label>Roles:</label><br/>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" checked="true" value="">
-                            Admin
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="">
-                            Student
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" checked="true" value="">
-                            User
-                        </label>
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" ng-controller="FieldsController">
+    <h1 class="page-header">{{form.title}}</h1>
+
+    <ul class="nav nav-tabs">
+        <li role="presentation"><a href="#/forms">Forms</a></li>
+        <li role="presentation" class="active"><a href="#/fields">Fields</a></li>
+    </ul>
+    <br>
+    <form>
+        <div ng-repeat="field in fields">
+            <label>{{field.label}}</label>
+            <div ng-switch="field.type">
+                <div ng-switch-when="TEXT">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="{{field.placeholder}}">
+                        <div class="input-group-btn" ng-include="'views/forms/buttons.html'"></div>
                     </div>
                 </div>
-                <div class="col-sm-4 col-sm-offset-2 responsive">
-                    <a href="#">
-                        <span class="glyphicon glyphicon-pencil btn btn-default"></span>
-                    </a>
-                    <a href="#">
-                        <span class="glyphicon glyphicon-plus btn btn-default"></span>
-                    </a>
-                    <a href="#">
-                        <span class="glyphicon glyphicon-remove btn btn-default"></span>
-                    </a>
-                    <a href="#">
-                        <span class="glyphicon glyphicon-align-justify btn btn-default"></span>
-                    </a>
-                </div>
-            </div><br/>
-            <div class="row">
-                <div class="col-sm-5">
-                    <label>License Agreement:</label>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-                            Yes
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-                            No
-                        </label>
+                <div ng-switch-when="OPTIONS">
+                    <div class="input-group">
+                        <select class="form-control">
+                            <option ng-repeat="op in field.options">{{op.label}}</option>
+                        </select>
+                        <div class="input-group-btn" ng-include="'views/forms/buttons.html'"></div>
                     </div>
                 </div>
-                <div class="col-sm-4 col-sm-offset-2 responsive"><br/>
-                    <a href="#">
-                        <span class="glyphicon glyphicon-pencil btn btn-default"></span>
-                    </a>
-                    <a href="#">
-                        <span class="glyphicon glyphicon-plus btn btn-default"></span>
-                    </a>
-                    <a href="#">
-                        <span class="glyphicon glyphicon-remove btn btn-default"></span>
-                    </a>
-                    <a href="#">
-                        <span class="glyphicon glyphicon-align-justify btn btn-default"></span>
-                    </a>
+                <div ng-switch-when="TEXTAREA">
+                    <div class="input-group">
+                        <textarea class="form-control" placeholder="{{field.placeholder}}"></textarea>
+                        <div class="input-group-btn" ng-include="'views/forms/buttons.html'"></div>
+                    </div>
+                </div>
+                <div ng-switch-when="CHECKBOXES">
+                    <div class="input-group">
+                        <div class="checkbox">
+                            <div ng-repeat="op in field.options">
+                                <label>
+                                    <input type="checkbox" value="{{op.value}}">{{op.label}}
+                                </label>
+                                <br>
+                            </div>
+                        </div>
+                        <div class="input-group-btn" ng-include="'views/forms/buttons.html'"></div>
+
+                    </div>
+                </div>
+                <div ng-switch-when="RADIOS">
+                    <div class="input-group">
+                        <div ng-repeat="op in field.options" class="radio">
+                            <label>
+                                <input type="radio" name="{{op.label}}" value="{{op.value}}" checked>
+                                {{op.label}}
+                            </label>
+                        </div>
+                        <div class="input-group-btn" ng-include="'views/forms/buttons.html'"></div>
+                    </div>
+                </div>
+                <div ng-switch-default>
+                    <div class="input-group">
+                        <input type="date" placeholder="{{field.placeholder}}" class="form-control">
+                        <div class="input-group-btn" ng-include="'views/forms/buttons.html'"></div>
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+
+        <hr>
+        <label for="input5">Add New Field:</label>
+        <div class="input-group">
+            <select ng-model="fieldType" class="form-control" id="input5">
+                <option>Single Line Text Field</option>
+                <option>Date Field</option>
+                <option>Dropdown Field</option>
+                <option>Checkboxes Field</option>
+                <option>Radio Buttons Field</option>
+                <option>Multi Line Text Field</option>
+            </select>
+            <div class="input-group-btn">
+                <button ng-click="addField(fieldType)" type="button" class="btn btn-success">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <div id="editField" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">{{cField.label}}</h4>
+                </div>
+                <div class="modal-body" ng-switch on="eField.type">
+                    <div ng-switch-when="TEXT">
+                        <h3>Single Line Field</h3>
+                        <form>
+                            <label>Label</label>
+                            <input ng-model="eField.label" class="form-control" type="text" placeholder="Edit Label">
+                            <br>
+                            <label>Placeholder</label>
+                            <input ng-model="eField.placeholder" class="form-control" type="text"
+                                   placeholder="Edit Placeholder">
+                        </form>
+                    </div>
+                    <div ng-switch-when="TEXTAREA">
+                        <h3>Multi Line Field</h3>
+                        <form>
+                            <label>Label</label>
+                            <input ng-model="eField.label" class="form-control" type="text" placeholder="Edit Label">
+                            <br>
+                            <label>Placeholder</label>
+                            <textarea ng-model="eField.placeholder" class="form-control" placeholder="Edit Placeholder"></textarea>
+                        </form>
+                    </div>
+                    <div ng-switch-when="OPTIONS">
+                        <h3>Dropdown Field</h3>
+                        <form>
+                            <label>Label</label>
+                            <input ng-model="eField.label" class="form-control" type="text" placeholder="Edit Dropdown Label">
+                            <br>
+                            <label>Options</label>
+                            <textarea ng-model="optionText" class="form-control" placeholder="Edit Dropdown Options" ng-list="&#10;" ng-trim="false"></textarea>                        </form>
+                    </div>
+                    <div ng-switch-when="DATE">
+                        <h3>Date Field</h3>
+                        <form>
+                            <label>Label</label>
+                            <input ng-model="eField.label" class="form-control" type="text">
+                            <br>
+                        </form>
+                    </div>
+                    <div ng-switch-when="RADIOS">
+                        <h3>Radio Buttons Field</h3>
+                        <form>
+                            <label>Label</label>
+                            <input ng-model="eField.label" class="form-control" type="text" placeholder="Edit Radio Label">
+                            <br>
+                            <label>Options</label>
+                            <textarea ng-model="optionText" class="form-control" placeholder="Edit Radio Options" ng-list="&#10;" ng-trim="false"></textarea>
+                        </form>
+                    </div>
+                    <div ng-switch-default>
+                        <h3>Checkbox Field</h3>
+                        <form>
+                            <label>Label</label>
+                            <input ng-model="eField.label" class="form-control" type="text" placeholder="Edit Checkbox label">
+                            <br>
+                            <label>Options</label>
+                            <textarea ng-model="optionText" class="form-control" placeholder="Edit Checkbox options" ng-list="&#10;" ng-trim="false"></textarea>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button ng-click="commitEdit(eField)" type="button" class="btn btn-default"
+                            data-dismiss="modal">Confirm
+                    </button>
                 </div>
             </div>
-            <hr>
-            <div class="row">
-                <div class="col-sm-5">
-                    <label>Add New Field:</label><br/>
-                    <select class="form-control">
-                        <option>Single Line Text</option>
-                        <option>Date</option>
-                        <option>Dropdown</option>
-                        <option>Checkboxes</option>
-                        <option>Radio buttons</option>
-                        <option>Paragraph Text Field</option>
-                    </select>
-                </div>
-                <div class="col-sm-4 col-sm-offset-2 responsive"><br/>
-                    <a href="#">
-                        <span class="glyphicon glyphicon-plus arrangeicons btn btn-default"></span>
-                    </a>
-                </div>
-            </div>
-        </form>
+        </div>
     </div>
-</form>
 
-
+</div>

@@ -1,42 +1,41 @@
 "use strict";
-
-(function() {
+(function () {
     angular
         .module("FormBuilderApp")
         .factory("FieldService", FieldService);
 
-    function FieldService($http) {
+    function FieldService ($http) {
+
         var api = {
-            createFieldForForm : createFieldForForm,
-            getFieldsForForm : getFieldsForForm,
-            getFieldForForm: getFieldForForm,
-            deleteFieldFromForm : deleteFieldFromForm,
+            createField: createField,
+            findField: findField,
+            findFieldsByForm: findFieldsByForm,
+            deleteField: deleteField,
             updateField: updateField
         };
 
         return api;
 
-        function createFieldForForm(formId, field) {
-            field._id = (new Date).getTime();
-            field.userId = formId;
-
+        function createField (formId, field) {
+            console.log("creating field.... field.service.client.js");
             return $http.post("/api/assignment/form/" + formId + "/field", field);
         }
 
-        function getFieldsForForm(formId) {
-            return $http.get("/api/assignment/form/" + formId + "/field");
-        }
-
-        function getFieldForForm(formId, fieldId) {
+        function findField (formId, fieldId) {
             return $http.get("/api/assignment/form/" + formId + "/field/" + fieldId);
         }
 
-        function deleteFieldFromForm(formId, fieldId) {
+        function findFieldsByForm (formId) {
+            return $http.get("/api/assignment/form/" + formId + "/field")
+        }
+
+        function deleteField (formId, fieldId) {
             return $http.delete("/api/assignment/form/" + formId + "/field/" + fieldId);
         }
 
-        function updateField(formId, fieldId, field) {
+        function updateField (formId, fieldId, field) {
             return $http.put("/api/assignment/form/" + formId + "/field/" + fieldId, field);
         }
+
     }
 })();
