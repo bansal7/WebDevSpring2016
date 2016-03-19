@@ -12,6 +12,8 @@
         vm.commitEdit = commitEdit;
         vm.deleteField = deleteField;
         vm.addField = addField;
+        vm.cloneField = cloneField;
+        vm.reorder = reorder;
         vm.options =
             [
                 'Single Line Text Field',
@@ -23,10 +25,7 @@
             ];
         vm.selection = vm.options[0];
         vm.fieldOptions = null;
-
         var formId = "000";
-
-
         if ($routeParams.formId) {
             formId = $routeParams.formId;
         }
@@ -63,7 +62,27 @@
             vm.cField = null;
             FieldService
                 .updateField(formId, field._id, field)
-                .then(init)
+                .then(init);
+        }
+
+        function reorder() {
+            vm.form.fields = vm.fields;
+            FormService
+                .updateFormById(formId, vm.form)
+                .then(init);
+
+        }
+
+        function cloneField(newField) {
+            //console.log(newField);
+            FieldService
+                .createFieldForForm(FormService.getFormById(), newField)
+                .then(function(response){
+                    if(response.data) {
+                        init();
+                    }
+                });
+
         }
 
         function deleteField(field) {

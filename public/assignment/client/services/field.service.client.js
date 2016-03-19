@@ -11,10 +11,15 @@
             findField: findField,
             findFieldsByForm: findFieldsByForm,
             deleteField: deleteField,
-            updateField: updateField
+            updateField: updateField,
+            createFieldForForm: createFieldForForm,
         };
 
         return api;
+
+        function createFieldForForm(formId, field){
+            return $http.post("/api/assignment/form/" + formId + "/field", field);
+        }
 
         function createField (formId, field) {
             console.log("creating field.... field.service.client.js");

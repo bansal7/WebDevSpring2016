@@ -1,5 +1,5 @@
 var forms = require("./form.mock.json");
-module.exports = function (app) {
+module.exports = function (app,uuid) {
     var api = {
         createFormForUser: createFormForUser,
         deleteFormById: deleteFormById,
@@ -8,7 +8,6 @@ module.exports = function (app) {
         updateForm: updateForm,
         findFormByTitle: findFormByTitle,
         findFormsByUserId: findFormsByUserId,
-
         createField: createField,
         deleteField: deleteField,
         findField: findField,
@@ -81,7 +80,7 @@ module.exports = function (app) {
 
     function createField(formId, field) {
         var form;
-        field._id = uuid.v1();
+        field._id = (new Date()).getTime();
         form = findFormById(formId);
         form.fields.push(field);
     }

@@ -1,4 +1,4 @@
-module.exports = function(app, formModel, fieldModel) {
+module.exports = function(app, formModel) {
     app.get("/api/assignment/form/:formId/field", fieldsForFormId);
     app.get("/api/assignment/form/:formId/field/:fieldId", getFieldById);
     app.delete("/api/assignment/form/:formId/field/:fieldId", deleteFieldById);
@@ -9,7 +9,7 @@ module.exports = function(app, formModel, fieldModel) {
         var formId;
         var fields;
         formId = req.params.formId;
-        fields = fieldModel.findFieldsByFormId(formId);
+        fields = formModel.findFieldsByFormId(formId);
         res.json(fields);
     }
 
@@ -19,7 +19,7 @@ module.exports = function(app, formModel, fieldModel) {
         var field;
         formId = req.params.formId;
         fieldId = req.params.fieldId;
-        field = fieldModel.findField(formId, fieldId);
+        field = formModel.findField(formId, fieldId);
         res.json(field);
     }
 
@@ -28,17 +28,16 @@ module.exports = function(app, formModel, fieldModel) {
         var fieldId;
         formId = req.params.formId;
         fieldId = req.params.fieldId;
-        fieldModel.deleteField(formId, fieldId);
+        formModel.deleteField(formId, fieldId);
         res.send(200);
     }
 
-    function addFieldToForm(req, res) {
-        var field;
-        var formId;
-        field = req.body;
-        formId = req.params.formId;
-        field = fieldModel.createField(formId, field);
-        res.json(field);
+        function addFieldToForm(req, res) {
+            var formId = req.params.formId;
+            var newField = req.body;
+            newField._id = (new Date()).getTime();
+            field = formModel.createField(formId, newField);
+            res.json(field);
     }
 
     function updateFieldById(req, res) {
@@ -49,7 +48,7 @@ module.exports = function(app, formModel, fieldModel) {
         field = req.body;
         fieldId = req.params.fieldId;
         formId = req.params.formId;
-        r = fieldModel.updateField(formId, fieldId, field);
+        r = formModel.updateField(formId, fieldId, field);
         res.json(r);
     }
 };
