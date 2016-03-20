@@ -35,7 +35,7 @@ module.exports = function(app, formModel) {
         function addFieldToForm(req, res) {
             var formId = req.params.formId;
             var newField = req.body;
-            newField._id = (new Date()).getTime();
+            //newField._id = (new Date()).getTime();
             field = formModel.createField(formId, newField);
             res.json(field);
     }
