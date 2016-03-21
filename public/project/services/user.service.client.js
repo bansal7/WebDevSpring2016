@@ -10,8 +10,8 @@
         var users = {};
 
         users= [
-            {	"_id":123, "firstName":"Alice",            "lastName":"Wonderland",
-                "username":"alice",  "password":"alice",   "email": "alice@alice.com"   },
+            {	"_id":123, "firstName":"Bansal",            "lastName":"Shah",
+                "username":"bansalshah1993@gmail.com",  "password":"webdev2016",   "email": "bansalshah1993@gmail.com"   },
             {	"_id":234, "firstName":"Bob",              "lastName":"Hope",
                 "username":"bob",    "password":"bob",     "email": "bob@bob.com"		},
             {	"_id":345, "firstName":"Charlie",          "lastName":"Brown",
@@ -43,7 +43,7 @@
                     break;
                 }
             }
-
+            console.log(user);
             callback(user);
 
         }

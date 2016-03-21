@@ -14,14 +14,26 @@ var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
 
 require("./public/assignment/server/app.js")(app);
 
-app.get("/api",function(req,res){
+app.get("/api/:username/:password",function(req,res){
+
+    //var user = ;
+    var username = req.params.username;
+    var password = req.params.password;
+
+    //console.log(username)
+
     request({
-    url:"https://www.buxfer.com/api/transactions?token=4e9acbk3lo7hb9vhn80lcfm740",
+    url:"https://www.buxfer.com/api/login?userid="+ username + "&password=" + password,
+    //url:"https://www.buxfer.com/api/login?userid="+ "bansalshah1993@gmail.com" + "&password=" + "webdev2016",
+
         json: true},
         function(error,response,body) {
             if (!error && response.statusCode === 200) {
                 res.json(body);
                 console.log(body);
+            }
+            else{
+                console.log(req.body);
             }
         });
 });

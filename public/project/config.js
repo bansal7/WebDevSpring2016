@@ -25,6 +25,10 @@
                 templateUrl: "views/notes/note.view.html",
                 controller : "NoteController"
             })
+            .when("/login",{
+                templateUrl: "views/users/login.view.html",
+                controller : "NoteController"
+            })
             .otherwise({
                 redirectTo: "/home"
             });
