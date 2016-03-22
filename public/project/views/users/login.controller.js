@@ -4,7 +4,7 @@
         .module("SplitUpApp")
         .controller("LoginController",LoginController);
 
-    function LoginController($scope,UserService,$http) {
+    function LoginController($scope,UserService,$http, $location) {
 
         $scope.login = login;
         var vm = this;
@@ -18,9 +18,21 @@
 
             function useApi(user){
                 //alert("sfdsdbs");
+                var URL="https://www.buxfer.com/api/login?&userid="+ "USERNAME" + "&password=" + "PASSWORD";
+
+                var a=URL.replace("USERNAME",user.username);
+                var b=a.replace("PASSWORD",user.password);
+                UserService.setCurrentUser(user);
                 if(user!=null) {
-                    $http.get("/api/"+ user.username + "/" + user.password)
-                        .success(renderToken);
+                    var req = {
+                        method: 'POST',
+                        url: "/api",
+                        data: b,
+                        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                    };
+                    //console.log(req.data);
+
+                    $http(req).success(renderToken);
                 }
                 else {
                     alert("Error in useApi function");
@@ -29,9 +41,11 @@
         }
 
         function renderToken(response){
-            console.log(response);
+            //console.log(response);
             var token = response.response.token;
             console.log(token);
+            UserService.setToken(token);
+            $location.path("/profile");
         }
     }
 })();

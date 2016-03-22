@@ -27,7 +27,11 @@
             })
             .when("/login",{
                 templateUrl: "views/users/login.view.html",
-                controller : "NoteController"
+                controller : "LoginController"
+            })
+            .when("/profile",{
+                templateUrl: "views/users/profile.view.html",
+                controller : "ProfileController"
             })
             .otherwise({
                 redirectTo: "/home"

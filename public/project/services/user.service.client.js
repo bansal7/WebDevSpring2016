@@ -29,7 +29,9 @@
             deleteUserById : deleteUserById,
             updateUser : updateUser,
             setCurrentUser: setCurrentUser,
-            getCurrentUser: getCurrentUser
+            getCurrentUser: getCurrentUser,
+            setToken : setToken,
+            getToken : getToken
         }
 
         return api;
@@ -43,7 +45,7 @@
                     break;
                 }
             }
-            console.log(user);
+            //console.log(user);
             callback(user);
 
         }
@@ -88,6 +90,14 @@
 
         function getCurrentUser () {
             return $rootScope.currentUser;
+        }
+
+        function setToken (token) {
+            $rootScope.token = token;
+        }
+
+        function getToken () {
+            return $rootScope.token;
         }
     }
 })();

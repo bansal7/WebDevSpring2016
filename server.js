@@ -14,23 +14,29 @@ var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
 
 require("./public/assignment/server/app.js")(app);
 
-app.get("/api/:username/:password",function(req,res){
+var urlencodedParser = bodyParser.urlencoded({extended: true});
 
-    //var user = ;
-    var username = req.params.username;
-    var password = req.params.password;
+app.post("/api",urlencodedParser,function(req,res){
 
-    //console.log(username)
+    //console.log(req);
+    //console.log(req.data);
+    //console.log(req.body);
+
+    var username = req.body.userid;
+    var password = req.body.password;
+
+    //console.log(username);
+    //console.log(password);
 
     request({
-    url:"https://www.buxfer.com/api/login?userid="+ username + "&password=" + password,
+    url:"https://www.buxfer.com/api/login?&userid="+ username + "&password=" + password,
     //url:"https://www.buxfer.com/api/login?userid="+ "bansalshah1993@gmail.com" + "&password=" + "webdev2016",
 
         json: true},
         function(error,response,body) {
             if (!error && response.statusCode === 200) {
                 res.json(body);
-                console.log(body);
+                //console.log(body);
             }
             else{
                 console.log(req.body);
@@ -38,9 +44,6 @@ app.get("/api/:username/:password",function(req,res){
         });
 });
 
-function renderfunction(response){
-    console.log(response);
-}
 
 var urlencodedParser = bodyParser.urlencoded({extended: true});
 
