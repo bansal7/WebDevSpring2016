@@ -22,15 +22,12 @@
 
 
         function renderTransaction(response) {
-            //var tid = UserService.getTransactionId();
+            var number = response.response.numTransactions;
             var transactions = (response.response.transactions);
-            for (var index = 0; index < response.response.numTransactions; index++) {
-                if (transactions[index].id = tid) {
+            for (var index = 0; index < number - 1; index++) {
+                if (transactions[index].id == tid) {
                     $scope.transaction = transactions[index];
                     break;
-                }
-                else {
-                    console.log("Error in renderTransaction");
                 }
             }
 

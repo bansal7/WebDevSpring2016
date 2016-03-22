@@ -43,7 +43,7 @@
         function renderToken(response){
             //console.log(response);
             var token = response.response.token;
-            console.log(token);
+            //console.log(token);
             UserService.setToken(token);
             $location.path("/profile");
         }
