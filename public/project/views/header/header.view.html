@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0" ng-controller="HeaderController">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="sr-only">Toggle navigation</span>
@@ -9,7 +9,9 @@
         <a class="navbar-brand" href="#">SPLIT-UP</a>
     </div>
     <ul class="nav navbar-top-links navbar-right">
-        <li><a href="#/login">Login</a></li>
+        <li ng-hide="currentUser"><a href="#/login">Login</a></li>
+        <li ng-show="currentUser"><a href="#/profile">Welcome, {{currentUser.username}}!</a></li>
+        <li ng-show="currentUser" ><a ng-click="logout()" href="#/home">Logout</a></li>
             <!-- /.dropdown-user -->
         <!-- /.dropdown -->
     </ul>

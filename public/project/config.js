@@ -7,7 +7,8 @@
     function Configure($routeProvider) {
         $routeProvider
             .when("/home",{
-                templateUrl: "views/home/home.view.html"
+                templateUrl: "views/home/home.view.html",
+                controller : "MainController"
             })
             .when("/user",{
                 templateUrl: "views/users/user.view.html",
@@ -32,6 +33,14 @@
             .when("/profile",{
                 templateUrl: "views/users/profile.view.html",
                 controller : "ProfileController"
+            })
+            .when("/searchtransactions",{
+                templateUrl: "views/transactions/transaction.view.html",
+                controller : "TransactionController"
+            })
+            .when("/details/:id",{
+                templateUrl: "views/details/details.view.html",
+                controller : "DetailsController"
             })
             .otherwise({
                 redirectTo: "/home"

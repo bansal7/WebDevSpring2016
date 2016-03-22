@@ -6,26 +6,29 @@
         .controller("ProfileController", ProfileController);
 
     function ProfileController(UserService, $scope, $rootScope) {
-        $scope.update = update;
+        $scope.updateUser = updateUser;
         var vm = this;
         vm.user = UserService.getCurrentUser();
 
         var token = UserService.getToken();
 
-        function update (user) {
+        function updateUser (user) {
             // console.log("updating user" + us);
-            UserService
-                .updateUser(user._id, user)
-                .then(function() {
-                    return UserService.findUserByCredentials(user.username, user.password);
-                })
-                .then(function(response){
-                    if (response.data){
-                        UserService.setCurrentUser(response.data);
-                        UserService.getCurrentUser();
-                        console.log("hooray!");
-                    }
-                });
+            UserService.updateUser(user._id, user, profileUpdate);
+
+
+            function profileUpdate(response) {
+                //console.log(response);
+                if (response) {
+                    UserService.setCurrentUser(response);
+                    UserService.getCurrentUser();
+                    //console.log("hooray!");
+                }
+                else{
+                    console.log(response);
+                    console.log("error in profileUpdate");
+                }
+            }
         }
     }
 })();

@@ -75,10 +75,12 @@
 
         // function updates a user entry
         function updateUser(userId,user,callback){
+            //console.log("I am here in service");
             for(var index in users){
                 if(users[index]._id==userId){
                     users[index] = user;
                     callback(users[index]);
+                    //console.log(users[index]);
                     break;
                 }
             }

@@ -18,25 +18,32 @@ var urlencodedParser = bodyParser.urlencoded({extended: true});
 
 app.post("/api",urlencodedParser,function(req,res){
 
-    //console.log(req);
-    //console.log(req.data);
-    //console.log(req.body);
-
     var username = req.body.userid;
     var password = req.body.password;
-
-    //console.log(username);
-    //console.log(password);
-
     request({
-    url:"https://www.buxfer.com/api/login?&userid="+ username + "&password=" + password,
-    //url:"https://www.buxfer.com/api/login?userid="+ "bansalshah1993@gmail.com" + "&password=" + "webdev2016",
-
-        json: true},
+            url:"https://www.buxfer.com/api/login?&userid="+ username + "&password=" + password,
+            json: true},
         function(error,response,body) {
             if (!error && response.statusCode === 200) {
                 res.json(body);
-                //console.log(body);
+            }
+            else{
+                console.log(req.body);
+            }
+        });
+});
+
+app.post("/api/transactions",urlencodedParser,function(req,res){
+
+    var token = req.body.token;
+
+    console.log(token);
+    request({
+            url:"https://www.buxfer.com/api/transactions?&token="+ token,
+            json: true},
+        function(error,response,body) {
+            if (!error && response.statusCode === 200) {
+                res.json(body);
             }
             else{
                 console.log(req.body);
