@@ -22,12 +22,31 @@ module.exports = function(app, userModel) {
 
     function createUser(req, res) {
         var newUser = req.body;
-        var user = userModel.createUser(newUser);
-        res.json(user);
+        userModel
+            .createUser(newUser)
+            .then(
+                function(doc){
+                    res.json(doc);
+                },
+                // send error if promise rejected
+                function(err ){
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function getUsers(req, res) {
-        res.json(userModel.findAllUsers());
+        userModel
+            .findAllUsers()
+            .then(
+                function(doc){
+                    res.json(doc);
+                },
+                //send error if promise rejected
+                function(err){
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function getUserById(req, res) {

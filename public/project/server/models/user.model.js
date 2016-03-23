@@ -1,5 +1,6 @@
 module.exports = function() {
     var users = require("./user.mock.json");
+    var q = require("q");
 
     // stores the data about all the users
     var api = {
@@ -29,7 +30,9 @@ module.exports = function() {
 
     // function finds all the users
     function findAllUsers() {
-        return users;
+        var deferred = q.defer();
+        deferred.resolve(users);
+        return deferred.promise;
     }
 
     function findUserById (id) {
@@ -44,9 +47,16 @@ module.exports = function() {
     }
 
     // function creates a new user
-    function createUser(user){
-        users.push(user);
-        return user;
+    function createUser(newUser){
+        var deferred = q.defer();
+        //var user = null;
+
+        newUser._id = (new Date()).getTime();
+        users.push(newUser);
+
+        deferred.resolve(newUser);
+        return deferred.promise;
+        //return newUser;
     }
 
     // function deletes a user
