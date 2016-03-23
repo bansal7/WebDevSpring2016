@@ -1,0 +1,10 @@
+[
+  {	"_id":123, "name1":"Alice",            "name2":["Alice","Bob","Charlie"],
+    "amount":"20.25",  "desc":"Grocery" },
+  {	"_id":234, "name1":"John",            "name2":["John","Kevin","Charlie"],
+    "amount":"30.25",  "desc":"Saturday Night" },
+  {	"_id":345, "name1":"Charlie",            "name2":["Charlie","Tom","Charlie"],
+    "amount":"10",  "desc":"Party" },
+  {	"_id":456, "name1":"Alice",            "name2":["Alice"],
+    "amount":"15",  "desc":"Movie" },
+]

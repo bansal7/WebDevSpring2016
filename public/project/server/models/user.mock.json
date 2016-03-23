@@ -1,0 +1,12 @@
+[
+  {	"_id":123, "firstName":"Bansal",            "lastName":"Shah",
+    "username":"bansalshah1993@gmail.com",  "password":"webdev2016",   "email": "bansalshah1993@gmail.com"   },
+  {	"_id":234, "firstName":"Harshil",              "lastName":"Vasani",
+    "username":"harshilvasani03@gmail.com",    "password":"hvwebdev2016",     "email": "harshilvasani03@gmail.com"		},
+  {	"_id":345, "firstName":"Saloni",          "lastName":"Shah",
+    "username":"11bce090@nirmauni.ac.in","password":"sswebdev2016", "email": "11bce090@nirmauni.ac.in"		},
+  {	"_id":456, "firstName":"Biyanta",              "lastName":"Shah",
+    "username":"shahbiyanta@gmail.com",    "password":"bswebdev2016",     "email": "shahbiyanta@gmail.com"},
+  {	"_id":567, "firstName":"Edward",           "lastName":"Norton",
+    "username":"ed",     "password":"ed",      "email": "edward@edward.com"		}
+]
