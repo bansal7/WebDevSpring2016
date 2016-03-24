@@ -58,10 +58,17 @@
                     <div class="input-group-btn" ng-include="'views/forms/buttons.html'"></div>
                 </div>
             </td>
+            <td ng-switch-when="DATE">
+                <label>{{field.label}}</label>
+                <div class="input-group">
+                            <input type="date" placeholder="{{field.placeholder}}" class="form-control">
+                    <div class="input-group-btn" ng-include="'views/forms/buttons.html'"></div>
+                </div>
+            </td>
             <td ng-switch-default>
                 <label>{{field.label}}</label>
                 <div class="input-group">
-                    <input type="date" placeholder="{{field.placeholder}}" class="form-control">
+                    <input type="email" placeholder="{{field.placeholder}}" class="form-control">
                     <div class="input-group-btn" ng-include="'views/forms/buttons.html'"></div>
                 </div>
             </td>
@@ -74,12 +81,12 @@
     <label for="input5">Add New Field:</label>
     <div class="input-group">
         <select ng-model="fieldType" class="form-control" id="input5">
-            <option>Single Line Text Field</option>
-            <option>Date Field</option>
-            <option>Dropdown Field</option>
-            <option>Checkboxes Field</option>
-            <option>Radio Buttons Field</option>
-            <option>Multi Line Text Field</option>
+            <option value="TEXT">Single Line Text Field</option>
+            <option value="DATE">Date Field</option>
+            <option value="OPTIONS">Dropdown Field</option>
+            <option value="CHECKBOXES">Checkboxes Field</option>
+            <option value="RADIOS">Radio Buttons Field</option>
+            <option value="TEXTAREA">Multi Line Text Field</option>
         </select>
         <div class="input-group-btn">
             <button ng-click="model.addField(fieldType)" type="button" class="btn btn-success">
@@ -139,7 +146,7 @@
                         <h3>Date Field</h3>
                         <form>
                             <label>Label</label>
-                            <input ng-model="model.eField.label" class="form-control" type="text">
+                            <input ng-model="model.eField.label" class="form-control" type="date">
                             <br>
                         </form>
                     </div>
@@ -155,7 +162,7 @@
                                       ng-list="&#10;" ng-trim="false"></textarea>
                         </form>
                     </div>
-                    <div ng-switch-default>
+                    <div ng-switch-when="CHECKBOXES">
                         <h3>Checkbox Field</h3>
                         <form>
                             <label>Label</label>
@@ -165,6 +172,18 @@
                             <label>Options</label>
                             <textarea ng-model="model.optionText" class="form-control"
                                       placeholder="Edit Checkbox options" ng-list="&#10;" ng-trim="false"></textarea>
+                        </form>
+                    </div>
+                    <div ng-switch-default>
+                        <h3>Default Field</h3>
+                        <form>
+                            <label>Label</label>
+                            <input ng-model="model.eField.label" class="form-control" type="text"
+                                   placeholder="Edit Label">
+                            <br>
+                            <label>Placeholder</label>
+                            <input ng-model="model.eField.placeholder" class="form-control" type="text"
+                                   placeholder="Edit Placeholder">
                         </form>
                     </div>
                 </div>

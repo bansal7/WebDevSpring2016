@@ -37,6 +37,7 @@ module.exports = function(app, formModel) {
             var newField = req.body;
             //newField._id = (new Date()).getTime();
             field = formModel.createField(formId, newField);
+            //console.log("inside server service " + field);
             res.json(field);
     }
 

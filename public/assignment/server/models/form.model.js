@@ -37,7 +37,7 @@ module.exports = function (app,uuid) {
     }
 
     function findFormById (id) {
-        console.log("inside form by Id :" + id);
+        //console.log("inside form by Id :" + id);
         for (var f in forms) {
             if (forms[f]._id == id) {
                 return forms[f];
@@ -80,11 +80,20 @@ module.exports = function (app,uuid) {
     }
 
     function createField(formId, field) {
-        var form;
+        //var form = null;
         //console.log(formId);
         field._id = (new Date()).getTime();
-        form =  findFormById(formId);
-        form.fields.push(field);
+        for (var f in forms) {
+            if (forms[f]._id == formId) {
+                //form = forms[f];
+                break;
+            }
+        }
+        //console.log(forms);
+        //form =  findFormById(formId);
+        forms[f].fields.push(field);
+        //console.log("inside model " + field.type);
+        return field;
     }
 
     function deleteField(formId, fieldId) {
@@ -113,7 +122,7 @@ module.exports = function (app,uuid) {
 
     function findFieldsByFormId(formId) {
         var form;
-        console.log(formId);
+        //console.log(formId);
         form = findFormById(formId);
         return form.fields;
     }

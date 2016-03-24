@@ -48,7 +48,12 @@
         function init() {
             FieldService
                 .findFieldsByForm(formId)
-                .then(render);
+                .then(function(response){
+                    if(response.data){
+                        vm.display = response.data;
+                        vm.fields = response.data;
+                    }
+                });
             FormService
                 .getFormById(formId)
                 .then(function (response)
@@ -76,9 +81,10 @@
         function cloneField(newField) {
             //console.log(newField);
             FieldService
-                .createField(FormService.getFormById(), newField)
+                .createField(formId, newField)
                 .then(function(response){
-                    if(response.data) {
+                    if(response) {
+                        //console.log("inside clone "+ response.data._id);
                         init();
                     }
                 });
@@ -173,7 +179,7 @@
             }
             else {
             }
-            console.log(vm.eField._id);
+            //console.log(vm.eField._id);
             FieldService
                 .updateField(formId, vm.eField._id, vm.eField)
                 .then(init);
