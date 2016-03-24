@@ -6,99 +6,95 @@
 
     function UserController($scope,UserService,$http) {
 
-        $scope.data = {};
-        UserService.findAllUsers(renderUsers);
+        var vm = this;
 
-        // renders all the forms of the logged in user
-        function renderUsers(response) {
-            //console.log(response);
-            $scope.data = response;
-        }
+        vm.data = {};
+        UserService
+            .findAllUsers()
+            .then(function(response){
+                //console.log(response);
+                vm.data = response.data;
+            });
 
-        $scope.addUser = addUser;
-        $scope.updateUser = updateUser;
-        $scope.deleteUser = deleteUser;
-        $scope.selectUser= selectUser;
-        $scope.selectedIndex = -1;
+        vm.addUser = addUser;
+        vm.updateUser = updateUser;
+        vm.deleteUser = deleteUser;
+        vm.selectUser= selectUser;
+        vm.selectedIndex = -1;
 
         // function that adds a new form to the users' list
-        function addUser(fName,lName,username,email) {
-            if (fName != null && lName != null && username != null && email != null){
+        function addUser(user) {
+            if (user.firstName != null && user.lastName != null && user.username != null && user.email != null){
                 var newUser = {
-                    "_id" : (new Date).getTime(),
-                    "firstName": fName,
-                    "lastName" : lName,
-                    "username" : username,
-                    "email" : email
+                    //"_id" : (new Date).getTime(),
+                    "firstName": user.firstName,
+                    "lastName" : user.lastName,
+                    "username" : user.username,
+                    "email" : user.email
                 }
 
-                UserService.createUser(newUser,renderAddUser)
+                UserService
+                    .createUser(newUser)
+                    .then(function(response){
+                        console.log(response.data);
+                        user.firstName = null;
+                        user.lastName = null;
+                        user.username = null;
+                        user.email = null;
+                    });
             }
             else {
                 alert("Please Enter a proper value in the fields.\nNames and Username cannot be empty and Email format should be a@b.com")
             }
-        }
-
-        // function that actually adds a form after getting a response from the service
-        function renderAddUser(response){
-            //console.log(response)
-            //$scope.data.push(response);
-            $scope.fName= null;
-            $scope.lName= null;
-            $scope.username= null;
-            $scope.email= null;
         }
 
         // function that updates a form of the user
-        function updateUser(fName,lName,username,email) {
-            if ((fName != null && lName != null && username != null && email != null) && $scope.selectedIndex != -1) {
-                var user = $scope.data[$scope.selectedIndex];
+        function updateUser(user) {
+            if ((user.firstName != null && user.lastName != null && user.username != null && user.email != null) && vm.selectedIndex != -1) {
+                var user = vm.data[vm.selectedIndex];
                 var newUser = {
                     "_id": user._id,
-                    "firstName": fName,
-                    "lastName": lName,
-                    "username": username,
-                    "email": email
+                    "firstName": user.firstName,
+                    "lastName": user.lastName,
+                    "username": user.username,
+                    "email": user.email
                 }
 
-                UserService.updateUser(user._id, newUser, renderUpdateUser)
-
+                UserService
+                    .updateUser(user._id, newUser)
+                    .then(function(response){
+                        user.firstName = null;
+                        user.lastName = null;
+                        user.username = null;
+                        user.email = null;
+                        vm.selectedIndex = -1;
+                    });
             }
             else {
                 alert("Please Enter a proper value in the fields.\nNames and Username cannot be empty and Email format should be a@b.com")
             }
-        }
-
-        // function that actually updates a form afer getting response from the service
-        function renderUpdateUser(response){
-            //$scope.data[$scope.selectedIndex] = response;
-            $scope.fName= null;
-            $scope.lName= null;
-            $scope.username= null;
-            $scope.email= null;
-            $scope.selectedIndex = -1;
         }
 
         // function that deletes a form
         function deleteUser(index){
-            var user = $scope.data[index];
+            var user = vm.data[index];
 
-            UserService.deleteUserById(user._id,renderDeleteUser)
+            UserService
+                .deleteUserById(user._id)
+                .then(function(response){
+            });
         }
 
-        // function that actually deletes the form and gets the rest of the form from the service
-        function renderDeleteUser(response){
-            //$scope.data = response;
-        }
-
-        // function that selects the form to be updated
+        // function that selects the form to be updated and places the data into input fields
         function selectUser(index) {
-            $scope.selectedIndex = index;
-            var user = $scope.data[index];
-            $scope.fName= user.firstName;
-            $scope.lName= user.lastName;
-            $scope.username= user.username;
-            $scope.email= user.email;
+            //console.log(index);
+            vm.selectedIndex = index;
+            var user = vm.data[index];
+            //console.log(user);
+            vm.firstName= user.firstName;
+            vm.lastName= user.lastName;
+            vm.username= user.username;
+            vm.email= user.email;
         }
     }
 })();

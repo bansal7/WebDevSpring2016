@@ -12,7 +12,8 @@
             })
             .when("/user",{
                 templateUrl: "views/users/user.view.html",
-                controller : "UserController"
+                controller : "UserController",
+                controllerAs : "model"
             })
             .when("/bill",{
                 templateUrl: "views/bills/bill.view.html",
@@ -28,7 +29,8 @@
             })
             .when("/login",{
                 templateUrl: "views/users/login.view.html",
-                controller : "LoginController"
+                controller : "LoginController",
+                controllerAs : "model"
             })
             .when("/profile",{
                 templateUrl: "views/users/profile.view.html",

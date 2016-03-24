@@ -8,29 +8,29 @@
             <th>Email</th>
             <th></th>
             <tr>
-                <td> <input ng-model="fName" class="form-control" type=text placeholder="First Name"></td>
-                <td> <input ng-model="lName" class="form-control" type=text placeholder="Last Name"></td>
-                <td> <input ng-model="username" class="form-control" type=text placeholder="Username"></td>
-                <td> <input ng-model="email" class="form-control" type=email placeholder="Email"></td>
+                <td> <input ng-model="model.user.firstName" class="form-control" type=text placeholder="First Name"></td>
+                <td> <input ng-model="model.user.lastName" class="form-control" type=text placeholder="Last Name"></td>
+                <td> <input ng-model="model.user.username" class="form-control" type=text placeholder="Username"></td>
+                <td> <input ng-model="model.user.email" class="form-control" type=email placeholder="Email"></td>
                 <td class="sameline">
-                    <a class="btn btn-success " type="submit" ng-click="addUser(fName,lName,username,email)" >
+                    <a class="btn btn-success " type="submit" ng-click="model.addUser(model.user)" >
                         Add
                     </a>
-                    <a ng-click="updateUser(fName,lName,username,email)" type="submit" class="btn btn-warning">
+                    <a ng-click="model.updateUser(model.user)" type="submit" class="btn btn-warning">
                         Update
                     </a>
                 </td>
             </tr>
-            <tr ng-show="data" ng-repeat="user in data">
+            <tr ng-show="model.data" ng-repeat="user in model.data">
                 <td><a href="#">{{user.firstName}}</a></td>
                 <td><a href="#">{{user.lastName}}</a></td>
                 <td><a href="#">{{user.username}}</a></td>
                 <td><a href="#">{{user.email}}</a></td>
                 <td>
-                    <a ng-click="deleteUser($index)" class="btn btn-danger">
+                    <a ng-click="model.deleteUser($index)" class="btn btn-danger">
                         Delete
                     </a>
-                    <a  ng-click="selectUser($index)" ng-model="selectedIndex" class="btn btn-primary">
+                    <a  ng-click="model.selectUser($index)" ng-model="model.selectedIndex" class="btn btn-primary">
                         Edit
                     </a>
                 </td>

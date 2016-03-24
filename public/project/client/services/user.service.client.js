@@ -28,39 +28,23 @@
         }
 
         // function finds all the users
-        function findAllUsers(callback) {
-            callback(users);
+        function findAllUsers() {
+            return $http.get("/api/project/user");
         }
 
         // function creates a new user
-        function createUser(user,callback){
-            users.push(user);
-            callback(user);
+        function createUser(user){
+            return $http.post("/api/project/user", user);
         }
 
         // function deletes a user
-        function deleteUserById(userId,callback){
-            for(var index in users){
-                if(users[index]._id==userId){
-                    users.splice(index,1);
-                    break;
-                }
-            }
-
-            callback(users);
+        function deleteUserById(userId){
+            return $http.delete("/api/project/user/" + userId);
         }
 
         // function updates a user entry
         function updateUser(userId,user,callback){
-            //console.log("I am here in service");
-            for(var index in users){
-                if(users[index]._id==userId){
-                    users[index] = user;
-                    callback(users[index]);
-                    //console.log(users[index]);
-                    break;
-                }
-            }
+            return $http.put("/api/project/user/" + userId, user);
         }
 
         function setCurrentUser (user) {

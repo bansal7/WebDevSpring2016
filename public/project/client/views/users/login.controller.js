@@ -6,10 +6,10 @@
 
     function LoginController($scope,UserService,$http, $location) {
 
-        $scope.login = login;
         var vm = this;
         vm.user = {username:"bansalshah1993@gmail.com",
             password:"webdev2016"};
+        vm.login = login;
 
 
         function login(user) {
