@@ -15,7 +15,10 @@ module.exports = function() {
     return api;
 
     // funtion finds the user based on email and password
-    function findUserByCredentials (username, password){
+    function findUserByCredentials (credentials){
+        var username = credentials.username;
+        var password = credentials.password;
+        var deferred = q.defer();
         var user = null;
         for(var index in users){
             if(users[index].username==username && users[index].password==password){
@@ -24,7 +27,8 @@ module.exports = function() {
             }
         }
         //console.log(user);
-        return user;
+        deferred.resolve(user);
+        return deferred.promise;
 
     }
 

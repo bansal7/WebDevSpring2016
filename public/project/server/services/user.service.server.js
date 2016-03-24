@@ -45,8 +45,7 @@ module.exports = function(app, userModel) {
                 //send error if promise rejected
                 function(err){
                     res.status(400).send(err);
-                }
-            );
+                });
     }
 
     function getUserById(req, res) {
@@ -66,8 +65,15 @@ module.exports = function(app, userModel) {
             username: req.query.username,
             password: req.query.password
         };
-        var user = userModel.findUserByCredentials(cred);
-        res.json(user);
+        console.log("I am in user service in server" + cred);
+        userModel
+            .findUserByCredentials(cred)
+            .then(function(doc){
+                res.json(doc);
+            },
+            function(err){
+                res.status(400).send(err);
+            });
     }
 
     function getUserByUsername(req, res) {

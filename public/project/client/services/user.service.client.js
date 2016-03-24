@@ -4,23 +4,8 @@
         .module("SplitUpApp")
         .factory("UserService", UserService);
 
-    function UserService($rootScope) {
+    function UserService($rootScope,$http) {
 
-        // stores the data about all the users
-        var users = {};
-
-        users= [
-            {	"_id":123, "firstName":"Bansal",            "lastName":"Shah",
-                "username":"bansalshah1993@gmail.com",  "password":"webdev2016",   "email": "bansalshah1993@gmail.com"   },
-            {	"_id":234, "firstName":"Bob",              "lastName":"Hope",
-                "username":"bob",    "password":"bob",     "email": "bob@bob.com"		},
-            {	"_id":345, "firstName":"Charlie",          "lastName":"Brown",
-                "username":"charlie","password":"charlie", "email": "charlie@charlie.com"		},
-            {	"_id":456, "firstName":"Dan",              "lastName":"Craig",
-                "username":"dan",    "password":"dan",     "email": "dan@dan.com"},
-            {	"_id":567, "firstName":"Edward",           "lastName":"Norton",
-                "username":"ed",     "password":"ed",      "email": "edward@edward.com"		}
-        ];
 
         var api = {
             findUserByCredentials : findUserByCredentials,
@@ -37,17 +22,9 @@
         return api;
 
         // funtion finds the user based on email and password
-        function findUserByCredentials (username, password, callback){
-            var user = null;
-            for(var index in users){
-                if(users[index].username==username && users[index].password==password){
-                    user = users[index];
-                    break;
-                }
-            }
-            //console.log(user);
-            callback(user);
-
+        function findUserByCredentials (username, password){
+            //console.log("I am in user service of client" + username + "   " + password);
+            return $http.get("/api/project/user?username=" + username + "&password=" + password);
         }
 
         // function finds all the users
