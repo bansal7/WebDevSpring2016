@@ -39,11 +39,12 @@
 
         // function deletes a user
         function deleteUserById(userId){
+            console.log(userId);
             return $http.delete("/api/project/user/" + userId);
         }
 
         // function updates a user entry
-        function updateUser(userId,user,callback){
+        function updateUser(userId,user){
             return $http.put("/api/project/user/" + userId, user);
         }
 

@@ -9,12 +9,18 @@
         var vm = this;
 
         vm.data = {};
-        UserService
-            .findAllUsers()
-            .then(function(response){
-                //console.log(response);
-                vm.data = response.data;
-            });
+
+        function init(){
+            UserService
+                .findAllUsers()
+                .then(function(response){
+                    //console.log(response);
+                    vm.data = response.data;
+                });
+        }
+
+        init();
+
 
         vm.addUser = addUser;
         vm.updateUser = updateUser;
@@ -36,12 +42,14 @@
                 UserService
                     .createUser(newUser)
                     .then(function(response){
-                        console.log(response.data);
+                        //console.log(response.data);
                         user.firstName = null;
                         user.lastName = null;
                         user.username = null;
                         user.email = null;
                     });
+
+                init();
             }
             else {
                 alert("Please Enter a proper value in the fields.\nNames and Username cannot be empty and Email format should be a@b.com")
@@ -51,22 +59,20 @@
         // function that updates a form of the user
         function updateUser(user) {
             if ((user.firstName != null && user.lastName != null && user.username != null && user.email != null) && vm.selectedIndex != -1) {
-                var user = vm.data[vm.selectedIndex];
+                var selectedUser = vm.data[vm.selectedIndex];
                 var newUser = {
-                    "_id": user._id,
+                    "_id": selectedUser._id,
                     "firstName": user.firstName,
                     "lastName": user.lastName,
                     "username": user.username,
                     "email": user.email
                 }
-
+                console.log(newUser);
                 UserService
-                    .updateUser(user._id, newUser)
+                    .updateUser(selectedUser._id, newUser)
                     .then(function(response){
-                        user.firstName = null;
-                        user.lastName = null;
-                        user.username = null;
-                        user.email = null;
+                        vm.data[vm.selectedIndex] = response.data;
+                        vm.user = null;
                         vm.selectedIndex = -1;
                     });
             }
@@ -77,24 +83,28 @@
 
         // function that deletes a form
         function deleteUser(index){
-            var user = vm.data[index];
-
+            var selectedUser = vm.data[index];
             UserService
-                .deleteUserById(user._id)
+                .deleteUserById(selectedUser._id)
                 .then(function(response){
-            });
+                    if(response){
+                        init();
+                    }
+                });
         }
 
         // function that selects the form to be updated and places the data into input fields
         function selectUser(index) {
             //console.log(index);
             vm.selectedIndex = index;
-            var user = vm.data[index];
-            //console.log(user);
-            vm.firstName= user.firstName;
-            vm.lastName= user.lastName;
-            vm.username= user.username;
-            vm.email= user.email;
+            var selectedUser = vm.data[index];
+
+            vm.user = {
+                "firstName": selectedUser.firstName,
+                "lastName": selectedUser.lastName,
+                "username": selectedUser.username,
+                "email": selectedUser.email
+            };
         }
     }
 })();

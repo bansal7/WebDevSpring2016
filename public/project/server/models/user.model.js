@@ -65,26 +65,33 @@ module.exports = function() {
 
     // function deletes a user
     function deleteUserById(userId){
+        var deferred = q.defer();
         for(var index in users){
             if(users[index]._id==userId){
                 users.splice(index,1);
                 break;
             }
         }
-
-        return users;
+        deferred.resolve(users);
+        return deferred.promise;
     }
 
     // function updates a user entry
     function updateUser(userId,user){
-        //console.log("I am here in service");
+        var deferred = q.defer();
+        var updatedUser = null;
         for(var index in users){
             if(users[index]._id==userId){
+                users[index]._id = userId;
                 users[index] = user;
-                return users[index];
+
+                //console.log(user);
+                updatedUser = users[index];
                 //console.log(users[index]);
                 break;
             }
         }
+        deferred.resolve(updatedUser);
+        return deferred.promise;
     }
 }

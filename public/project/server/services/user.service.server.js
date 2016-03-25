@@ -57,7 +57,15 @@ module.exports = function(app, userModel) {
     function updateUserById(req, res) {
         var user = req.body;
         var userId = req.params.id;
-        res.json(userModel.updateUser(userId, user));
+        userModel
+            .updateUser(userId, user)
+            .then(function(doc){
+                    res.json(doc);
+                },
+                //send error if promise rejected
+                function(err){
+                    res.status(400).send(err);
+                });
     }
 
     function getUserByCredentials(req, res) {
@@ -69,11 +77,11 @@ module.exports = function(app, userModel) {
         userModel
             .findUserByCredentials(cred)
             .then(function(doc){
-                res.json(doc);
-            },
-            function(err){
-                res.status(400).send(err);
-            });
+                    res.json(doc);
+                },
+                function(err){
+                    res.status(400).send(err);
+                });
     }
 
     function getUserByUsername(req, res) {
@@ -83,7 +91,13 @@ module.exports = function(app, userModel) {
 
     function deleteUserById(req, res) {
         var id = req.params.id;
-        res.json(userModel.deleteUserById(id));
-
+        userModel
+            .deleteUserById(id)
+            .then(function(doc){
+                res.json(doc);
+            },
+                function(err){
+                    res.status(400).send(err);
+                });
     }
 };
