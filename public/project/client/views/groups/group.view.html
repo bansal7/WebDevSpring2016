@@ -6,25 +6,25 @@
             <th>Members</th>
             <th></th>
             <tr>
-                <td> <input ng-model="gName" class="form-control" type=text placeholder="Roommates"></td>
-                <td> <input ng-model="members" class="form-control" type=text placeholder="Alice,Bob,Charlie"></td>
+                <td> <input ng-model="model.group.name" class="form-control" type=text placeholder="Roommates"></td>
+                <td> <input ng-model="model.group.members" class="form-control" type=text placeholder="Alice,Bob,Charlie"></td>
                 <td class="sameline">
-                    <a class="btn btn-success " type="submit" ng-click="addGroup(gName,members)" >
+                    <a class="btn btn-success " type="submit" ng-click="model.addGroup(model.group)" >
                         Add
                     </a>
-                    <a ng-click="updateGroup(gName,members.toString())" type="submit" class="btn btn-warning">
+                    <a ng-click="model.updateGroup(model.group)" type="submit" class="btn btn-warning">
                         Update
                     </a>
                 </td>
             </tr>
-            <tr ng-show="data" ng-repeat="group in data">
-                <td><a href="#">{{group.gName}}</a></td>
+            <tr ng-show="model.data" ng-repeat="group in model.data">
+                <td><a href="#">{{group.name}}</a></td>
                 <td><a href="#">{{group.members.toString()}}</a></td>
                 <td>
-                    <a ng-click="deleteGroup($index)" class="btn btn-danger">
+                    <a ng-click="model.deleteGroup($index)" class="btn btn-danger">
                         Delete
                     </a>
-                    <a  ng-click="selectGroup($index)" ng-model="selectedIndex" class="btn btn-primary">
+                    <a  ng-click="model.selectGroup($index)" ng-model="model.selectedIndex" class="btn btn-primary">
                         Edit
                     </a>
                 </td>

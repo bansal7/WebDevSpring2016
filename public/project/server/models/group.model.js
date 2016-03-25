@@ -2,12 +2,9 @@ module.exports = function() {
     var groups = require("./group.mock.json");
     var q = require("q");
 
-    function GroupService($rootScope) {
-
-
         var api = {
             //findGroupByCredentials : findGroupByCredentials,
-            findAllGroups: findAllGroups,
+            findGroupsByUser: findGroupsByUser,
             createGroup: createGroup,
             deleteGroupById: deleteGroupById,
             updateGroup: updateGroup
@@ -17,9 +14,18 @@ module.exports = function() {
 
 
         // function finds all the users
-        function findAllGroups() {
+        function findGroupsByUser(name) {
+            //console.log(name);
             var deferred = q.defer();
-            deferred.resolve(groups);
+            var userGroups = [];
+            for (var index in groups) {
+                if (groups[index].members.indexOf(name)>= 0) {
+                    //console.log("I am inside the if");
+                    userGroups.push(groups[index]);
+                }
+            }
+            //console.log(userGroups);
+            deferred.resolve(userGroups);
             return deferred.promise;
         }
 
@@ -60,5 +66,4 @@ module.exports = function() {
             deferred.resolve(updatedUser);
             return deferred.promise;
         }
-    }
 }

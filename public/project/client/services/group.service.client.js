@@ -4,21 +4,10 @@
         .module("SplitUpApp")
         .factory("GroupService", GroupService);
 
-    function GroupService($rootScope) {
-
-        // stores the data about all the users
-        var groups = {};
-
-        groups= [
-            {	"_id":123, "gName":"Grad College",            "members":["Alice","Bob","Charlie"], },
-            {	"_id":234, "gName":"UnderGrad College",            "members":["John","Dan","Edward"], },
-            {	"_id":345, "gName":"Rommates",            "members":["Zoom","Flash","Jay"], },
-            {	"_id":456, "gName":"Partners",            "members":["Jose","Neil","Oliver"], }
-        ];
+    function GroupService($rootScope,$http) {
 
         var api = {
-            //findGroupByCredentials : findGroupByCredentials,
-            findAllGroups : findAllGroups,
+            findGroupsByUser : findGroupsByUser,
             createGroup : createGroup,
             deleteGroupById : deleteGroupById,
             updateGroup : updateGroup
@@ -28,37 +17,25 @@
 
 
         // function finds all the users
-        function findAllGroups(callback) {
-            callback(groups);
+        function findGroupsByUser(name) {
+            //console.log(name);
+            return $http.get("/api/project/group?username=" + name);
         }
 
         // function creates a new user
-        function createGroup(group,callback){
-            groups.push(group);
-            callback(group);
+        function createGroup(group){
+            return $http.post("/api/project/group", group);
         }
 
         // function deletes a user
-        function deleteGroupById(groupId,callback){
-            for(var index in groups){
-                if(groups[index]._id==groupId){
-                    groups.splice(index,1);
-                    break;
-                }
-            }
-
-            callback(groups);
+        function deleteGroupById(groupId){
+            return $http.delete("/api/project/group/" + groupId);
         }
 
         // function updates a user entry
-        function updateGroup(groupId,group,callback){
-            for(var index in groups){
-                if(groups[index]._id==groupId){
-                    groups[index] = group;
-                    callback(groups[index]);
-                    break;
-                }
-            }
+        function updateGroup(groupId,group){
+            //console.log("I am in group service on client side" + groupId + "   " + group);
+            return $http.put("/api/project/user/" + groupId, group);
         }
     }
 })();

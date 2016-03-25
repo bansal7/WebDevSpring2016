@@ -4,60 +4,68 @@
         .module("SplitUpApp")
         .controller("GroupController",GroupController);
 
-    function GroupController($scope,GroupService) {
+    function GroupController(GroupService,UserService) {
+        var vm = this;
 
-        $scope.data = {};
-        GroupService.findAllGroups(renderGroups);
+        vm.data = {};
 
-
-
-        // renders all the forms of the logged in user
-        function renderGroups(response) {
-            //console.log(response);
-            $scope.data = response;
+        function init(){
+            var name = UserService.getCurrentUser().firstName;
+            //console.log(name);
+            GroupService
+                .findGroupsByUser(name)
+                .then(function(response){
+                    vm.data = response.data;
+                });
         }
 
-        $scope.addGroup = addGroup;
-        $scope.updateGroup = updateGroup;
-        $scope.deleteGroup = deleteGroup;
-        $scope.selectGroup= selectGroup;
-        $scope.selectedIndex = -1;
+        init();
+
+        vm.addGroup = addGroup;
+        vm.updateGroup = updateGroup;
+        vm.deleteGroup = deleteGroup;
+        vm.selectGroup= selectGroup;
+        vm.selectedIndex = -1;
 
         // function that adds a new form to the users' list
-        function addGroup(gName,members) {
-            if (gName != null && members != null){
+        function addGroup(group) {
+            if (group.name != null && group.members != null){
                 var newGroup = {
                     "_id" : (new Date).getTime(),
-                    "gName": gName,
-                    "members" : members.split(",")
+                    "name": group.name,
+                    "members" : group.members.split(",")
                 }
 
-                GroupService.createGroup(newGroup,renderAddGroup)
+                GroupService
+                    .createGroup(newGroup)
+                    .then(function(response){
+                        vm.group = null;
+                        init();
+                    });
             }
             else {
                 alert("Please Enter a proper value in the fields.\nNames and Members cannot be empty")
             }
-        }
-
-        // function that actually adds a form after getting a response from the service
-        function renderAddGroup(response){
-            //console.log(response)
-            //$scope.data.push(response);
-            $scope.gName= null;
-            $scope.members= null;
         }
 
         // function that updates a form of the user
-        function updateGroup(gName,members) {
-            if ((gName != null && members != null) && $scope.selectedIndex != -1) {
-                var group = $scope.data[$scope.selectedIndex];
+        function updateGroup(group) {
+            if ((group.name != null && group.members != null) && vm.selectedIndex != -1) {
+                var selectedGroup = vm.data[vm.selectedIndex];
                 var newGroup = {
-                    "_id": group._id,
-                    "gName": gName,
-                    "members": members.split(",")
+                    "_id": selectedGroup._id,
+                    "name": group.name,
+                    "members": group.members.split(",")
                 }
-
-                GroupService.updateGroup(group._id, newGroup, renderUpdateGroup)
+                //console.log(newGroup);
+                GroupService
+                    .updateGroup(selectedGroup._id, newGroup)
+                    .then(function(response){
+                        //console.log(response.data);
+                        vm.data[vm.selectedIndex] = response.data;
+                        vm.group = null;
+                        vm.selectedIndex = -1;
+                    });
 
             }
             else {
@@ -65,33 +73,27 @@
             }
         }
 
-        // function that actually updates a form afer getting response from the service
-        function renderUpdateGroup(response){
-            //$scope.data[$scope.selectedIndex] = response;
-            //console.log(response);
-            $scope.gName= null;
-            $scope.members= null;
-            $scope.selectedIndex = -1;
-        }
 
         // function that deletes a form
         function deleteGroup(index){
-            var group = $scope.data[index];
+            var group = vm.data[index];
 
-            GroupService.deleteGroupById(group._id,renderDeleteGroup)
-        }
-
-        // function that actually deletes the form and gets the rest of the form from the service
-        function renderDeleteGroup(response){
-            //$scope.data = response;
+            GroupService
+                .deleteGroupById(group._id)
+                .then(function(response){
+                   init();
+                });
         }
 
         // function that selects the form to be updated
         function selectGroup(index) {
-            $scope.selectedIndex = index;
-            var group = $scope.data[index];
-            $scope.gName= group.gName;
-            $scope.members= group.members;
+            vm.selectedIndex = index;
+            var selectedUser = vm.data[index];
+
+            vm.group = {
+                "name": selectedUser.name,
+                "members": selectedUser.members
+            };
         }
     }
 })();

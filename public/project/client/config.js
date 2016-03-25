@@ -22,7 +22,8 @@
             })
             .when("/group",{
                 templateUrl: "views/groups/group.view.html",
-                controller : "GroupController"
+                controller : "GroupController",
+                controllerAs : "model"
             })
             .when("/note",{
                 templateUrl: "views/notes/note.view.html",

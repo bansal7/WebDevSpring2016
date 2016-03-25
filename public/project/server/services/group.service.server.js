@@ -1,20 +1,30 @@
 module.exports = function(app, groupModel) {
     app.post("/api/project/group", createGroup);
-    app.get("/api/project/group", findAllGroups);
+    app.get("/api/project/group",getAllGroups)
+    app.get("/api/project/group?username=username", findGroupsByUser);
     app.put("/api/project/group/:id", updateGroupById);
     app.delete("/api/project/group/:id", deleteGroupById);
 
 
+
+    function getAllGroups(req, res) {
+        if (req.query.username) {
+            findGroupsByUser(req, res);
+        }
+    }
+
     // function finds all the users
-    function findAllGroups(req, res) {
+    function findGroupsByUser(req, res) {
+        var name = req.query.username;
+        //console.log(name + "in group service server");
         groupModel
-            .findAllGroups()
+            .findGroupsByUser(name)
             .then(
-                function (doc) {
+                function(doc){
                     res.json(doc);
                 },
                 //send error if promise rejected
-                function (err) {
+                function(err){
                     res.status(400).send(err);
                 });
     }
@@ -53,7 +63,7 @@ module.exports = function(app, groupModel) {
         var group = req.body;
         var groupId = req.params.id;
         groupModel
-            .updateUser(groupId, group)
+            .updateGroup(groupId, group)
             .then(function (doc) {
                     res.json(doc);
                 },
