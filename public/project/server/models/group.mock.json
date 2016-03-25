@@ -1,0 +1,24 @@
+[{"_id":"123","name":"Nirma Group","balance":97.5,
+  "members":
+  [{"name": "Bansal","balance":97.5},
+    {"name":"Harshil","balance":-52.5},
+    {"name":"Saloni","balance":-52.5},
+    {"name":"Biyanta","balance":7.5}]},
+
+  {"_id":"234","name":"Roommates","balance":100,
+  "members":
+  [{"name":"Bansal","balance":100},
+    {"name":"Harshil","balance":20},
+    {"name":"Mehul","balance":-52.5},
+    {"name":"Mitesh","balance":22.5},
+    {"name":"Deep","balance":-33.5},
+    {"name":"Preet","balance":-17.5}]},
+
+  {"_id":"234","name":"Car Pool","balance":-20,
+    "members":
+    [{"name":"Bansal","balance":-20},
+      {"name":"Neha","balance":22},
+      {"name":"Priyanka","balance":-1.5},
+      {"name":"Anirudh","balance":0},
+      {"name":"Swambita","balance":22.5}]}
+]
