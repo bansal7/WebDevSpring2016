@@ -43,10 +43,7 @@
                     .createUser(newUser)
                     .then(function(response){
                         //console.log(response.data);
-                        user.firstName = null;
-                        user.lastName = null;
-                        user.username = null;
-                        user.email = null;
+                        vm.user = null;
                     });
 
                 init();

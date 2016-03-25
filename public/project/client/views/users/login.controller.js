@@ -30,11 +30,11 @@
                                 data: b,
                                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                             };
-                            console.log(req.data);
+                            //console.log(req.data);
 
                             $http(req).success(function(response){
                                 var token = response.response.token;
-                                console.log(token);
+                                //console.log(token);
                                 UserService.setToken(token);
                                 $location.path("/profile");
                             });

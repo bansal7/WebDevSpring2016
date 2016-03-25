@@ -4,103 +4,105 @@
         .module("SplitUpApp")
         .controller("BillController",BillController);
 
-    function BillController($scope,BillService) {
+    function BillController($scope,BillService,UserService) {
 
-        $scope.data = {};
-        BillService.findAllBills(renderBills);
+        var vm = this;
 
+        vm.data = {};
 
-
-        // renders all the forms of the logged in user
-        function renderBills(response) {
-            //console.log(response);
-            $scope.data = response;
+        function init(){
+            var user = UserService.getCurrentUser();
+            //console.log(user);
+            BillService
+                .findBillsByUsername(user.username)
+                .then(function(response){
+                    //console.log(response.data);
+                    vm.data = response.data;
+                });
         }
 
-        $scope.addBill = addBill;
-        $scope.updateBill = updateBill;
-        $scope.deleteBill = deleteBill;
-        $scope.selectBill= selectBill;
-        $scope.selectedIndex = -1;
+        init();
+
+        vm.addBill = addBill;
+        vm.updateBill = updateBill;
+        vm.deleteBill = deleteBill;
+        vm.selectBill= selectBill;
+        vm.selectedIndex = -1;
 
         // function that adds a new form to the users' list
-        function addBill(name1,name2,amount,desc) {
-            if (name1 != null && name2 != null && amount != null && desc != null){
+        function addBill(bill) {
+            if (bill.description != null && bill.type != null && bill.amount != null && bill.date != null){
                 var newBill = {
                     "_id" : (new Date).getTime(),
-                    "name1": name1,
-                    "name2" : name2.split(","),
-                    "amount" : amount,
-                    "desc" : desc
-                }
-
-                BillService.createBill(newBill,renderAddBill)
+                    "description": bill.description,
+                    "type" : bill.type,
+                    "amount" : bill.amount,
+                    "date" : bill.date,
+                    "username" : UserService.getCurrentUser().username
+                };
+                //console.log(newBill);
+                BillService
+                    .createBill(newBill)
+                    .then(function(response){
+                        if(response) {
+                            //console.log(response);
+                            vm.bill = null;
+                            init();
+                        }
+                    });
             }
             else {
                 alert("Please Enter a proper value in the fields.\nNames, Amount and Description cannot be empty")
             }
-        }
-
-        // function that actually adds a form after getting a response from the service
-        function renderAddBill(response){
-            //console.log(response)
-            //$scope.data.push(response);
-            $scope.name1= null;
-            $scope.name2= null;
-            $scope.amount= null;
-            $scope.desc= null;
         }
 
         // function that updates a form of the user
-        function updateBill(name1,name2,amount,desc) {
-            if ((name1 != null && name2 != null && amount != null && desc != null) && $scope.selectedIndex != -1) {
-                var bill = $scope.data[$scope.selectedIndex];
+        function updateBill(bill) {
+            if ((bill.description != null && bill.type != null && bill.amount != null && bill.date != null) && vm.selectedIndex != -1) {
+                var selectedBill = vm.data[vm.selectedIndex];
                 var newBill = {
-                    "_id": bill._id,
-                    "name1": name1,
-                    "name2": name2.split(","),
-                    "amount": amount,
-                    "desc": desc
-                }
-                BillService.updateBill(bill._id, newBill, renderUpdateBill)
+                    "_id": selectedBill._id,
+                    "description": bill.description,
+                    "type" : bill.type,
+                    "amount" : bill.amount,
+                    "date" : bill.date
+                };
+                BillService
+                    .updateBill(selectedBill._id, newBill)
+                    .then(function(response){
+                        if(response) {
+                            vm.data[vm.selectedIndex] = response.data;
+                            vm.bill = null;
+                            vm.selectedIndex = -1;
+                        }
+                    });
             }
             else {
                 alert("Please Enter a proper value in the fields.\nNames, Amount and Description cannot be empty")
             }
-        }
-
-        // function that actually updates a form afer getting response from the service
-        function renderUpdateBill(response){
-            //$scope.data[$scope.selectedIndex] = response;
-            $scope.name1= null;
-            $scope.name2= null;
-            $scope.amount= null;
-            $scope.desc= null;
-            $scope.selectedIndex = -1;
         }
 
         // function that deletes a form
         function deleteBill(index){
-            var bill = $scope.data[index];
+            var bill = vm.data[index];
 
-            BillService.deleteBillById(bill._id,renderDeleteBill)
-        }
-
-        // function that actually deletes the form and gets the rest of the form from the service
-        function renderDeleteBill(response){
-            //$scope.data = response;
+            BillService
+                .deleteBillById(bill._id)
+                .then(function(response){
+                    init();
+                });
         }
 
         // function that selects the form to be updated
         function selectBill(index) {
-            $scope.selectedIndex = index;
-            var bill = $scope.data[index];
-            $scope.name1= bill.name1;
-            $scope.name2= bill.name2;
-            $scope.amount= bill.amount;
-            $scope.desc= bill.desc;
-
-
+            vm.selectedIndex = index;
+            var selectedBill = vm.data[index];
+            vm.bill = {
+                description : selectedBill.description,
+                type : selectedBill.type,
+                amount : selectedBill.amount,
+                date : selectedBill.date
+            }
         }
     }
 })();

@@ -73,7 +73,7 @@ module.exports = function(app, userModel) {
             username: req.query.username,
             password: req.query.password
         };
-        console.log("I am in user service in server" + cred);
+        //console.log("I am in user service in server" + cred);
         userModel
             .findUserByCredentials(cred)
             .then(function(doc){

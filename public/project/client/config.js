@@ -17,7 +17,8 @@
             })
             .when("/bill",{
                 templateUrl: "views/bills/bill.view.html",
-                controller : "BillController"
+                controller : "BillController",
+                controllerAs: "model"
             })
             .when("/group",{
                 templateUrl: "views/groups/group.view.html",

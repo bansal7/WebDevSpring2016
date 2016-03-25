@@ -24,7 +24,7 @@
         init();
         function renderTransactions(response){
             var transactions = (response.response.transactions);
-
+            console.log(transactions);
             $scope.data = transactions;
         }
     }

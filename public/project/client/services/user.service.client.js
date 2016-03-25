@@ -39,7 +39,7 @@
 
         // function deletes a user
         function deleteUserById(userId){
-            console.log(userId);
+            //console.log(userId);
             return $http.delete("/api/project/user/" + userId);
         }
 

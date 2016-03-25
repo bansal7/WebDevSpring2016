@@ -1,0 +1,33 @@
+[
+  {	"_id":123, "description":"Grocery",            "type":"Shared Bill",
+    "username":"bansalshah1993@gmail.com",  "date":"2016-03-10",   "amount": "35"   },
+  {	"_id":124, "description":"Dunkin Donuts",            "type":"Shared Bill",
+    "username":"bansalshah1993@gmail.com",  "date":"2016-03-11",   "amount": "20"   },
+  {	"_id":125, "description":"Patel Brothers",            "type":"Shared Bill",
+    "username":"bansalshah1993@gmail.com",  "date":"2016-03-15",   "amount": "180"   },
+  {	"_id":126, "description":"PayCheck",            "type":"Income",
+    "username":"bansalshah1993@gmail.com",  "date":"2016-03-20",   "amount": "500"   },
+  {	"_id":127, "description":"Snacks",            "type":"Expense",
+    "username":"bansalshah1993@gmail.com",  "date":"2016-03-21",   "amount": "15"   },
+
+
+  {	"_id":234, "description":"Grocery",            "type":"Shared Bill",
+    "username":"harshilvasani03@gmail.com",  "date":"2016-03-10",   "amount": "35"   },
+  {	"_id":235, "description":"Money from Home",            "type":"Income",
+    "username":"harshilvasani03@gmail.com",  "date":"2016-03-12",   "amount": "2000"   },
+  {	"_id":236, "description":"Drinks",            "type":"Expense",
+    "username":"harshilvasani03@gmail.com",  "date":"2016-03-15",   "amount": "15"   },
+  {	"_id":237, "description":"Saturday Night Party",            "type":"Shared Bill",
+    "username":"harshilvasani03@gmail.com",  "date":"2016-03-20",   "amount": "60"   },
+  {	"_id":238, "description":"Rent",            "type":"Expense",
+    "username":"harshilvasani03@gmail.com",  "date":"2016-03-25",   "amount": "500"   },
+
+  {	"_id":345, "description":"Grocery",            "type":"Shared Bill",
+    "username":"11bce090@nirmauni.ac.in",  "date":"2016-03-10",   "amount": "55"   },
+  {"_id":346, "description":"Transportation",            "type":"Shared Bill",
+  "username":"11bce090@nirmauni.ac.in",  "date":"2016-03-16",   "amount": "32"   },
+  {	"_id":347, "description":"Movie",            "type":"Expense",
+    "username":"11bce090@nirmauni.ac.in",  "date":"2016-03-20",   "amount": "40"   },
+  {	"_id":348, "description":"Research Study",            "type":"Income",
+    "username":"11bce090@nirmauni.ac.in",  "date":"2016-03-20",   "amount": "150"   }
+]
