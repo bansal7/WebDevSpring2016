@@ -41,6 +41,9 @@ body {
         border-left: 1px solid #e7e7e7;
     }
 }
+.container {
+    width: auto;
+}
 
 .navbar-top-links {
     margin-right: 0;
@@ -105,7 +108,7 @@ body {
 }
 
 .sidebar .sidebar-search {
-    padding: 15px;
+    padding: 0px;
 }
 
 .sidebar ul li {
@@ -142,7 +145,6 @@ body {
     .sidebar {
         z-index: 1;
         position: absolute;
-        width: 250px;;
     }
 
     .navbar-top-links .dropdown-messages,

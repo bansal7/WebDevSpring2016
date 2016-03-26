@@ -5,14 +5,14 @@
  */
 
 body {
-    padding-top: 50px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    padding-top: 00px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
 }
 
 /* Header Image Background - Change the URL below to your image path (example: ../images/background.jpg) */
 
 .business-header {
     height: 400px;
-    background: url("../bg-1.jpg") center center no-repeat scroll;
+    background: url("./../frontpage/bg-1.jpg") center center no-repeat scroll;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
@@ -23,12 +23,12 @@ body {
 
 .pname {
     text-shadow: 0 0 10px #000;
-    color: #00d6b2;
+    color: #ffffff;
 }
 
 .tagline {
     text-shadow: 0 0 10px #000;
-    color: #d0d237;
+    color: #ffffff;
     text-align: center;
 }
 

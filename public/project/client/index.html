@@ -22,6 +22,12 @@
     <!-- Timeline CSS -->
     <link href="dist/css/timeline.css" rel="stylesheet">
 
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/business-frontpage.css" rel="stylesheet">
+
     <!-- Custom CSS -->
     <link href="dist/css/sb-admin-2.css" rel="stylesheet">
 
@@ -56,26 +62,21 @@
 
 <body ng-controller="MainController">
 
-<div id="wrapper" class="container">
+<div class="container" id="wrapper">
 
-    <div class="row">
-        <div class="col-sm-12 col-lg-12">
-            <div ng-include="'views/header/header.view.html'"></div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-3 col-md-2 col-lg-1">
-            <div ng-include="'views/sidebar/sidebar.view.html'"></div>
-        </div>
-        <div id="page-wrapper">
-            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 col-lg-11 col-lg-offset-1">
+    <div ng-include="'views/header/header.view.html'"></div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 col-md-2 sidebar">
+                <div ng-include="'views/sidebar/sidebar.view.html'"></div>
+            </div>
+            <div class="col-sm-8 col-sm-offset-3 col-md-9 col-md-offset-2 main">
                 <div ng-view></div>
             </div>
         </div>
     </div>
 </div>
-
-<!-- /#wrapper -->
 
 <!-- jQuery -->
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
@@ -89,12 +90,6 @@
 <!-- Custom Theme JavaScript -->
 <script src="dist/js/sb-admin-2.js"></script>
 
-<!-- sha1 -->
-<script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/hmac-sha1.js"></script>
-<!-- sha256 -->
-<script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/hmac-sha256.js"></script>
-
-<script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/components/enc-base64-min.js"></script>
 
 </body>
 
