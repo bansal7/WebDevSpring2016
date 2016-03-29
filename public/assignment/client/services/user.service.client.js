@@ -14,10 +14,15 @@
             deleteUserById : deleteUserById,
             updateUser : updateUser,
             setCurrentUser: setCurrentUser,
-            getCurrentUser: getCurrentUser
+            getCurrentUser: getCurrentUser,
+            logout : logout
         }
 
         return model;
+
+        function logout(){
+            return $http.post("/api/assignment/logout");
+        }
 
         function findUserByUsername(username) {
             return $http.get("/api/assignment/user?username=" + username);
@@ -56,7 +61,8 @@
         }
 
         function getCurrentUser () {
-            return $rootScope.currentUser;
+            //return $rootScope.currentUser;
+            return $http.get("/api/assignment/loggedin");
         }
     }
 })();

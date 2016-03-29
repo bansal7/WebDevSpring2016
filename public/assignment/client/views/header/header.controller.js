@@ -5,12 +5,21 @@
         .controller("HeaderController", HeaderController);
 
     function HeaderController($location, $scope, UserService, $rootScope) {
-        $scope.$location = $location;
-        $scope.logout = logout;
+
+        var vm = this;
+
+        vm.$location = $location;
+        vm.logout = logout;
 
         function logout() {
-            $rootScope.currentUser = null;
-            $location.url("/home");
+            //$rootScope.currentUser = null;
+            //$location.url("/home");
+            UserService
+                .logout()
+                .then(function(){
+                    UserService.setCurrentUser(null);
+                    $location.url("/home");
+                });
         }
     }
 })();

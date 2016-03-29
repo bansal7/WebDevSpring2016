@@ -6,6 +6,8 @@ module.exports = function(app, userModel) {
     app.get("/api/assignment/user?username=username", getUserByUsername);
     app.put("/api/assignment/user/:id", updateUserById);
     app.delete("/api/assignment/user/:id", deleteUserById);
+    app.get("/api/assignment/loggedin", loggedin);
+    app.post("/api/assignment/logout",logout);
 
 
     function getAllUsers(req, res) {
@@ -48,6 +50,7 @@ module.exports = function(app, userModel) {
             password: req.query.password
         };
         var user = userModel.findUserByCredentials(cred);
+        req.session.currentUser = user;
         res.json(user);
     }
 
@@ -60,5 +63,14 @@ module.exports = function(app, userModel) {
         var id = req.params.id;
         res.json(userModel.deleteUserById(id));
 
+    }
+
+    function loggedin(req,res){
+        res.json(req.session.currentUser);
+    }
+
+    function logout(req,res){
+        req.session.destroy();
+        res.send(200);
     }
 };

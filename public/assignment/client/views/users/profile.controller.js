@@ -6,8 +6,10 @@
         .controller("ProfileController", profileController);
 
     function profileController(UserService, $scope, $rootScope) {
-        $scope.update = update;
-        $scope.loggedUser = UserService.getCurrentUser();
+
+        var vm = this;
+        vm.update = update;
+        //$scope.loggedUser = UserService.getCurrentUser();
 
         function update (user) {
            // console.log("updating user" + us);
