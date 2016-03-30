@@ -8,15 +8,15 @@
         $routeProvider
             .when("/home",{
                 templateUrl: "views/home/home.view.html",
-                controller : "MainController"
+                controller : "MainController",
+                resolve : {
+                    getLoggedIn : getLoggedIn
+                }
             })
             .when("/register", {
                 templateUrl: "views/users/register.view.html",
                 controller : "RegisterController",
-                controllerAs: "model",
-                resolve : {
-                    checkLoggedIn : checkLoggedIn
-                }
+                controllerAs: "model"
             })
             .when("/login", {
                 templateUrl: "views/users/login.view.html" ,
@@ -58,6 +58,20 @@
             .otherwise({
                 redirectTo: "/home"
             });
+    }
+
+    function getLoggedIn(UserService, $q) {
+        var deferred = $q.defer();
+
+        UserService
+            .getCurrentUser()
+            .then(function(response){
+                var currentUser = response.data;
+                UserService.setCurrentUser(currentUser);
+                deferred.resolve();
+            });
+
+        return deferred.promise;
     }
 
     function checkLoggedIn(UserService,$q,$location){

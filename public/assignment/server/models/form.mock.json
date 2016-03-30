@@ -1,7 +1,7 @@
 [
-  {"_id": "000",
+  {
     "title": "Contacts",
-    "userId": 123,
+    "userId": "56fc38837fc9616398adff0c",
     "fields": [
       {"_id": "111",
         "label": "First Name",
@@ -50,9 +50,8 @@
     ]
   },
   {
-    "_id": "010",
     "title": "ToDo",
-    "userId": 234,
+    "userId": "56fc38837fc9616398adff0d",
     "fields": [
       {
         "_id": "777",

@@ -80,6 +80,7 @@ module.exports = function(app,db,mongoose) {
                 function (err, stats) {
                     if (!err) {
                         deferred.resolve(stats);
+                        //console.log(stats);
                     } else {
                         deferred.reject(err);
                     }

@@ -24,9 +24,11 @@ module.exports = function(app, userModel) {
 
     function createUser(req, res) {
         var newUser = req.body;
+        console.log(newUser);
         userModel
             .createUser(newUser)
             .then(function(response){
+                console.log(response.data + "   in service server");
                 var user = response.data;
                 res.json(user);
             });
@@ -37,7 +39,7 @@ module.exports = function(app, userModel) {
         userModel
             .findAllUsers()
             .then(function(response){
-                res.json(response.data);
+                res.json(response);
             });
     }
 

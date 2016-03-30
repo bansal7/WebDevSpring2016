@@ -6,14 +6,16 @@
         .controller("RegisterController", registerController);
 
     function registerController($location, UserService, $scope, $rootScope) {
-        $scope.register = register;
-        $scope.user = {};
+        var vm = this;
+        vm.register = register;
+        vm.user = {};
 
         function register (newUser) {
             //$scope.user = registeredUser;
             UserService
                 .createUser(newUser)
                 .then(function(response) {
+                    console.log(response);
                     if(response.data) {
                         $scope.user = response.data;
                         UserService.setCurrentUser(response.data);
