@@ -14,7 +14,7 @@
                 UserService
                 .getCurrentUser()
                     .then(function(response){
-                        console.log(response.data);
+                        //console.log(response.data);
                         vm.loggedUser = response.data;
                     });
         }

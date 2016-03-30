@@ -12,7 +12,11 @@
             })
             .when("/register", {
                 templateUrl: "views/users/register.view.html",
-                controller : "RegisterController"
+                controller : "RegisterController",
+                controllerAs: "model",
+                resolve : {
+                    checkLoggedIn : checkLoggedIn
+                }
             })
             .when("/login", {
                 templateUrl: "views/users/login.view.html" ,
