@@ -40,17 +40,14 @@
                 {key: "Radio Buttons Field", value: "RADIOS"}
             ];
 
-        function render(response) {
-            vm.display = response.data;
-            vm.fields = response.data;
-        }
-
         function init() {
+            //console.log("inside fields controller  " + formId);
             FieldService
                 .findFieldsByForm(formId)
                 .then(function(response){
                     if(response.data){
-                        vm.display = response.data;
+                        console.log(response.data);
+                        //vm.display = response.data;
                         vm.fields = response.data;
                     }
                 });
@@ -59,7 +56,7 @@
                 .then(function (response)
                 {
                     vm.form = response.data;
-                })
+                });
         }
         init();
 

@@ -23,7 +23,7 @@
         -->
         <div class="collapse navbar-collapse" id="nav-bar-collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li ng-show="currentUser.roles.indexOf('admin') >= 0"><a href="#/admin">Admin</a></li>
+                <li><a href="#/admin">Admin</a></li>
                 <li ng-hide="currentUser"><a href="#/register">Register</a></li>
                 <li ng-hide="currentUser"><a href="#/login">Login</a></li>
                 <li ng-show="currentUser"><a href="#/profile">Welcome, {{currentUser.username}}!</a></li>

@@ -9,8 +9,12 @@ module.exports = function(app, formModel) {
         var formId;
         var fields;
         formId = req.params.formId;
-        fields = formModel.findFieldsByFormId(formId);
-        res.json(fields);
+         formModel
+            .findFieldsByFormId(formId)
+            .then(function(response){
+                fields = response;
+                res.json(fields);
+            });
     }
 
     function getFieldById(req, res) {
@@ -19,8 +23,12 @@ module.exports = function(app, formModel) {
         var field;
         formId = req.params.formId;
         fieldId = req.params.fieldId;
-        field = formModel.findField(formId, fieldId);
-        res.json(field);
+        formModel
+            .findField(formId, fieldId)
+            .then(function(response){
+                field = response;
+                res.json(field);
+            });
     }
 
     function deleteFieldById(req, res) {
@@ -28,17 +36,24 @@ module.exports = function(app, formModel) {
         var fieldId;
         formId = req.params.formId;
         fieldId = req.params.fieldId;
-        formModel.deleteField(formId, fieldId);
-        res.send(200);
+        formModel
+            .deleteField(formId, fieldId)
+            .then(function(response){
+                res.send(200);
+            });
     }
 
-        function addFieldToForm(req, res) {
-            var formId = req.params.formId;
-            var newField = req.body;
-            //newField._id = (new Date()).getTime();
-            field = formModel.createField(formId, newField);
-            //console.log("inside server service " + field);
-            res.json(field);
+    function addFieldToForm(req, res) {
+        var formId = req.params.formId;
+        var newField = req.body;
+        //newField._id = (new Date()).getTime();
+        formModel
+            .createField(formId, newField)
+            .then(function(response){
+                var field = response;
+                res.json(field);
+            });
+        //console.log("inside server service " + field);
     }
 
     function updateFieldById(req, res) {
@@ -49,7 +64,12 @@ module.exports = function(app, formModel) {
         field = req.body;
         fieldId = req.params.fieldId;
         formId = req.params.formId;
-        r = formModel.updateField(formId, fieldId, field);
-        res.json(r);
+        formModel
+            .updateField(formId, fieldId, field)
+            .then(function(response){
+                r = response;
+                res.json(r);
+            });
+
     }
 };

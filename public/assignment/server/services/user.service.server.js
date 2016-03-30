@@ -24,24 +24,41 @@ module.exports = function(app, userModel) {
 
     function createUser(req, res) {
         var newUser = req.body;
-        var user = userModel.createUser(newUser);
-        res.json(user);
+        userModel
+            .createUser(newUser)
+            .then(function(response){
+                var user = response.data;
+                res.json(user);
+            });
+
     }
 
     function getUsers(req, res) {
-        res.json(userModel.findAllUsers());
+        userModel
+            .findAllUsers()
+            .then(function(response){
+                res.json(response.data);
+            });
     }
 
     function getUserById(req, res) {
         var userId = req.params.id;
-        var user = userModel.findUserById(userId);
-        res.json(user);
+        userModel
+            .findUserById(userId)
+            .then(function(response){
+                var user = response.data;
+                res.json(user);
+            });
     }
 
     function updateUserById(req, res) {
         var user = req.body;
         var userId = req.params.id;
-        res.json(userModel.updateUser(userId, user));
+        userModel
+            .updateUser(userId, user)
+            .then(function(response){
+                res.json(response.data);
+            });
     }
 
     function getUserByCredentials(req, res) {
@@ -49,20 +66,33 @@ module.exports = function(app, userModel) {
             username: req.query.username,
             password: req.query.password
         };
-        var user = userModel.findUserByCredentials(cred);
-        req.session.currentUser = user;
-        res.json(user);
+        userModel
+            .findUserByCredentials(cred)
+            .then(function(response){
+                //console.log(response);
+                //console.log(response.data);
+                var user = response;
+                req.session.currentUser = user;
+                res.json(user);
+            });
     }
 
     function getUserByUsername(req, res) {
         var uName = req.query.username;
-        res.json(userModel.findUserByUsername(uName));
+        userModel
+            .findUserByUsername(uName)
+            .then(function(response){
+                res.json(response.data);
+            });
     }
 
     function deleteUserById(req, res) {
         var id = req.params.id;
-        res.json(userModel.deleteUserById(id));
-
+        userModel
+            .deleteUserById(id)
+            .then(function(response){
+                res.json(response.data);
+            });
     }
 
     function loggedin(req,res){

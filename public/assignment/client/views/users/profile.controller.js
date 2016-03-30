@@ -9,7 +9,17 @@
 
         var vm = this;
         vm.update = update;
+
+        function init(){
+                UserService
+                .getCurrentUser()
+                    .then(function(response){
+                        console.log(response.data);
+                        vm.loggedUser = response.data;
+                    });
+        }
         //$scope.loggedUser = UserService.getCurrentUser();
+        init();
 
         function update (user) {
            // console.log("updating user" + us);

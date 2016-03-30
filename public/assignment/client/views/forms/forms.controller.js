@@ -6,77 +6,99 @@
 
     function FormController($scope,FormService, UserService) {
 
-        $scope.forms = [];
+        var vm = this;
+
+        vm.forms = [];
 
         // renders all the forms of the logged in user
-        function retrieveForms () {
-            var userId = UserService.getCurrentUser()._id;
-            //console.log(userId);
-            FormService
-                .findAllFormsForUser(userId)
-                .then(function(response) {
-                    if (response.data) {
-                        //console.log(response.data);
-                        $scope.forms = response.data;
-                    }
-                });
-        }
-        retrieveForms();
+        function init () {
+            var userId = null;
+            UserService.getCurrentUser()
+                .then(function(response){
 
-        $scope.form = {};
-        $scope.addForm = addForm;
-        $scope.updateForm = updateForm;
-        $scope.deleteForm = deleteForm;
-        $scope.selectForm = selectForm;
-        $scope.selectedIndex = -1;
+                    userId = response.data._id;
+                    //console.log(userId);
+                    FormService
+                        .findAllFormsForUser(userId)
+                        .then(function(response) {
+                            //console.log("In form controller" + response.data);
+                            if (response.data) {
+                                //console.log(response.data);
+                                vm.forms = response.data;
+                            }
+                        });
+                });
+            //console.log(userId);
+
+        }
+        init();
+
+        vm.form = null;
+        vm.addForm = addForm;
+        vm.updateForm = updateForm;
+        vm.deleteForm = deleteForm;
+        vm.selectForm = selectForm;
+        vm.selectedIndex = -1;
 
         // function that adds a new form to the users' list
         function addForm(form) {
-            FormService
-                .createFormForUser(UserService.getCurrentUser()._id, form)
+            UserService
+                .getCurrentUser()
                 .then(function(response){
-                    if (response.data) {
-                        $scope.form = {};
-                        retrieveForms();
-                    }
+                    //console.log(response.data);
+                    var userId = response.data._id;
+
+                    FormService
+                        .createFormForUser(userId, form)
+                        .then(function(response){
+                            //console.log(response.data);
+                            if (response.data != null) {
+                                vm.form = null;
+                                init();
+                            }
+                        });
                 });
+
         }
 
         // function that updates a form of the user
         function updateForm(form) {
-            var newForm = $scope.forms[$scope.selectedIndex];
+            var newForm = vm.forms[vm.selectedIndex];
             newForm.title=form.title;
             //console.log(newForm);
             FormService
                 .updateFormById(newForm._id, newForm)
                 .then(function(response) {
                     if (response.data) {
-                        $scope.form = {};
-                        $scope.forms = retrieveForms();
+                        vm.form = {};
+                        vm.forms = init();
                     }
                 });
         }
 
         // function that deletes a form
         function deleteForm(index) {
-            var form = $scope.forms[index];
+            var form = vm.forms[index];
 
             FormService
                 .deleteFormById(form._id)
                 .then(function (response) {
                     if (response.data) {
-                        retrieveForms();
-                        $scope.form = {};
+                        init();
+                        vm.form = {};
                     }
                 });
         }
 
         // function that selects the form to be updated
         function selectForm(index) {
-            $scope.selectedIndex = index;
-            var form = $scope.forms[index];
+            vm.selectedIndex = index;
+            var form = vm.forms[index];
             //console.log(form);
-            $scope.form.title = form.title;
+            vm.form =
+            {
+                title:form.title
+            };
         }
     }
 })();
