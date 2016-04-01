@@ -32,7 +32,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended : true}));
 var urlencodedParser = bodyParser.urlencoded({extended: true});
 //app.use(multer());
-app.use(session({ secret: "Bansal" }));
+app.use(session({ secret: "Bansal" ,
+    resave : true,
+    saveUninitialized : true}));
 app.use(cookieParser());
 app.use(express.static(__dirname + '/public'));
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';

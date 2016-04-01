@@ -22,7 +22,7 @@
         init();
 
         function update (user) {
-           // console.log("updating user" + us);
+            // console.log("updating user" + us);
             UserService
                 .updateUser(user._id, user)
                 .then(function() {
