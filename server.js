@@ -82,7 +82,4 @@ app.post("/api/transactions",urlencodedParser,function(req,res){
         });
 });
 
-
-var urlencodedParser = bodyParser.urlencoded({extended: true});
-
 app.listen(port, ipaddress);
