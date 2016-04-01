@@ -145,7 +145,7 @@
                         <h3>Date Field</h3>
                         <form>
                             <label>Label</label>
-                            <input ng-model="model.eField.label" class="form-control" type="date">
+                            <input ng-model="model.eField.label" class="form-control" type="text">
                             <br>
                         </form>
                     </div>
@@ -157,8 +157,7 @@
                                    placeholder="Edit Radio Label">
                             <br>
                             <label>Options</label>
-                            <textarea ng-model="model.optionText" class="form-control" placeholder="Edit Radio Options"
-                                      ng-list="&#10;" ng-trim="false"></textarea>
+                            <textarea ng-model="model.optionText" class="form-control" placeholder="Edit Radio Options"></textarea>
                         </form>
                     </div>
                     <div ng-switch-when="CHECKBOXES">
@@ -170,7 +169,7 @@
                             <br>
                             <label>Options</label>
                             <textarea ng-model="model.optionText" class="form-control"
-                                      placeholder="Edit Checkbox options" ng-list="&#10;" ng-trim="false"></textarea>
+                                      placeholder="Edit Checkbox options"></textarea>
                         </form>
                     </div>
                     <div ng-switch-default>

@@ -122,7 +122,9 @@ module.exports = function (app,uuid,mongoose,db) {
         forms
             .update (
                 {_id: id},
-                {$set: form},
+                {$set: {
+                    title : form.title
+                }},
                 function (err, stats) {
                     if (!err) {
                         deferred.resolve(stats);

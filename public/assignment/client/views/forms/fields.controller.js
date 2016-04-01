@@ -146,6 +146,7 @@
             if (isOption) {
                 var optionList = [];
                 var ol = vm.eField.options;
+                console.log(ol + "   sjdvfsdjv")
                 for (var o in ol) {
                     optionList.push(ol[o].label + ":" + ol[o].value)
                 }
@@ -162,14 +163,13 @@
 
             var optionArray = [];
             if (isOption) {
-                console.log(vm.optionText);
+
                 var oa = vm.optionText;
 
                     var a = oa.split("\n");
-                console.log("harshil " + a.length);
 
                 for (var i in a){
-                    console.log(a[i]);
+                    //console.log(a[i]);
                     var b = a[i].split(":");
                     optionArray.push({
                         label: b[0],
@@ -177,8 +177,6 @@
                     });
                 }
 
-
-                console.log("harshil " + optionArray.length);
                 vm.eField.options = optionArray;
 
             }
