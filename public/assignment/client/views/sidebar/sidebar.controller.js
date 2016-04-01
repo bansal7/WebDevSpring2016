@@ -4,8 +4,7 @@
         .module("FormBuilderApp")
         .controller("SidebarController",SidebarController);
 
-    function SidebarController($scope, UserService) {
-        UserService.setCurrentUser(null);
+    function SidebarController(UserService) {
 
         }
 })();

@@ -153,12 +153,6 @@ module.exports = function (app,uuid,mongoose,db) {
                     }
                 }
             );
-        //console.log(forms);
-        //form =  findFormById(formId);
-
-
-
-        //console.log("inside model " + field.type);
         deferred.resolve(field);
         return deferred.promise;
     }
@@ -181,7 +175,9 @@ module.exports = function (app,uuid,mongoose,db) {
                 forms.update(
                     {_id : formId},
 
-                    {$set: form},
+                    {$set: {
+                        fields : form.fields
+                    }},
 
                     function (err,results){
                         if(!err) {
@@ -256,7 +252,9 @@ module.exports = function (app,uuid,mongoose,db) {
                                 forms
                                     .update(
                                         {_id: formId},
-                                        {$set : form},
+                                        {$set: {
+                                            fields : form.fields
+                                        }},
                                         function (err, forms) {
                                             if (!err) {
                                                 deferred.resolve(form);
