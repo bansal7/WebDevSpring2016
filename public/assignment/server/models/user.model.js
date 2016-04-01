@@ -53,30 +53,17 @@ module.exports = function(app,db,mongoose) {
         return deferred.promise;
     }
 
-    //function updateUser (id, user) {
-    //    var deferred = q.defer();
-    //    var updatedUser = null;
-    //    for(var index in users){
-    //        if(users[index]._id==userId){
-    //            users[index]._id = userId;
-    //            users[index] = user;
-    //
-    //            //console.log(user);
-    //            updatedUser = users[index];
-    //            //console.log(users[index]);
-    //            break;
-    //        }
-    //    }
-    //    deferred.resolve(updatedUser);
-    //    return deferred.promise;
-    //}
-
     function updateUser (id, user) {
         var deferred = q.defer();
         users
             .update (
                 {_id: id},
-                {$set: user},
+                {$set: {
+                    "password" : user.password,
+                    "firstName" : user.firstName,
+                    "lastName" : user.lastName,
+                    "email" : user.email
+                }},
                 function (err, stats) {
                     if (!err) {
                         deferred.resolve(stats);
@@ -88,12 +75,6 @@ module.exports = function(app,db,mongoose) {
             );
         return deferred.promise;
     }
-
-    //function findAllUsers () {
-    //    var deferred = q.defer();
-    //    deferred.resolve(users);
-    //    return deferred.promise;
-    //}
 
     function findAllUsers () {
         var deferred = q.defer ();
