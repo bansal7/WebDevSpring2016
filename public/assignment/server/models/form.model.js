@@ -47,7 +47,7 @@ module.exports = function (app,uuid,mongoose,db) {
     }
 
     function findFormsByUserId (userId) {
-        console.log("Ho userid in model  " + userId);
+        //console.log("Ho userid in model  " + userId);
         var deferred = q.defer ();
         var userForms = [];
         forms
@@ -221,7 +221,7 @@ module.exports = function (app,uuid,mongoose,db) {
     }
 
     function findFieldsByFormId (formId) {
-        console.log("Ho formId in model  " + formId);
+        //console.log("Ho formId in model  " + formId);
         var deferred = q.defer ();
         forms
             .find(
@@ -245,13 +245,26 @@ module.exports = function (app,uuid,mongoose,db) {
         forms
             .find(
                 {_id: formId},
-                function (err, forms) {
+                function (err, results) {
                     if (!err) {
                         //deferred.resolve(forms[0]);
-                        form = forms[0];
+                        form = results[0];
+                        console.log("fssfd" + form);
                         for (var index in form.fields){
                             if(form.fields[index]._id == fieldId){
                                 form.fields[index] = field;
+                                forms
+                                    .update(
+                                        {_id: formId},
+                                        {$set : form},
+                                        function (err, forms) {
+                                            if (!err) {
+                                                deferred.resolve(form);
+                                            } else {
+                                                deferred.reject(err);
+                                            }
+                                        }
+                                    );
                             }
                         }
                     } else {
@@ -260,17 +273,7 @@ module.exports = function (app,uuid,mongoose,db) {
                 }
             );
         //fields = form.fields;
-        forms
-            .update(
-                {_id: formId},
-                function (err, forms) {
-                    if (!err) {
-                        deferred.resolve(form);
-                    } else {
-                        deferred.reject(err);
-                    }
-                }
-            );
+
         return deferred.promise;
     }
 };

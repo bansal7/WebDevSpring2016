@@ -164,13 +164,21 @@
             if (isOption) {
                 console.log(vm.optionText);
                 var oa = vm.optionText;
-                for (var o in oa) {
-                    var a = oa[o].split(":");
+
+                    var a = oa.split("\n");
+                console.log("harshil " + a.length);
+
+                for (var i in a){
+                    console.log(a[i]);
+                    var b = a[i].split(":");
                     optionArray.push({
-                        label: a[0],
-                        value: a[1]
+                        label: b[0],
+                        value: b[1]
                     });
                 }
+
+
+                console.log("harshil " + optionArray.length);
                 vm.eField.options = optionArray;
 
             }
@@ -180,7 +188,7 @@
             FieldService
                 .updateField(formId, vm.eField._id, vm.eField)
                 .then(init);
-            vm.eField = null;
+            //vm.eField = null;
         }
 
     }

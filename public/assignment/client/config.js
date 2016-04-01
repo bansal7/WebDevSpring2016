@@ -53,7 +53,10 @@
             .when("/form/:formId/fields", {
                 templateUrl: "views/forms/fields.view.html",
                 controller: "FieldsController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve : {
+                    checkLoggedIn : checkLoggedIn
+                }
             })
             .otherwise({
                 redirectTo: "/home"
