@@ -28,8 +28,9 @@ module.exports = function(app, userModel) {
         userModel
             .createUser(newUser)
             .then(function(response){
-                console.log(response.data + "   in service server");
-                var user = response.data;
+                //console.log(response + "   in service server");
+                var user = response;
+                req.session.currentUser = user;
                 res.json(user);
             });
 

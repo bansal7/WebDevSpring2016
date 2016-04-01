@@ -42,7 +42,7 @@
         // function creates a new user
         function createUser(user) {
             //user._id = (new Date).getTime();
-            console.log(user + "   ksdbgshb");
+            //console.log(user + "   ksdbgshb");
             return $http.post("/api/assignment/user", user);
         }
 
