@@ -16,9 +16,10 @@ module.exports = function() {
 
     // funtion finds the user based on email and password
     function findUserByCredentials (credentials){
+        var deferred = q.defer();
         var username = credentials.username;
         var password = credentials.password;
-        var deferred = q.defer();
+
         var user = null;
         for(var index in users){
             if(users[index].username==username && users[index].password==password){
@@ -41,13 +42,14 @@ module.exports = function() {
 
     function findUserById (id) {
         //console.log(users);
+        var deferred = q.defer();
         for (var index in users) {
             if (users[index]._id == id) {
-                return users[index];
+                deferred.resolve(users[index]);
                 //console.log(users[index]);
             }
         }
-        return null;
+        return deferred.promise;
     }
 
     // function creates a new user

@@ -6,6 +6,9 @@ module.exports = function(app, userModel) {
     app.get("/api/project/user?username=username", getUserByUsername);
     app.put("/api/project/user/:id", updateUserById);
     app.delete("/api/project/user/:id", deleteUserById);
+    app.get("/api/project/loggedin", loggedin);
+    app.post("/api/project/logout", logout);
+    app.get("/api/project/getToken",getToken);
 
 
     function getAllUsers(req, res) {
@@ -54,6 +57,11 @@ module.exports = function(app, userModel) {
         res.json(user);
     }
 
+    function logout(req, res) {
+        req.session.destroy();
+        res.send(200);
+    }
+
     function updateUserById(req, res) {
         var user = req.body;
         var userId = req.params.id;
@@ -77,6 +85,8 @@ module.exports = function(app, userModel) {
         userModel
             .findUserByCredentials(cred)
             .then(function(doc){
+                    console.log("in user service server   "+doc);
+                    req.session.currentUser = doc;
                     res.json(doc);
                 },
                 function(err){
@@ -94,10 +104,18 @@ module.exports = function(app, userModel) {
         userModel
             .deleteUserById(id)
             .then(function(doc){
-                res.json(doc);
-            },
+                    res.json(doc);
+                },
                 function(err){
                     res.status(400).send(err);
                 });
+    }
+
+    function loggedin(req, res) {
+        res.json(req.session.currentUser);
+    }
+
+    function getToken(req,res){
+        res.json(req.session.token);
     }
 };

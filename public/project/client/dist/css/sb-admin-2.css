@@ -27,6 +27,14 @@ body {
     width: 100%;
 }
 
+.note{
+    font-size: 14px;
+}
+
+
+.bigger{
+    font-size: 20px;
+}
 #page-wrapper {
     padding: 0 15px;
     min-height: 568px;

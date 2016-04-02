@@ -10,13 +10,16 @@
         vm.data = {};
 
         function init(){
-            var name = UserService.getCurrentUser().firstName;
-            //console.log(name);
-            GroupService
-                .findGroupsByUser(name)
+            UserService.getCurrentUser()
                 .then(function(response){
-                    vm.data = response.data;
+                    var name = response.data.firstName;
+                    GroupService
+                        .findGroupsByUser(name)
+                        .then(function(response){
+                            vm.data = response.data;
+                        });
                 });
+            //console.log(name);
         }
 
         init();

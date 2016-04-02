@@ -11,14 +11,17 @@
         vm.data = {};
 
         function init(){
-            var user = UserService.getCurrentUser();
+           UserService.getCurrentUser()
+               .then(function(response){
+                   var user = response.data;
+                   BillService
+                       .findBillsByUsername(user.username)
+                       .then(function(response){
+                           //console.log(response.data);
+                           vm.data = response.data;
+                       });
+               });
             //console.log(user);
-            BillService
-                .findBillsByUsername(user.username)
-                .then(function(response){
-                    //console.log(response.data);
-                    vm.data = response.data;
-                });
         }
 
         init();

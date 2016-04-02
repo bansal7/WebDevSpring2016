@@ -6,13 +6,13 @@
 
     function UserService($rootScope,$http) {
 
-
         var api = {
             findUserByCredentials : findUserByCredentials,
             findAllUsers : findAllUsers,
             createUser : createUser,
             deleteUserById : deleteUserById,
             updateUser : updateUser,
+            logout : logout,
             setCurrentUser: setCurrentUser,
             getCurrentUser: getCurrentUser,
             setToken : setToken,
@@ -25,6 +25,10 @@
         function findUserByCredentials (username, password){
             //console.log("I am in user service of client" + username + "   " + password);
             return $http.get("/api/project/user?username=" + username + "&password=" + password);
+        }
+
+        function logout() {
+            return $http.post("/api/project/logout");
         }
 
         // function finds all the users
@@ -53,15 +57,17 @@
         }
 
         function getCurrentUser () {
-            return $rootScope.currentUser;
+            return $http.get("/api/project/loggedin");
         }
 
         function setToken (token) {
+            //console.log(token);
             $rootScope.token = token;
         }
 
         function getToken () {
             return $rootScope.token;
+            return $http.get("api/project/getToken");
         }
     }
 })();

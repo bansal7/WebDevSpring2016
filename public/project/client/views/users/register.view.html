@@ -1,0 +1,27 @@
+<div class="container" ng-controller="RegisterController as model">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="login-panel panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title bigger">Register</h3><br/> <h4 class="note">(Enter same username and password as in buxfer.com)</h4>
+                </div>
+                <div class="panel-body">
+                    <form role="form">
+                        <fieldset>
+                            <div class="form-group">
+                                <label class="control-label">Username/Email:</label>
+                                <input class="form-control" placeholder="E-mail" ng-model="model.user.username" type="email">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Password:</label>
+                                <input class="form-control" placeholder="Password" ng-model="model.user.password" type="password" value="">
+                            </div>
+                            <!-- Change this to a button or input when using this as a form -->
+                            <a ng-click="model.registerUser(model.user)" class="btn btn-lg btn-success btn-block">Register</a>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
