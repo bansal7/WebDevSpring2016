@@ -18,7 +18,7 @@
                 lastName : null,
                 username : user.username,
                 password: user.password,
-                email: user.email,
+                emails: user.emails.split(","),
                 roles: []
             };
             UserService

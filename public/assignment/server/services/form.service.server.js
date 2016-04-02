@@ -26,7 +26,8 @@ module.exports = function(app, formModel, userModel) {
         formModel
             .findFormById(id)
             .then(function(response){
-                var forms = response.data;
+                console.log(response);
+                var forms = response;
                 res.json(forms);
             });
     }
@@ -49,7 +50,7 @@ module.exports = function(app, formModel, userModel) {
         formModel
             .createFormForUser(userId, form)
             .then(function(response){
-                res.json(response.data);
+                res.json(response);
             });
     }
 

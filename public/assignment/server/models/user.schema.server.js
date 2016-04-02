@@ -10,7 +10,7 @@ module.exports = function(mongoose) {
             description: "Alice"},
         lastName: {type : String,
             description: "Wonderland"},
-        email: {type : String,
+        emails: {type : [String],
             description: "alice@wonderland.com"},
         roles: [String],
 

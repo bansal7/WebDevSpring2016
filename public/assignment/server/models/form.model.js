@@ -123,12 +123,13 @@ module.exports = function (app,uuid,mongoose,db) {
             .update (
                 {_id: id},
                 {$set: {
-                    title : form.title
+                    title : form.title,
+                    fields : form.fields
                 }},
                 function (err, stats) {
                     if (!err) {
                         deferred.resolve(stats);
-                        console.log(stats);
+                        //console.log(stats);
                     } else {
                         deferred.reject(err);
                     }
@@ -247,7 +248,7 @@ module.exports = function (app,uuid,mongoose,db) {
                     if (!err) {
                         //deferred.resolve(forms[0]);
                         form = results[0];
-                        console.log("fssfd" + form);
+                        //console.log("fssfd" + form);
                         for (var index in form.fields){
                             if(form.fields[index]._id == fieldId){
                                 form.fields[index] = field;

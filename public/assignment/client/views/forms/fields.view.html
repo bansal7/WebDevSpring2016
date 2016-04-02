@@ -1,4 +1,4 @@
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" ng-controller="FieldsController">
+<div class="col-sm-9 col-md-10 main" ng-controller="FieldsController">
     <h1 class="page-header">{{model.form.title}}</h1>
 
     <ul class="nav nav-tabs">
@@ -6,8 +6,10 @@
         <li role="presentation" class="active"><a href="#/fields">Fields</a></li>
     </ul>
     <br>
-    <table class="table table-responsive">
-        <tbody ng-model="model.fields"  ui-sortable="model.fields">
+
+    <div >
+    <table class="table table-responsive" >
+        <tbody ng-model="model.fields"  ui-sortable="model.fields" bns-sortable>
         <tr  ng-switch="field.type" ng-repeat="field in model.fields">
             <td ng-switch-when="TEXT">
                 <label>{{field.label}}</label>
@@ -76,8 +78,10 @@
         </tr>
         </tbody>
     </table>
+    </div>
 
     <hr>
+
     <label for="input5">Add New Field:</label>
     <div class="input-group">
         <select ng-model="fieldType" class="form-control" id="input5">

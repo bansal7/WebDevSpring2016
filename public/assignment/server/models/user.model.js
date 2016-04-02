@@ -62,7 +62,7 @@ module.exports = function(app,db,mongoose) {
                     "password" : user.password,
                     "firstName" : user.firstName,
                     "lastName" : user.lastName,
-                    "email" : user.email
+                    "emails" : user.emails
                 }},
                 function (err, stats) {
                     if (!err) {

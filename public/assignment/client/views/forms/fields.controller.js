@@ -4,7 +4,7 @@
         .module("FormBuilderApp")
         .controller("FieldsController", FieldsController);
 
-    function FieldsController(FieldService, FormService, $routeParams) {
+    function FieldsController(FieldService, FormService, $routeParams,$scope) {
         var vm = this;
         vm.cField = null;
         vm.eField = null;
@@ -13,7 +13,7 @@
         vm.deleteField = deleteField;
         vm.addField = addField;
         vm.cloneField = cloneField;
-        vm.reorder = reorder;
+        $scope.reorderForm = reorderForm
         vm.options =
             [
                 'Single Line Text Field',
@@ -55,6 +55,7 @@
                 .getFormById(formId)
                 .then(function (response)
                 {
+                    console.log(response.data);
                     vm.form = response.data;
                 });
         }
@@ -67,15 +68,33 @@
                 .then(init);
         }
 
-        function reorder() {
-            vm.form.fields = vm.fields;
-            FormService
-                .updateFormById(formId, vm.form)
-                .then(init);
+        function reorderForm(start,end){
 
+            alert("hu andar aayo");
+
+            var newFields = [];
+
+            for(var i in vm.fields){
+                newFields[i] = vm.fields[i];
+            }
+            newFields.splice(end, 0 ,newFields.splice(start, 1)[0]);
+            FormService
+                .getFormById(formId)
+                .then(
+                    function (res){
+                        //console.log(res.data);
+                        var form = res.data;
+                        form.fields = newFields;
+                        FormService
+                            .updateFormById(form._id,form);
+
+                    }
+                );
         }
 
+
         function cloneField(newField) {
+            delete newField._id;
             //console.log(newField);
             FieldService
                 .createField(formId, newField)

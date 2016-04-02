@@ -16,6 +16,7 @@
                     .then(function(response){
                         //console.log(response.data);
                         vm.loggedUser = response.data;
+                        vm.loggedUser.emails = response.data.emails.join(",");
                     });
         }
         //$scope.loggedUser = UserService.getCurrentUser();

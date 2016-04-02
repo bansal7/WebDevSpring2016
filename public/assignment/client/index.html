@@ -9,21 +9,34 @@
 
     <title>Assignment</title>
 
-    <link href="http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
-    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <!-- Bootstrap JS-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <!--Anguler Core-->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.9/angular-route.min.js"></script>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-sortable/0.13.4/sortable.js"></script>
 
-    <!-- Custom styles for this template -->
+    <!--Anguler Routing-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.min.js"></script>
+
+
+    <script src="js/bnsSortable.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.2.4/ui-bootstrap-tpls.min.js"></script>
+
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
     <link href="css/dashboard.css" rel="stylesheet">
+
     <link href="css/style.css" rel="stylesheet">
 
     <script src="app.js"></script>
+
     <script src="config.js"></script>
 
     <script src="views/main/main.controller.js"></script>
@@ -40,8 +53,8 @@
     <script src="services/user.service.client.js"></script>
     <script src="services/forms.service.client.js"></script>
     <script src="services/field.service.client.js"></script>
-
 </head>
+
 
 <body ng-controller="MainController">
 <div class="container">
@@ -60,10 +73,80 @@
     </div>
 </div>
 
+
 <!-- Bootstrap core JavaScript
 ================================================== -->
+
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
 </body>
 </html>
+<!--<html lang="en" ng-app="FormBuilderApp">-->
+<!--<head>-->
+<!--<meta charset="utf-8">-->
+<!--<meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+<!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+<!--<meta name="description" content="">-->
+<!--<meta name="author" content="">-->
+
+<!--<title>Assignment</title>-->
+
+<!--<link href="http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">-->
+<!--<script src="http://code.jquery.com/jquery-1.10.2.js"></script>-->
+<!--<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>-->
+
+
+<!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.9/angular-route.min.js"></script>-->
+<!--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-sortable/0.13.4/sortable.js"></script>-->
+
+<!--&lt;!&ndash; Custom styles for this template &ndash;&gt;-->
+<!--<link href="css/dashboard.css" rel="stylesheet">-->
+<!--<link href="css/style.css" rel="stylesheet">-->
+
+<!--<script src="app.js"></script>-->
+<!--<script src="config.js"></script>-->
+<!--<script src="js/bnsSortable.js"></script>-->
+
+<!--<script src="views/main/main.controller.js"></script>-->
+<!--<script src="views/header/header.controller.js"></script>-->
+<!--<script src="views/sidebar/sidebar.controller.js"></script>-->
+<!--<script src="views/users/register.controller.js"></script>-->
+<!--<script src="views/users/profile.controller.js"></script>-->
+<!--<script src="views/users/login.controller.js"></script>-->
+<!--<script src="views/forms/forms.controller.js"></script>-->
+<!--<script src="views/admin/admin.controller.js"></script>-->
+<!--<script src="views/forms/fields.controller.js"></script>-->
+
+
+<!--<script src="services/user.service.client.js"></script>-->
+<!--<script src="services/forms.service.client.js"></script>-->
+<!--<script src="services/field.service.client.js"></script>-->
+
+<!--</head>-->
+
+<!--<body ng-controller="MainController">-->
+<!--<div class="container">-->
+<!--<div class="row">-->
+<!--<div class="col-sm-12">-->
+<!--<div ng-include="'../../assignment/client/views/header/header.view.html'"></div>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="row">-->
+<!--<div class="col-sm-3 col-md-2 sidebar">-->
+<!--<div ng-include="'../../assignment/client/views/sidebar/sidebar.view.html'"></div>-->
+<!--</div>-->
+<!--<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">-->
+<!--<div ng-view></div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+
+<!--&lt;!&ndash; Bootstrap core JavaScript-->
+<!--================================================== &ndash;&gt;-->
+<!--&lt;!&ndash; Placed at the end of the document so the pages load faster &ndash;&gt;-->
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>-->
+<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>-->
+<!--</body>-->
+<!--</html>-->
