@@ -182,7 +182,6 @@
 
         function commitEdit(field) {
 
-
             vm.eField = {
                 _id:field._id,
                 label : field.label,
