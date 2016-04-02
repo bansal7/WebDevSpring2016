@@ -156,27 +156,44 @@
 
 
         function editField(field) {
-            vm.eField = field;
 
-            var isOption = !(vm.eField.type === 'TEXT' || vm.eField.type === 'TEXTAREA');
+            vm.eField = {
+                _id:field._id,
+                label : field.label,
+                placeholder : field.placeholder,
+                options : field.options,
+                type: field.type
+            }
+
+            var isOption = !(vm.eField.type === 'TEXT' || vm.eField.type === 'TEXTAREA' || vm.eField.type === 'DATE'|| vm.eField.type === 'EMAIL');
 
             if (isOption) {
                 var optionList = [];
                 var ol = vm.eField.options;
-                console.log(ol + "   sjdvfsdjv")
+                //console.log(ol + "   sjdvfsdjv")
                 for (var o in ol) {
                     optionList.push(ol[o].label + ":" + ol[o].value)
                 }
-                console.log(optionList);
+                //console.log(optionList);
                 vm.optionText = optionList.join("\n");
-                console.log(vm.optionText);
+                //console.log(vm.optionText);
             }
         }
 
         function commitEdit(field) {
-            vm.eField = field;
 
-            var isOption = !(field.type == 'TEXT' || field.type == 'TEXTAREA');
+
+            vm.eField = {
+                _id:field._id,
+                label : field.label,
+                placeholder : field.placeholder,
+                options : field.options,
+                type: field.type
+            }
+
+            console.log(field._id);
+
+            var isOption = !(vm.eField.type === 'TEXT' || vm.eField.type === 'TEXTAREA' || vm.eField.type === 'DATE'|| vm.eField.type === 'EMAIL');
 
             var optionArray = [];
             if (isOption) {
@@ -201,7 +218,7 @@
             }
             //console.log(vm.eField._id);
             FieldService
-                .updateField(formId, vm.eField._id, vm.eField)
+                .updateField(formId, field._id, vm.eField)
                 .then(init);
             //vm.eField = null;
         }
