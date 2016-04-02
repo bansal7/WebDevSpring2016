@@ -70,8 +70,6 @@
 
         function reorderForm(start,end){
 
-            alert("hu andar aayo");
-
             var newFields = [];
 
             for(var i in vm.fields){
