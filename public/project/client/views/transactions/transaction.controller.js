@@ -5,9 +5,12 @@
 
     function TransactionController($scope, $http, UserService) {
 
+        var vm = this;
+
         //$scope.search = search;
         function init(){
             var token = UserService.getToken();
+            console.log("Inside Transaction Controller ... here iss the token   " + token);
 
             var URL="https://www.buxfer.com/api/transactions?&token="+ token;
 
@@ -24,8 +27,8 @@
         init();
         function renderTransactions(response){
             var transactions = (response.response.transactions);
-            console.log(transactions);
-            $scope.data = transactions;
+            //console.log(transactions);
+            vm.data = transactions;
         }
     }
 })();

@@ -46,7 +46,6 @@ require("./public/assignment/server/app.js")(app,db,mongoose);
 require("./public/project/server/app.js")(app);
 
 
-
 app.post("/api",urlencodedParser,function(req,res){
 
     var username = req.body.userid;
@@ -68,13 +67,32 @@ app.post("/api/transactions",urlencodedParser,function(req,res){
 
     var token = req.body.token;
 
-    console.log(token);
+    //console.log(token);
     request({
             url:"https://www.buxfer.com/api/transactions?&token="+ token,
             json: true},
         function(error,response,body) {
             if (!error && response.statusCode === 200) {
                 res.json(body);
+            }
+            else{
+                console.log(req.body);
+            }
+        });
+});
+
+app.post("/api/usergroups",urlencodedParser,function(req,res){
+
+    var token = req.body.token;
+
+    //console.log(token);
+    request({
+            url:"https://www.buxfer.com/api/groups?&token="+ token,
+            json: true},
+        function(error,response,body) {
+            if (!error && response.statusCode === 200) {
+                res.json(body);
+                //console.log(body);
             }
             else{
                 console.log(req.body);

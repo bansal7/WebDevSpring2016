@@ -58,13 +58,30 @@
             .when("/searchtransactions",{
                 templateUrl: "views/transactions/transaction.view.html",
                 controller : "TransactionController",
+                controllerAs : "model",
                 resolve: {
-                    checkLoggedIn: checkLoggedIn
+                    getLoggedIn: getLoggedIn
+                }
+            })
+            .when("/usergroups",{
+                templateUrl: "views/usergroups/usergroups.view.html",
+                controller : "UserGroupsController",
+                controllerAs : "model",
+                resolve: {
+                    getLoggedIn: getLoggedIn
                 }
             })
             .when("/details/:id",{
                 templateUrl: "views/details/details.view.html",
                 controller : "DetailsController",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
+            })
+            .when("/groupdetails/:id",{
+                templateUrl: "views/details/groupdetails.view.html",
+                controller : "DetailsController",
+
                 resolve: {
                     checkLoggedIn: checkLoggedIn
                 }

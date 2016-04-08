@@ -22,10 +22,10 @@
                 </td>
             </tr>
             <tr ng-show="model.data" ng-repeat="bill in model.data">
-                <td><a href="#">{{bill.description}}</a></td>
-                <td><a href="#">{{bill.type}}</a></td>
-                <td><a href="#">{{bill.amount}}</a></td>
-                <td><a href="#">{{bill.date}}</a></td>
+                <td><a href="#/bill">{{bill.description}}</a></td>
+                <td><a href="#/bill">{{bill.type}}</a></td>
+                <td><a href="#/bill">{{bill.amount}}</a></td>
+                <td><a href="#/bill">{{bill.date}}</a></td>
                 <td>
                     <a ng-click="model.deleteBill($index)" class="btn btn-danger">
                         Delete
