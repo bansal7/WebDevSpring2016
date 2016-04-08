@@ -1,5 +1,8 @@
-module.exports = function() {
-    var users = require("./user.mock.json");
+module.exports = function(app,db,mongoose) {
+    var UserSchema = require("./user.schema.server.js")(mongoose);
+    var q = require("q");
+    var users = mongoose.model("actor", UserSchema);
+
     var q = require("q");
 
     // stores the data about all the users
@@ -16,84 +19,85 @@ module.exports = function() {
 
     // funtion finds the user based on email and password
     function findUserByCredentials (credentials){
-        var deferred = q.defer();
-        var username = credentials.username;
-        var password = credentials.password;
-
-        var user = null;
-        for(var index in users){
-            if(users[index].username==username && users[index].password==password){
-                user = users[index];
-                break;
+        return users.findOne(
+            {
+                username: credentials.username,
+                password: credentials.password
             }
-        }
-        //console.log(user);
-        deferred.resolve(user);
-        return deferred.promise;
-
+        );
     }
 
     // function finds all the users
     function findAllUsers() {
-        var deferred = q.defer();
-        deferred.resolve(users);
+        var deferred = q.defer ();
+        users.find (
+            function (err, users) {
+                if (!err) {
+                    deferred.resolve (users);
+                } else {
+                    deferred.reject (err);
+                }
+            }
+        );
         return deferred.promise;
     }
 
     function findUserById (id) {
         //console.log(users);
-        var deferred = q.defer();
-        for (var index in users) {
-            if (users[index]._id == id) {
-                deferred.resolve(users[index]);
-                //console.log(users[index]);
-            }
-        }
-        return deferred.promise;
+        return users.findById(userId);
     }
 
     // function creates a new user
     function createUser(newUser){
         var deferred = q.defer();
-        //var user = null;
-
-        newUser._id = (new Date()).getTime();
-        users.push(newUser);
-
-        deferred.resolve(newUser);
+        users.create(newUser, function (err, doc) {
+            if (err) {
+                deferred.reject (err);
+            } else {
+                deferred.resolve (doc);
+            }
+        });
         return deferred.promise;
-        //return newUser;
     }
 
     // function deletes a user
     function deleteUserById(userId){
         var deferred = q.defer();
-        for(var index in users){
-            if(users[index]._id==userId){
-                users.splice(index,1);
-                break;
-            }
-        }
-        deferred.resolve(users);
+        users
+            .remove (
+                {_id: userId},
+                function (err, stats) {
+                    if (!err) {
+                        deferred.resolve(stats);
+                    } else {
+                        deferred.reject(err);
+                    }
+                }
+            );
         return deferred.promise;
     }
 
     // function updates a user entry
     function updateUser(userId,user){
         var deferred = q.defer();
-        var updatedUser = null;
-        for(var index in users){
-            if(users[index]._id==userId){
-                users[index]._id = userId;
-                users[index] = user;
-
-                //console.log(user);
-                updatedUser = users[index];
-                //console.log(users[index]);
-                break;
-            }
-        }
-        deferred.resolve(updatedUser);
+        users
+            .update (
+                {_id: userId},
+                {$set: {
+                    "password" : user.password,
+                    "firstName" : user.firstName,
+                    "lastName" : user.lastName,
+                    "email" : user.email
+                }},
+                function (err, stats) {
+                    if (!err) {
+                        deferred.resolve(stats);
+                        //console.log(stats);
+                    } else {
+                        deferred.reject(err);
+                    }
+                }
+            );
         return deferred.promise;
     }
 }

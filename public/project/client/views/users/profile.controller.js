@@ -30,8 +30,8 @@
                 .then(function(response){
                     if (response) {
                         console.log(response.data);
-                        UserService.setCurrentUser(response.data);
-                        UserService.getCurrentUser();
+                        UserService.setCurrentUser(user);
+                       UserService.getCurrentUser();
                         //console.log("hooray!");
                     }
                     else{

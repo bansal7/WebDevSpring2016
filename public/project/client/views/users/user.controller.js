@@ -36,6 +36,7 @@
                     "firstName": user.firstName,
                     "lastName" : user.lastName,
                     "username" : user.username,
+                    "password" : user.password,
                     "email" : user.email
                 }
 
@@ -62,13 +63,15 @@
                     "firstName": user.firstName,
                     "lastName": user.lastName,
                     "username": user.username,
+                    "password" :user.password,
                     "email": user.email
                 }
-                console.log(newUser);
+                //console.log(newUser);
                 UserService
                     .updateUser(selectedUser._id, newUser)
                     .then(function(response){
-                        vm.data[vm.selectedIndex] = response.data;
+                        console.log(response.data);
+                        vm.data[vm.selectedIndex] = newUser;
                         vm.user = null;
                         vm.selectedIndex = -1;
                     });
@@ -100,6 +103,7 @@
                 "firstName": selectedUser.firstName,
                 "lastName": selectedUser.lastName,
                 "username": selectedUser.username,
+                "password" : selectedUser.password,
                 "email": selectedUser.email
             };
         }

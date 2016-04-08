@@ -9,12 +9,12 @@ MAIN CONTENT
             <h2 class="form-login-heading">register now</h2>
             <div class="login-wrap">
                 <label class="control-label">Username/Email:</label>
-                <input type="text" class="form-control" placeholder="Username" autofocus>
+                <input ng-model="model.user.username" type="text" class="form-control" placeholder="Username" autofocus>
                 <br>
                 <label class="control-label">Password:</label>
-                <input type="password" class="form-control" placeholder="Password">
+                <input ng-model="model.user.password" type="password" class="form-control" placeholder="Password">
 
-                <a  ng-click="model.registerUser(model.user)" class="btn btn-theme btn-block btn-success" href="#/profile" type="submit"><i class="fa fa-lock"></i> Register</a>
+                <a  ng-click="model.registerUser(model.user)" class="btn btn-theme btn-block btn-success" type="submit"><i class="fa fa-lock"></i> Register</a>
                 <hr>
 
 
