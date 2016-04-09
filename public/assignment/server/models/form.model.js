@@ -167,6 +167,7 @@ module.exports = function (app,uuid,mongoose,db) {
         forms.find({_id : formId}, function (err,results){
             if(!err) {
                 form = results[0];
+                console.log(form);
 
                 for(var i in form.fields){
                     if(form.fields[i]._id == fieldId){

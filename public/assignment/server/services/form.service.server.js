@@ -7,14 +7,14 @@ module.exports = function(app, formModel, userModel) {
 
     function getFormsForUser(req, res) {
         var id = req.params.userId;
-        console.log(id + "in service server");
+        //console.log(id + "in service server");
         formModel
             .findFormsByUserId(id)
             .then(function(response){
-                console.log(response + " after calling model");
+                //console.log(response + " after calling model");
                 var userForms = response;
                 res.json(userForms);
-                console.log(userForms);
+                //console.log(userForms);
             });
         //console.log(userForms);
 

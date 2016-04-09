@@ -106,10 +106,10 @@
         }
 
         function deleteField(field) {
-            vm.cField = null;
             FieldService
                 .deleteField(formId, field._id)
                 .then(init);
+            //vm.cField = null;
         }
 
         function translateFieldType(fieldType) {
