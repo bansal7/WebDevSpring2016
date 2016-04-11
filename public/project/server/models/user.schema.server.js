@@ -1,7 +1,7 @@
 module.exports = function(mongoose) {
 
     // use mongoose to declare a user schema
-    var UserSchema = mongoose.Schema({
+    var ActorSchema = mongoose.Schema({
         username: {type : String,
             description: "alice"},
         password: {type : String,
@@ -15,5 +15,5 @@ module.exports = function(mongoose) {
         roles: [String],
 
     }, {collection: 'actor'});
-    return UserSchema;
+    return ActorSchema;
 };

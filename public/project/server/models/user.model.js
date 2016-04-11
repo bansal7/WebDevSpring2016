@@ -1,7 +1,7 @@
 module.exports = function(app,db,mongoose) {
-    var UserSchema = require("./user.schema.server.js")(mongoose);
+    var ActorSchema = require("./user.schema.server.js")(mongoose);
     var q = require("q");
-    var users = mongoose.model("actor", UserSchema);
+    var actors = mongoose.model("actor", ActorSchema);
 
     // stores the data about all the users
     var api = {
@@ -17,7 +17,7 @@ module.exports = function(app,db,mongoose) {
 
     // funtion finds the user based on email and password
     function findUserByCredentials (credentials){
-        return users.findOne(
+        return actors.findOne(
             {
                 username: credentials.username,
                 password: credentials.password
@@ -28,7 +28,7 @@ module.exports = function(app,db,mongoose) {
     // function finds all the users
     function findAllUsers() {
         var deferred = q.defer ();
-        users.find (
+        actors.find (
             function (err, users) {
                 if (!err) {
                     deferred.resolve (users);
@@ -42,13 +42,13 @@ module.exports = function(app,db,mongoose) {
 
     function findUserById (id) {
         //console.log(users);
-        return users.findById(userId);
+        return actors.findById(userId);
     }
 
     // function creates a new user
     function createUser(newUser){
         var deferred = q.defer();
-        users.create(newUser, function (err, doc) {
+        actors.create(newUser, function (err, doc) {
             if (err) {
                 deferred.reject (err);
             } else {
@@ -61,7 +61,7 @@ module.exports = function(app,db,mongoose) {
     // function deletes a user
     function deleteUserById(userId){
         var deferred = q.defer();
-        users
+        actors
             .remove (
                 {_id: userId},
                 function (err, stats) {
@@ -78,7 +78,7 @@ module.exports = function(app,db,mongoose) {
     // function updates a user entry
     function updateUser(userId,user){
         var deferred = q.defer();
-        users
+        actors
             .update (
                 {_id: userId},
                 {$set: {

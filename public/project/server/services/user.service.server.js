@@ -90,7 +90,7 @@ module.exports = function(app, userModel) {
             .findUserByCredentials(cred)
             .then(function(doc){
                     //console.log("in user service server   "+doc);
-                    req.session.currentUser = doc;
+                    req.session.currentActor = doc;
                     res.json(doc);
                 },
                 function(err){
@@ -116,6 +116,6 @@ module.exports = function(app, userModel) {
     }
 
     function loggedin(req, res) {
-        res.json(req.session.currentUser);
+        res.json(req.session.currentActor);
     }
 };
