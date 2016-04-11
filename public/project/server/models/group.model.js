@@ -20,18 +20,14 @@
         function findGroupsByUser(name) {
             //console.log(name);
             var deferred = q.defer ();
-            groups
-                .find(
-                    {members: { $elemMatch: {members : name}}},
+            groups.find( { members: name },
                     function (err, groups) {
                         if (!err) {
                             deferred.resolve(groups);
                         } else {
                             deferred.reject(err);
                         }
-                    }
-                );
-
+                    });
             return deferred.promise;
         }
 
@@ -79,7 +75,7 @@
                 .update (
                     {_id: groupId},
                     {$set: {
-                        name : group.title,
+                        name : group.name,
                         members : group.members
                     }},
                     function (err, stats) {

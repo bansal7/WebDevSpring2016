@@ -38,6 +38,10 @@
                     "name": group.name,
                     "members" : group.members.split(",")
                 };
+                //console.log(newGroup.members);
+                if(newGroup.members.indexOf("Bansal") < 0){
+                    newGroup.members.push("Bansal");
+                }
                 GroupService
                     .createGroup(newGroup)
                     .then(function(response){
@@ -58,13 +62,18 @@
                     "_id": selectedGroup._id,
                     "name": group.name,
                     "members": group.members.split(",")
+                };
+                //console.log(newGroup);
+                if(newGroup.members.indexOf('Bansal') < 0){
+                    newGroup.members.push("Bansal");
                 }
+
                 //console.log(newGroup);
                 GroupService
                     .updateGroup(selectedGroup._id, newGroup)
                     .then(function(response){
                         //console.log(response.data);
-                        vm.data[vm.selectedIndex] = response.data;
+                        vm.data[vm.selectedIndex] = newGroup;
                         vm.group = null;
                         vm.selectedIndex = -1;
                     });
