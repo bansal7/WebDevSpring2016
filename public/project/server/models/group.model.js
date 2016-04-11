@@ -1,8 +1,11 @@
-module.exports = function() {
-    var groups = require("./group.mock.json");
-    var q = require("q");
+  module.exports = function(app,db,mongoose) {
 
-        var api = {
+      var GroupSchema = require("./group.schema.server.js")(mongoose);
+      var q = require("q");
+      var groups = mongoose.model("group", GroupSchema);
+
+        var api =
+        {
             //findGroupByCredentials : findGroupByCredentials,
             findGroupsByUser: findGroupsByUser,
             createGroup: createGroup,
@@ -16,54 +19,78 @@ module.exports = function() {
         // function finds all the users
         function findGroupsByUser(name) {
             //console.log(name);
-            var deferred = q.defer();
-            var userGroups = [];
-            for (var index in groups) {
-                if (groups[index].members.indexOf(name)>= 0) {
-                    //console.log("I am inside the if");
-                    userGroups.push(groups[index]);
-                }
-            }
-            //console.log(userGroups);
-            deferred.resolve(userGroups);
+            var deferred = q.defer ();
+            groups
+                .find(
+                    {members: { $elemMatch: {members : name}}},
+                    function (err, groups) {
+                        if (!err) {
+                            deferred.resolve(groups);
+                        } else {
+                            deferred.reject(err);
+                        }
+                    }
+                );
+
             return deferred.promise;
         }
 
         // function creates a new user
         function createGroup(group) {
-            var deferred = q.defer();
-            group._id = (new Date()).getTime();
-            groups.push(group);
-            deferred.resolve(groups);
-            return deferred.promise;
+            {
+                var deferred = q.defer();
+                var newGroup = {
+                    name: group.name,
+                    members : group.members
+                };
+                //console.log("  " + newGroup);
+                groups.create(newGroup, function (err, doc) {
+                    if (err) {
+                        deferred.reject (err);
+                    } else {
+                        deferred.resolve (doc);
+                    }
+                });
+                return deferred.promise;
+            }
         }
 
         // function deletes a user
         function deleteGroupById(groupId) {
             var deferred = q.defer();
-            for (var index in groups) {
-                if (groups[index]._id == groupId) {
-                    groups.splice(index, 1);
-                    break;
-                }
-            }
-            deferred.resolve(groups);
+            groups
+                .remove (
+                    {_id: groupId},
+                    function (err, stats) {
+                        if (!err) {
+                            deferred.resolve(stats);
+                        } else {
+                            deferred.reject(err);
+                        }
+                    }
+                );
             return deferred.promise;
-
         }
 
         // function updates a user entry
         function updateGroup(groupId, group) {
             var deferred = q.defer();
-            var updatedUser = null;
-            for (var index in groups) {
-                if (groups[index]._id == groupId) {
-                    groups[index] = group;
-                    updatedUser = groups[index];
-                    break;
-                }
-            }
-            deferred.resolve(updatedUser);
+            groups
+                .update (
+                    {_id: groupId},
+                    {$set: {
+                        name : group.title,
+                        members : group.members
+                    }},
+                    function (err, stats) {
+                        if (!err) {
+                            deferred.resolve(stats);
+                            //console.log(stats);
+                        } else {
+                            deferred.reject(err);
+                        }
+                    }
+                );
             return deferred.promise;
         }
 }

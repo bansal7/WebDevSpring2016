@@ -34,11 +34,10 @@
         function addGroup(group) {
             if (group.name != null && group.members != null){
                 var newGroup = {
-                    "_id" : (new Date).getTime(),
+                    //"_id" : (new Date).getTime(),
                     "name": group.name,
                     "members" : group.members.split(",")
-                }
-
+                };
                 GroupService
                     .createGroup(newGroup)
                     .then(function(response){

@@ -8,7 +8,7 @@ module.exports = function(mongoose) {
             " or retrieve all bills for a given user"},
         description: {
             type: String,
-            default : "New Form",
+            default : "Grocery",
             description : ""
         },
         type : {

@@ -33,18 +33,6 @@ module.exports = function(app,db,mongoose) {
         return deferred.promise;
     }
 
-    //function findBillsByUsername(username) {
-    //    var deferred = q.defer();
-    //    var userBills = [];
-    //    for (var index in bills) {
-    //        if (bills[index].username == username) {
-    //            userBills.push(bills[index]);
-    //        }
-    //    }
-    //    deferred.resolve(userBills);
-    //    return deferred.promise;
-    //}
-
 // function finds all the bills
     function findAllBills() {
         var deferred = q.defer ();

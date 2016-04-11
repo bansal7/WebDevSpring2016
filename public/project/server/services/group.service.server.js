@@ -1,6 +1,6 @@
 module.exports = function(app, groupModel) {
     app.post("/api/project/group", createGroup);
-    app.get("/api/project/group",getAllGroups)
+    app.get("/api/project/group",getAllGroups);
     app.get("/api/project/group?username=username", findGroupsByUser);
     app.put("/api/project/group/:id", updateGroupById);
     app.delete("/api/project/group/:id", deleteGroupById);
@@ -16,7 +16,7 @@ module.exports = function(app, groupModel) {
     // function finds all the users
     function findGroupsByUser(req, res) {
         var name = req.query.username;
-        //console.log(name + "in group service server");
+        console.log(name + "in group service server");
         groupModel
             .findGroupsByUser(name)
             .then(
@@ -32,6 +32,7 @@ module.exports = function(app, groupModel) {
     // function creates a new user
     function createGroup(req, res) {
         var newGroup = req.body;
+        console.log("newGroup" + newGroup);
         groupModel
             .createGroup(newGroup)
             .then(
