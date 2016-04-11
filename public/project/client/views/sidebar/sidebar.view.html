@@ -2,25 +2,8 @@
     <div id="sidebar"  class="nav-collapse ">
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
-
             <p class="centered"><a href="#/profile"><img src="assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
             <h5 class="centered">{{currentUser.firstName}}</h5>
-            <li>
-                <a href="#/user"><i class="fa fa-user fa-fw"></i> Users of Application</a>
-            </li>
-            <li>
-                <a ng-show="currentUser" href="#/bill"><i class="fa fa-bitcoin fa-fw"></i> Bills for you</a>
-            </li>
-            <li>
-                <a href="#/group" ng-show="currentUser"><i class="fa fa-group fa-fw"></i> Your Groups</a>
-            </li>
-            <li>
-                <a ng-show="currentUser" href="#/searchtransactions"><i class="fa fa-search fa-fw"></i> Transactions (API)</a>
-            </li>
-            <li>
-                <a ng-show="currentUser" href="#/usergroups"><i class="fa fa-search fa-fw"></i> Groups (API)</a>
-            </li>
-
         </ul>
         <!-- sidebar menu end-->
     </div>

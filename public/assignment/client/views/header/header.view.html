@@ -1,8 +1,8 @@
 <nav class="navbar navbar-inverse navbar-fixed-top" ng-controller="HeaderController as model">
-    <div class="container-fluid" >
+    <div class="container-fluid">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                    aria-expanded="false" aria-controls="navbar">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -10,24 +10,23 @@
             </button>
             <a class="navbar-brand" href="#/home">Form Maker</a>
         </div>
-        <!--
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li ng-show="checkRootScope()"><a href="#/register">Register</a></li>
-                <li ng-show="checkRootScope()"><a href="#/login">Login</a></li>
-                <li ng-show="!checkRootScope()" ng-click="updateRootScope()"><a href="#/home">Logout</a></li>
-                <li ng-show="!checkRootScope()"><a href="#/profile">{{username}}</a></li>
-                <li ng-show="isAdmin()"><a href="#/admin">Admin</a></li>
-            </ul>
-        </div>
-        -->
-        <div class="collapse navbar-collapse" id="nav-bar-collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li ng-show="currentUser.roles.indexOf('admin') >= 0"><a href="#/admin">Admin</a></li>
+                <!--
+                <li ng-show="displayLink()"><a href="#/register">Register</a></li>
+                <li ng-show="displayLink()"><a href="#/login">Login</a></li>
+                <li ng-hide="displayLink()" ng-click="logout()"><a href="#/home">Logout</a></li>
+                <li ng-hide="displayLink()"><a href="#/profile">{{username}}</a></li>
+                <li ng-show="checkUserAdmin()"><a href="#/admin">Admin</a></li>
+                -->
+                <!--
+                <li ng-hide="displayLink()" ng-click="checkUserAdmin()"><a>Admin</a></li>
+                -->
                 <li ng-hide="currentUser"><a href="#/register">Register</a></li>
                 <li ng-hide="currentUser"><a href="#/login">Login</a></li>
-                <li ng-show="currentUser"><a href="#/profile">Welcome, {{currentUser.username}}!</a></li>
                 <li ng-show="currentUser" ng-click="model.logout()"><a href="#/home">Logout</a></li>
+                <li ng-show="currentUser"><a href="#/profile">{{currentUser.username}}</a></li>
+                <li ng-show="currentUser.roles.indexOf('admin') >= 0"><a href="#/admin">Admin</a></li>
             </ul>
         </div>
     </div>

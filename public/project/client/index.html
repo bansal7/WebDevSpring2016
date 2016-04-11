@@ -56,13 +56,13 @@
 
 <body ng-controller="MainController">
 
-<div>
+<section id="container">
 
     <div ng-include="'views/header/header.view.html'"></div>
 
-    <div class="container-fluid">
+    <div>
         <div class="row">
-            <div >
+            <div>
                 <div ng-include="'views/sidebar/sidebar.view.html'"></div>
             </div>
             <div>
@@ -74,7 +74,7 @@
             </div>
         </div>
     </div>
-</div>
+</section>
 
 
 <!-- js placed at the end of the document so the pages load faster -->
@@ -95,6 +95,7 @@
 
 <!--script for this page-->
 <script src="assets/js/sparkline-chart.js"></script>
+
 <!--<script src="assets/js/zabuto_calendar.js"></script>-->
 
 </body>

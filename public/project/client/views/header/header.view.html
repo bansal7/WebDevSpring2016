@@ -1,23 +1,82 @@
-<header class="header black-bg" ng-controller="HeaderController">
-    <div class="sidebar-toggle-box">
-        <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
-    </div>
-    <!--logo start-->
-    <a href="#/home" class="logo"><b>SPLIT-UP</b></a>
-    <!--logo end-->
+<nav class="header black-bg navbar" ng-controller="HeaderController">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="logo" href="#">SPLIT-UP</a>
+            </div>
 
-    <!--<div class="top-menu">-->
-    <!--<ul class="nav pull-right top-menu">-->
-    <!--<li><a class="logout" href="login.html">Logout</a></li>-->
-    <!--</ul>-->
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse top-menu" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav pull-right top-menu">
+                    <li ng-hide="currentUser"><a href="#/login">Login</a></li>
+                    <li ng-show="currentUser"><a href="#/profile">Welcome, {{currentUser.username}}!</a></li>
+                    <li ng-show="currentUser" ><a ng-click="logout()" href="#/home">Logout</a></li>
+
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Modules <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#/user"><i class="fa fa-user fa-fw"></i> Users of Application</a>
+                            </li>
+                            <li>
+                                <a ng-show="currentUser" href="#/bill"><i class="fa fa-bitcoin fa-fw"></i> Bills for you</a>
+                            </li>
+                            <li>
+                                <a href="#/group" ng-show="currentUser"><i class="fa fa-group fa-fw"></i> Your Groups</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a  ng-show="currentUser"  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">API Modules <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a ng-show="currentUser" href="#/searchtransactions"><i class="fa fa-search fa-fw"></i> Transactions (API)</a>
+                            </li>
+                            <li>
+                                <a ng-show="currentUser" href="#/usergroups"><i class="fa fa-search fa-fw"></i> Groups (API)</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+</nav>
+<!--<nav class="navbar navbar-inverse navbar-fixed-top" ng-controller="HeaderController as model">-->
+    <!--<div class="container-fluid">-->
+        <!--<div class="navbar-header">-->
+            <!--<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"-->
+                    <!--data-target="#navbar" aria-expanded="false" aria-controls="navbar">-->
+                <!--<span class="sr-only">Toggle navigation</span>-->
+                <!--<span class="icon-bar"></span>-->
+                <!--<span class="icon-bar"></span>-->
+                <!--<span class="icon-bar"></span>-->
+            <!--</button>-->
+            <!--<a class="navbar-brand" href="#/home">Form Maker</a>-->
+        <!--</div>-->
+        <!--<div id="navbar" class="navbar-collapse collapse">-->
+            <!--<ul class="nav navbar-nav navbar-right">-->
+                <!--&lt;!&ndash;-->
+                <!--<li ng-show="displayLink()"><a href="#/register">Register</a></li>-->
+                <!--<li ng-show="displayLink()"><a href="#/login">Login</a></li>-->
+                <!--<li ng-hide="displayLink()" ng-click="logout()"><a href="#/home">Logout</a></li>-->
+                <!--<li ng-hide="displayLink()"><a href="#/profile">{{username}}</a></li>-->
+                <!--<li ng-show="checkUserAdmin()"><a href="#/admin">Admin</a></li>-->
+                <!--&ndash;&gt;-->
+                <!--&lt;!&ndash;-->
+                <!--<li ng-hide="displayLink()" ng-click="checkUserAdmin()"><a>Admin</a></li>-->
+                <!--&ndash;&gt;-->
+                <!--<li ng-hide="currentUser"><a href="#/register">Register</a></li>-->
+                <!--<li ng-hide="currentUser"><a href="#/login">Login</a></li>-->
+                <!--<li ng-show="currentUser" ng-click="model.logout()"><a href="#/home">Logout</a></li>-->
+                <!--<li ng-show="currentUser"><a href="#/profile">{{currentUser.username}}</a></li>-->
+                <!--<li ng-show="currentUser.roles.indexOf('admin') >= 0"><a href="#/admin">Admin</a></li>-->
+            <!--</ul>-->
+        <!--</div>-->
     <!--</div>-->
-    <div class="top-menu">
-    <ul class="nav pull-right top-menu">
-        <li ng-hide="currentUser"><a href="#/login">Login</a></li>
-        <li ng-show="currentUser"><a href="#/profile">Welcome, {{currentUser.username}}!</a></li>
-        <li ng-show="currentUser" ><a ng-click="logout()" href="#/home">Logout</a></li>
-        <!-- /.dropdown-user -->
-        <!-- /.dropdown -->
-    </ul>
-    </div>
-</header>
+<!--</nav>-->
