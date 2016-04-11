@@ -3,8 +3,6 @@ module.exports = function(app,db,mongoose) {
     var q = require("q");
     var users = mongoose.model("actor", UserSchema);
 
-    var q = require("q");
-
     // stores the data about all the users
     var api = {
         findUserByCredentials : findUserByCredentials,

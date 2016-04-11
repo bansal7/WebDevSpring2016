@@ -7,6 +7,7 @@
     function BillService($http) {
 
         var api = {
+            findBillsByUserId : findBillsByUserId,
             findBillsByUsername : findBillsByUsername,
             findAllBills : findAllBills,
             createBill : createBill,
@@ -16,7 +17,13 @@
 
         return api;
 
-        // function finds the bill based on email and password
+        function findBillsByUserId(userId) {
+            //console.log("sgdsg");
+            //console.log(userId);
+            return $http.get("/api/project/user/" + userId + "/bill");
+        }
+
+        // function finds the bill based on username
         function findBillsByUsername (username){
             return $http.get("/api/project/bill?username=" + username);
         }
@@ -27,8 +34,8 @@
         }
 
         // function creates a new bill
-        function createBill(bill){
-            return $http.post("/api/project/bill", bill);
+        function createBill(userId,bill){
+            return $http.post("/api/project/user/" + userId+ "/bill", bill);
         }
 
         // function deletes a bill

@@ -1,10 +1,27 @@
 module.exports = function(app, billModel) {
-    app.post("/api/project/bill", createBill);
+    app.get("/api/project/user/:userId/bill", findBillsByUserId)
+    app.post("/api/project/user/:userId/bill", createBill);
     app.get("/api/project/bill", getAllBills);
     app.get("/api/project/bill/:id", getBillById);
     app.get("/api/project/bill?username=username", getBillsByUsername);
     app.put("/api/project/bill/:id", updateBillById);
     app.delete("/api/project/bill/:id", deleteBillById);
+
+
+    function findBillsByUserId(req, res) {
+        var id = req.params.userId;
+        //console.log(id + "in service server");
+        billModel
+            .findBillsByUserId(id)
+            .then(function(response){
+                //console.log(response + " after calling model");
+                var userForms = response;
+                res.json(userForms);
+                //console.log(userForms);
+            });
+        //console.log(userForms);
+
+    }
 
 
     function getAllBills(req, res) {
@@ -17,9 +34,10 @@ module.exports = function(app, billModel) {
     }
 
     function createBill(req, res) {
+        var id = req.params.userId;
         var newBill = req.body;
         billModel
-            .createBill(newBill)
+            .createBill(id,newBill)
             .then(
                 function(doc){
                     res.json(doc);

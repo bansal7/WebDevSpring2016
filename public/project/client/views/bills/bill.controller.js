@@ -11,16 +11,16 @@
         vm.data = {};
 
         function init(){
-           UserService.getCurrentUser()
-               .then(function(response){
-                   var user = response.data;
-                   BillService
-                       .findBillsByUsername(user.username)
-                       .then(function(response){
-                           //console.log(response.data);
-                           vm.data = response.data;
-                       });
-               });
+            UserService.getCurrentUser()
+                .then(function(response){
+                    var user = response.data;
+                    BillService
+                        .findBillsByUserId(user._id)
+                        .then(function(response){
+                            //console.log(response.data);
+                            vm.data = response.data;
+                        });
+                });
             //console.log(user);
         }
 
@@ -36,22 +36,26 @@
         function addBill(bill) {
             if (bill.description != null && bill.type != null && bill.amount != null && bill.date != null){
                 var newBill = {
-                    "_id" : (new Date).getTime(),
+                    //"_id" : (new Date).getTime(),
                     "description": bill.description,
                     "type" : bill.type,
                     "amount" : bill.amount,
-                    "date" : bill.date,
-                    "username" : UserService.getCurrentUser().username
+                    "date" : bill.date
                 };
                 //console.log(newBill);
-                BillService
-                    .createBill(newBill)
-                    .then(function(response){
-                        if(response) {
-                            //console.log(response);
-                            vm.bill = null;
-                            init();
-                        }
+                //console.log(bill.date);
+                UserService.getCurrentUser()
+                    .then(function(response) {
+                        var user = response.data;
+                        BillService
+                            .createBill(user._id,newBill)
+                            .then(function (response) {
+                                if (response) {
+                                    //console.log(response);
+                                    vm.bill = null;
+                                    init();
+                                }
+                            });
                     });
             }
             else {
