@@ -100,4 +100,75 @@ app.post("/api/usergroups",urlencodedParser,function(req,res){
         });
 });
 
+app.post("/api/contacts",urlencodedParser,function(req,res){
+
+    var token = req.body.token;
+
+    //console.log(token);
+    request({
+            url:"https://www.buxfer.com/api/contacts?&token="+ token,
+            json: true},
+        function(error,response,body) {
+            if (!error && response.statusCode === 200) {
+                res.json(body);
+                //console.log(body);
+            }
+            else{
+                console.log(req.body);
+            }
+        });
+});
+
+app.post("/api/add_transactions",urlencodedParser,function(req,res){
+
+    var token = req.body.token;
+    var transaction = req.body.text.split(" ");
+    var description;
+    var amount;
+    var share;
+    var date;
+
+    //console.log(transaction);
+    if(transaction.length == 4){
+        description = transaction[0];
+        amount = transaction[1];
+        date = transaction[3];
+        request({
+                url:"https://www.buxfer.com/api/add_transaction?&token="+ token +"&format=sms&text=" +  description + " " + amount + "date:" + date,
+                json: true},
+            function(error,response,body) {
+                if (!error && response.statusCode === 200) {
+                    res.json(body);
+                    //console.log(body);
+                }
+                else{
+                    console.log(req.body);
+                }
+            });
+    }
+    else {
+        description = transaction[0];
+        amount = transaction[1];
+        share = transaction[3];
+        date = transaction[5];
+
+        request({
+                url:"https://www.buxfer.com/api/add_transaction?&token="+ token +"&format=sms&text=" +  description + " " + amount + "with:" + share + "date:" + date,
+                json: true},
+            function(error,response,body) {
+                if (!error && response.statusCode === 200) {
+                    res.json(body);
+                    //console.log(body);
+                }
+                else{
+                    console.log(req.body);
+                }
+            });
+    }
+
+
+    //console.log(token);
+
+});
+
 app.listen(port, ipaddress);

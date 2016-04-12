@@ -63,9 +63,25 @@
                     getLoggedIn: getLoggedIn
                 }
             })
+            .when("/addtransaction",{
+                templateUrl: "views/addtransaction/addtransaction.view.html",
+                controller : "AddTransactionController",
+                controllerAs : "model",
+                resolve: {
+                    getLoggedIn: getLoggedIn
+                }
+            })
             .when("/usergroups",{
                 templateUrl: "views/usergroups/usergroups.view.html",
                 controller : "UserGroupsController",
+                controllerAs : "model",
+                resolve: {
+                    getLoggedIn: getLoggedIn
+                }
+            })
+            .when("/contacts",{
+                templateUrl: "views/contacts/contacts.view.html",
+                controller : "ContactsController",
                 controllerAs : "model",
                 resolve: {
                     getLoggedIn: getLoggedIn

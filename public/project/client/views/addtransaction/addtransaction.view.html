@@ -1,0 +1,27 @@
+<div id="login-page" ng-controller="AddTransactionController">
+    <div class="container">
+
+        <form class="form-login">
+            <h2 class="form-login-heading">Add Transaction</h2>
+            <div class="login-wrap">
+                <label class="control-label">Description:</label>
+                <input class="form-control" placeholder="coffee" type="text" ng-model="model.transaction.description" autofocus>
+                <br>
+                <label class="control-label">Amount:</label>
+                <input class="form-control" placeholder="5.45" type="text" ng-model="model.transaction.amount">
+                <br>
+                <label class="control-label">Shared With: </label>
+                <input type="text" ng-model="model.transaction.share" class="form-control" placeholder="Shared with You and">
+                <br>
+                <label class="control-label">Date:</label>
+                <input class="form-control" placeholder="E-mail" ng-model="model.transaction.date" type="date">
+                <br>
+                <a ng-click="model.addTransaction(model.transaction)" class="btn btn-theme btn-block btn-success" type="submit"><i class="fa fa-upload"></i> Add</a>
+
+
+            </div>
+
+        </form>
+
+    </div>
+</div>

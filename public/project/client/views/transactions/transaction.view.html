@@ -1,8 +1,9 @@
-<div ng-controller="TransactionController">
+<div ng-controller="TransactionController" class="table-responsive">
     <h2> Transaction </h2>
     <section ng-show="model.data">
+
         <h3> Search Results</h3>
-        <table class="table table-striped table-responsive table-hover">
+        <table class="table table-striped  table-hover">
             <thead>
             <tr>
                 <th>Description</th>
@@ -22,5 +23,8 @@
             </tr>
             </tbody>
         </table>
+        <div style="text-align: center">
+            <a href="#/addtransaction" class="btn btn-primary"> Add a transaction</a>
+        </div>
     </section>
 </div>
