@@ -18,11 +18,11 @@
 
             if(transaction.share) {
                 var a = URL + "&format=sms&text=" + transaction.description + " " + transaction.amount + " with: " + transaction.share + " date: " +
-                    transaction.date.toISOString().substr(0,10);;
+                    transaction.date.toISOString().substr(0,10);
             }
             else {
                 var a = URL + "&format=sms&text=" + transaction.description + " " + transaction.amount +  " date: " +
-                    transaction.date.toISOString().substr(0,10);;
+                    transaction.date.toISOString().substr(0,10);
             }
             var req = {
                 method: 'POST',
