@@ -11,6 +11,7 @@ body {
 /* Header Image Background - Change the URL below to your image path (example: ../images/background.jpg) */
 
 .business-header {
+    width: 1180px;
     height: 400px;
     background: url("./../../frontpage/bg-1.jpg") center center no-repeat scroll;
     -webkit-background-size: cover;

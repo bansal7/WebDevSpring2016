@@ -8,11 +8,12 @@
         var vm = this;
 
         vm.data = {};
+        var name;
 
-        function init(){
+            function init(){
             UserService.getCurrentUser()
                 .then(function(response){
-                    var name = response.data.firstName;
+                    name = response.data.firstName;
                     GroupService
                         .findGroupsByUser(name)
                         .then(function(response){
@@ -39,8 +40,8 @@
                     "members" : group.members.split(",")
                 };
                 //console.log(newGroup.members);
-                if(newGroup.members.indexOf("Bansal") < 0){
-                    newGroup.members.push("Bansal");
+                if(newGroup.members.indexOf(name) < 0){
+                    newGroup.members.push(name);
                 }
                 GroupService
                     .createGroup(newGroup)
