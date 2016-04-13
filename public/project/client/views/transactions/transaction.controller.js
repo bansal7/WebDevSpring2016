@@ -9,20 +9,24 @@
 
         //$scope.search = search;
         function init(){
-            var token = UserService.getToken();
-            console.log("Inside Transaction Controller ... here iss the token   " + token);
+            UserService.getToken()
+                .then(function(response){
+                    var token = response.data;
+                    //console.log("Inside Transaction Controller ... here iss the token   " + token);
+                    var URL="https://www.buxfer.com/api/transactions?&token="+ token;
 
-            var URL="https://www.buxfer.com/api/transactions?&token="+ token;
+                    var req = {
+                        method: 'POST',
+                        url: "/api/transactions",
+                        data: URL,
+                        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                    };
 
-            var req = {
-                method: 'POST',
-                url: "/api/transactions",
-                data: URL,
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-            };
-
-            $http(req).success(renderTransactions);
+                    $http(req).success(renderTransactions);
+                });
         }
+
+
 
         init();
         function renderTransactions(response){

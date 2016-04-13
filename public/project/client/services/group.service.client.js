@@ -1,5 +1,5 @@
 (function(){
-    "use script";
+    "use strict";
     angular
         .module("SplitUpApp")
         .factory("GroupService", GroupService);

@@ -8,7 +8,8 @@ module.exports = function(app, userModel) {
     app.delete("/api/project/user/:id", deleteUserById);
     app.get("/api/project/loggedin", loggedin);
     app.post("/api/project/logout", logout);
-    app.get("/api/project/settoken",setToken);
+    app.get("/api/project/setToken/:token",setToken);
+    app.get("/api/project/getToken/",getToken);
 
 
     function getAllUsers(req, res) {
@@ -23,8 +24,18 @@ module.exports = function(app, userModel) {
         }
     }
 
+    function getToken(req,res){
+        res.json(req.session.token);
+    }
+
     function setToken(req,res){
-        req.session.token = req.token;
+        //console.log(req.params.token);
+        userModel.setToken(req.params.token)
+            .then(function(response){
+                req.session.token = req.params.token;
+                res.json();
+                //console.log(" after model " + req.session.token);
+            });
     }
 
     function createUser(req, res) {
@@ -58,7 +69,7 @@ module.exports = function(app, userModel) {
     function getUserById(req, res) {
         var userId = req.params.id;
         var user = userModel.findUserById(userId);
-        res.json(user);
+        res.send(user);
     }
 
     function logout(req, res) {

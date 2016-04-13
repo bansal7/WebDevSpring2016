@@ -1,5 +1,5 @@
 (function(){
-    "use script";
+    "use strict";
     angular
         .module("SplitUpApp")
         .factory("UserService", UserService);
@@ -62,13 +62,13 @@
 
         function setToken (token) {
             //console.log(token);
-            $rootScope.token = token;
-            //return $http.post("api/project/setToken", token);
+            //$rootScope.token = token;
+            return $http.get("/api/project/setToken/" + token);
         }
 
         function getToken () {
-            return $rootScope.token;
-            //return $http.get("api/project/getToken");
+            //return $rootScope.token;
+            return $http.get("/api/project/getToken");
         }
     }
 })();

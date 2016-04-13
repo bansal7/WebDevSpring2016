@@ -10,10 +10,17 @@ module.exports = function(app,db,mongoose) {
         findUserById : findUserById,
         createUser : createUser,
         deleteUserById : deleteUserById,
-        updateUser : updateUser
+        updateUser : updateUser,
+        setToken : setToken
     }
 
     return api;
+
+    function setToken(token){
+        var deferred = q.defer ();
+        deferred.resolve(token);
+        return deferred.promise;
+    }
 
     // funtion finds the user based on email and password
     function findUserByCredentials (credentials){
@@ -42,7 +49,7 @@ module.exports = function(app,db,mongoose) {
 
     function findUserById (id) {
         //console.log(users);
-        return actors.findById(userId);
+        return actors.findById(id);
     }
 
     // function creates a new user

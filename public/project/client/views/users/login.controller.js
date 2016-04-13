@@ -34,9 +34,13 @@
 
                             $http(req).success(function(response){
                                 var token = response.response.token;
-                                //console.log(token);
-                                UserService.setToken(token);
-                                    $location.path("/profile");
+                                console.log(token);
+                                UserService.setToken(token)
+                                    .then(function(response){
+                                        console.log(" "  + response.data);
+                                        $location.path("/profile");
+                                    });
+
 
                                     //.then(function(response){
                                     //    $location.path("/profile");

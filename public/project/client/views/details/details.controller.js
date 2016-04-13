@@ -9,17 +9,19 @@
         var tid = $routeParams.id;
         //id = tid;
         //UserService.setTransactionId(tid);
-        var token = UserService.getToken();
-        var URL = "https://www.buxfer.com/api/transactions?&token=" + token;
-        var req = {
-            method: 'POST',
-            url: "/api/transactions",
-            data: URL,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        };
+        UserService.getToken()
+            .then(function(response) {
+                var token = response.data;
+                var URL = "https://www.buxfer.com/api/transactions?&token=" + token;
+                var req = {
+                    method: 'POST',
+                    url: "/api/transactions",
+                    data: URL,
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                };
 
-        $http(req).success(renderTransaction);
-
+                $http(req).success(renderTransaction);
+            });
 
         function renderTransaction(response) {
             var number = response.response.numTransactions;

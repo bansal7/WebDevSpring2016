@@ -8,20 +8,22 @@
         var vm = this;
 
         //$scope.search = search;
-        function init(){
-            var token = UserService.getToken();
-            //console.log(token);
+        function init() {
+            UserService.getToken()
+                .then(function (response) {
+                    var token = response.data;
 
-            var URL="https://www.buxfer.com/api/groups?&token="+ token;
+                    var URL = "https://www.buxfer.com/api/groups?&token=" + token;
 
-            var req = {
-                method: 'POST',
-                url: "/api/usergroups",
-                data: URL,
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-            };
+                    var req = {
+                        method: 'POST',
+                        url: "/api/usergroups",
+                        data: URL,
+                        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                    };
 
-            $http(req).success(renderGroups);
+                    $http(req).success(renderGroups);
+                });
         }
 
         init();

@@ -12,14 +12,19 @@
         var token = null;
 
             function init(){
+                console.log("Inside profile controller");
             UserService
                 .getCurrentUser()
                 .then(function(response){
-                    //console.log(response.data);
+                    console.log(response.data);
                     vm.user = response.data;
                 });
 
-             token = UserService.getToken();
+             UserService.getToken()
+                 .then(function (response) {
+                     console.log(response.data);
+                     token = response.data;
+                 });
         }
         init();
 

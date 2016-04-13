@@ -11,18 +11,19 @@
 
         function init() {
 
-            //id = tid;
-            //UserService.setTransactionId(tid);
-            var token = UserService.getToken();
-            var URL = "https://www.buxfer.com/api/groups?&token=" + token;
-            var req = {
-                method: 'POST',
-                url: "/api/usergroups",
-                data: URL,
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-            };
+            UserService.getToken()
+                .then(function (response) {
+                    var token = response.data;
+                    var URL = "https://www.buxfer.com/api/groups?&token=" + token;
+                    var req = {
+                        method: 'POST',
+                        url: "/api/usergroups",
+                        data: URL,
+                        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                    };
 
-            $http(req).success(renderGroups);
+                    $http(req).success(renderGroups);
+                });
         }
 
         init();
@@ -35,10 +36,10 @@
             //console.log(groups);
             for (var index in groups){
                 if (groups[index].id == gid) {
-                   $scope.group = {
-                       id : groups[index].id,
+                    $scope.group = {
+                        id : groups[index].id,
                         name: groups[index].name,
-                       members : members(groups[index].members)
+                        members : members(groups[index].members)
                     }
                     break;
                 }
