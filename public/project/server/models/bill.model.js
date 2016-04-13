@@ -97,7 +97,7 @@ module.exports = function(app,db,mongoose) {
             .update (
                 {_id: billId},
                 {$set: {
-                    description : bill.title,
+                    description : bill.description,
                     userId : bill.userId,
                     amount : bill.amount,
                     type : bill.type,

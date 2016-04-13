@@ -59,14 +59,15 @@
         function updateGroup(group) {
             if ((group.name != null && group.members != null) && vm.selectedIndex != -1) {
                 var selectedGroup = vm.data[vm.selectedIndex];
+                group.members = group.members.toString();
                 var newGroup = {
                     "_id": selectedGroup._id,
                     "name": group.name,
                     "members": group.members.split(",")
                 };
                 //console.log(newGroup);
-                if(newGroup.members.indexOf('Bansal') < 0){
-                    newGroup.members.push("Bansal");
+                if(newGroup.members.indexOf(name) < 0){
+                    newGroup.members.push(name);
                 }
 
                 //console.log(newGroup);

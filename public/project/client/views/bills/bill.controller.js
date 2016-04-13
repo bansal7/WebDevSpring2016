@@ -34,58 +34,65 @@
 
         // function that adds a new form to the users' list
         function addBill(bill) {
-            if (bill.description != null && bill.type != null && bill.amount != null && bill.date != null){
-                var newBill = {
-                    //"_id" : (new Date).getTime(),
-                    "description": bill.description,
-                    "type" : bill.type,
-                    "amount" : bill.amount,
-                    "date" : bill.date
-                };
-                //console.log(newBill);
-                //console.log(bill.date);
-                UserService.getCurrentUser()
-                    .then(function(response) {
-                        var user = response.data;
-                        BillService
-                            .createBill(user._id,newBill)
-                            .then(function (response) {
-                                if (response) {
-                                    //console.log(response);
-                                    vm.bill = null;
-                                    init();
-                                }
-                            });
-                    });
-            }
-            else {
-                alert("Please Enter a proper value in the fields.\nNames, Amount and Description cannot be empty")
+            if (bill != null) {
+                if (bill.description != null && bill.type != null && bill.amount != null && bill.date != null) {
+                    var newBill = {
+                        //"_id" : (new Date).getTime(),
+                        "description": bill.description,
+                        "type": bill.type,
+                        "amount": bill.amount,
+                        "date": bill.date
+                    };
+                    //console.log(newBill);
+                    //console.log(bill.date);
+                    UserService.getCurrentUser()
+                        .then(function (response) {
+                            var user = response.data;
+                            BillService
+                                .createBill(user._id, newBill)
+                                .then(function (response) {
+                                    if (response) {
+                                        //console.log(response);
+                                        vm.bill = null;
+                                        init();
+                                    }
+                                });
+                        });
+                }
+                else {
+                    alert("Please Enter a proper value in the fields.\nNames, Amount, Date and Description cannot be empty")
+                }
             }
         }
 
         // function that updates a form of the user
         function updateBill(bill) {
-            if ((bill.description != null && bill.type != null && bill.amount != null && bill.date != null) && vm.selectedIndex != -1) {
-                var selectedBill = vm.data[vm.selectedIndex];
-                var newBill = {
-                    "_id": selectedBill._id,
-                    "description": bill.description,
-                    "type" : bill.type,
-                    "amount" : bill.amount,
-                    "date" : bill.date
-                };
-                BillService
-                    .updateBill(selectedBill._id, newBill)
-                    .then(function(response){
-                        if(response) {
-                            vm.data[vm.selectedIndex] = response.data;
-                            vm.bill = null;
-                            vm.selectedIndex = -1;
-                        }
-                    });
-            }
-            else {
-                alert("Please Enter a proper value in the fields.\nNames, Amount and Description cannot be empty")
+            if (bill != null) {
+                if ((bill.description != "" && bill.type != "" && bill.amount != "" && bill.date != "") && vm.selectedIndex != -1) {
+                    var selectedBill = vm.data[vm.selectedIndex];
+                    var newBill = {
+                        "_id": selectedBill._id,
+                        "description": bill.description,
+                        "userId": selectedBill.userId,
+                        "type": bill.type,
+                        "amount": bill.amount,
+                        "date": bill.date
+                    };
+                    console.log(newBill);
+                    BillService
+                        .updateBill(selectedBill._id, newBill)
+                        .then(function (response) {
+                            if (response) {
+                                vm.data[vm.selectedIndex] = response.data;
+                                vm.bill = null;
+                                vm.selectedIndex = -1;
+                            }
+                        });
+                    init();
+                }
+                else {
+                    alert("Please Enter a proper value in the fields.\nNames, Amount, Date and Description cannot be empty")
+                }
             }
         }
 

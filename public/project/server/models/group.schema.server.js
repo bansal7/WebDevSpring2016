@@ -11,8 +11,8 @@ module.exports = function(mongoose) {
         },
         members : {
             type: [String],
-            default : "Shared Bill",
-            description : "Type of the Bill for User"
+            default : "Alice,Bob",
+            description : "Members of the group"
         }
     }, {collection: 'group'});
     return GroupSchema;
