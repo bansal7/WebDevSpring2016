@@ -10,6 +10,23 @@ module.exports = function(app, userModel) {
     app.post("/api/project/logout", logout);
     app.get("/api/project/setToken/:token",setToken);
     app.get("/api/project/getToken/",getToken);
+    app.get ("/api/user/search/:firstName", searchUser);
+
+    function searchUser(req, res) {
+
+        var firstName = req.params.firstName;
+        console.log(firstName);
+        userModel
+            .searchUser(firstName)
+            .then(
+                function(developers){
+                    res.json(developers);
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            )
+    }
 
 
     function getAllUsers(req, res) {

@@ -11,10 +11,15 @@ module.exports = function(app,db,mongoose) {
         createUser : createUser,
         deleteUserById : deleteUserById,
         updateUser : updateUser,
-        setToken : setToken
+        setToken : setToken,
+        searchUser: searchUser
     }
 
     return api;
+
+    function searchUser(firstName) {
+        return actors.find({'firstName': {$regex: firstName, $options: 'i'}});
+    }
 
     function setToken(token){
         var deferred = q.defer ();

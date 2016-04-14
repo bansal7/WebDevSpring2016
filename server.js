@@ -26,24 +26,24 @@ var db = mongoose.connect(connectionString);
 
 var app = express();
 
-
+//console.log(process.env.SESSION_SECRET);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended : true}));
 var urlencodedParser = bodyParser.urlencoded({extended: true});
 //app.use(multer());
-app.use(session({ secret: "Bansal" ,
+app.use(session({ secret: process.env.SESSION_SECRET,
     resave : true,
     saveUninitialized : true}));
 app.use(cookieParser());
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static(__dirname + '/public'));
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
 
-//console.log(process.env.PASSPORT_SECRET);
-
-require("./public/assignment/server/app.js")(app,db,mongoose);
-require("./public/project/server/app.js")(app,db,mongoose);
+require("./public/assignment/server/app.js")(app,db,mongoose,LocalStrategy);
+require("./public/project/server/app.js")(app,db,mongoose,LocalStrategy);
 
 
 app.post("/api",urlencodedParser,function(req,res){

@@ -8,9 +8,11 @@
         var vm = this;
 
         vm.data = {};
+        var tempMembers = [];
         var name;
 
             function init(){
+                tempMembers = [];
             UserService.getCurrentUser()
                 .then(function(response){
                     name = response.data.firstName;
@@ -29,7 +31,19 @@
         vm.updateGroup = updateGroup;
         vm.deleteGroup = deleteGroup;
         vm.selectGroup= selectGroup;
+        vm.shareGroup = shareGroup;
         vm.selectedIndex = -1;
+
+        function shareGroup(name,user){
+
+            tempMembers.push(user.firstName);
+
+            vm.group = {
+                name : name,
+                members : tempMembers.join(",")
+            };
+
+        }
 
         // function that adds a new form to the users' list
         function addGroup(group) {
@@ -107,6 +121,8 @@
                 "name": selectedUser.name,
                 "members": selectedUser.members
             };
+
+            tempMembers = selectedUser.members;
         }
     }
 })();

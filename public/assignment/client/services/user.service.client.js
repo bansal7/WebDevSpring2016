@@ -31,7 +31,7 @@
         // funtion finds the user based on username and password
         function findUserByCredentials(username, password) {
             //console.log("inside login");
-            return $http.get("/api/assignment/user?username=" + username + "&password=" + password);
+            return $http.get("/api/assignment/login?username=" + username + "&password=" + password);
         }
 
         // function finds all the users
@@ -43,12 +43,12 @@
         function createUser(user) {
             //user._id = (new Date).getTime();
             //console.log(user + "   ksdbgshb");
-            return $http.post("/api/assignment/user", user);
+            return $http.post("/api/assignment/register", user);
         }
 
         // function deletes a user
         function deleteUserById(userId) {
-            return $http.delete("/api/assignment/user/" + userId);
+            return $http.delete("/api/assignment/admin/user/" + userId);
         }
 
         // function updates a user entry
