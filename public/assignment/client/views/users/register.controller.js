@@ -22,7 +22,7 @@
                 roles: []
             };
             UserService
-                .createUser(newUser)
+                .register(newUser)
                 .then(function(response) {
                     //console.log(response);
                     if(response.data) {

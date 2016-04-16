@@ -36,7 +36,8 @@ module.exports = function(app,db,mongoose) {
                     "password" : user.password,
                     "firstName" : user.firstName,
                     "lastName" : user.lastName,
-                    "emails" : user.emails
+                    "emails" : user.emails,
+                    "roles" : user.roles
                 }},
                 function (err, stats) {
                     if (!err) {

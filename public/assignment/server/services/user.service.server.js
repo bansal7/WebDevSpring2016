@@ -2,6 +2,7 @@ module.exports = function(app, userModel,LocalStrategy) {
     var passport = require('passport');
     var auth = authorized;
     passport.use(new LocalStrategy(localStrategy));
+    var bcrypt = require("bcrypt-nodejs");
 
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
@@ -68,6 +69,7 @@ module.exports = function(app, userModel,LocalStrategy) {
                     if(user) {
                         res.json(null);
                     } else {
+                        newUser.password = bcrypt.hashSync(newUser.password);
                         return userModel.createUser(newUser);
                     }
                 },
@@ -109,6 +111,7 @@ module.exports = function(app, userModel,LocalStrategy) {
                     // if the user does not already exist
                     if(user == null) {
                         // create a new user
+                        newUser.password = bcrypt.hashSync(newUser.password);
                         return userModel.createUser(newUser)
                             .then(
                                 // fetch all the users
@@ -165,7 +168,7 @@ module.exports = function(app, userModel,LocalStrategy) {
     }
 
     function isAdmin(user) {
-        if(user.roles.indexOf("admin") > 0) {
+        if(user.roles.indexOf("admin") >= 0) {
             return true
         }
         return false;
@@ -199,7 +202,7 @@ module.exports = function(app, userModel,LocalStrategy) {
          if(typeof newUser.roles == "string") {
          newUser.roles = newUser.roles.split(",");
          }*/
-
+        newUser.password = bcrypt.hashSync(newUser.password);
         userModel
             .updateUser(req.params.id, newUser)
             .then(
@@ -239,17 +242,17 @@ module.exports = function(app, userModel,LocalStrategy) {
 
         var credentials = {"username" : username,
             "password" : password};
-        console.log(credentials.username + " " + credentials.password );
+        //console.log(credentials.username + " " + credentials.password );
         userModel
-            .findUserByCredentials(credentials)
+            .findUserByUsername(username)
             .then(
-                function (doc) {
-                    user = doc;
+                function (user) {
                     //req.session.currentUser = user;
-                    if (!user) {
+                    if(user && bcrypt.compareSync(password, user.password)) {
+                        return done(null, user);
+                    } else {
                         return done(null, false);
                     }
-                    return done(null, user);
 
                 },
                 // reject promise if error
@@ -265,7 +268,7 @@ module.exports = function(app, userModel,LocalStrategy) {
         if(isAdmin(req.user)) {
 
             userModel
-                .removeUser(req.params.id)
+                .deleteUser(req.params.id)
                 .then(
                     function(user){
                         return userModel.findAllUsers();
@@ -290,7 +293,7 @@ module.exports = function(app, userModel,LocalStrategy) {
     function updateUserAdmin(req, res) {
 
         var newUser = req.body;
-
+        console.log(newUser.roles);
         if(newUser.roles && newUser.roles.length > 1) {
             newUser.roles = newUser.roles.split(",");
         }

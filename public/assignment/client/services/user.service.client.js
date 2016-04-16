@@ -9,10 +9,13 @@
         var model = {
             findUserByUsername: findUserByUsername,
             findUserByCredentials : findUserByCredentials,
+            findUserById : findUserById,
             findAllUsers : findAllUsers,
             createUser : createUser,
+            register : register,
             deleteUserById : deleteUserById,
             updateUser : updateUser,
+            updateUserAdmin : updateUserAdmin,
             setCurrentUser: setCurrentUser,
             getCurrentUser: getCurrentUser,
             logout : logout
@@ -31,18 +34,26 @@
         // funtion finds the user based on username and password
         function findUserByCredentials(username, password) {
             //console.log("inside login");
-            return $http.get("/api/assignment/login?username=" + username + "&password=" + password);
+            return $http.post("/api/assignment/login?username=" + username + "&password=" + password);
+        }
+
+        function findUserById(userId){
+            return $http.get("/api/assignment/admin/user/" + userId);
         }
 
         // function finds all the users
         function findAllUsers() {
-            return $http.get("/api/assignment/user");
+            return $http.get("/api/assignment/admin/user");
         }
 
         // function creates a new user
         function createUser(user) {
             //user._id = (new Date).getTime();
             //console.log(user + "   ksdbgshb");
+            return $http.post("/api/assignment/admin/user", user);
+        }
+
+        function register(user){
             return $http.post("/api/assignment/register", user);
         }
 
@@ -55,6 +66,10 @@
         function updateUser(userId, user) {
             //console.log("sending: " + "/api/assignment/user/" + userId, user);
             return $http.put("/api/assignment/user/" + userId, user);
+        }
+
+        function updateUserAdmin(userId,user) {
+            return $http.put("/api/assignment/admin/user/" + userId, user);
         }
 
         function setCurrentUser (user) {

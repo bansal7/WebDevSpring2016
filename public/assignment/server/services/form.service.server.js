@@ -26,7 +26,7 @@ module.exports = function(app, formModel, userModel) {
         formModel
             .findFormById(id)
             .then(function(response){
-                console.log(response);
+                //console.log(response);
                 var forms = response;
                 res.json(forms);
             });
