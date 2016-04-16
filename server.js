@@ -26,6 +26,9 @@ var db = mongoose.connect(connectionString);
 
 var app = express();
 
+if(process.env.SESSION_SECRET == undefined){
+    process.env.SESSION_SECRET = "this is the secret";
+}
 //console.log(process.env.SESSION_SECRET);
 
 app.use(bodyParser.json());
