@@ -27,7 +27,7 @@
                     //console.log(response);
                     if(response.data) {
                         //console.log(response.data);
-                        vm.user = response.data;
+                        //vm.user = response.data;
                         UserService.setCurrentUser(response.data);
                         $location.path('/profile');
                         //console.log("current user is: " + response.data);

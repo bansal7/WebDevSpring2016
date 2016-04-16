@@ -43,8 +43,8 @@
                 //})
                 .then(function(response){
                     if (response.data){
-                        console.log(response.data);
-                        UserService.setCurrentUser(updatedUserObj);
+                        //console.log(response.data);
+                        //UserService.setCurrentUser(updatedUserObj);
                         init();
                         //console.log("hooray!");
                     }
