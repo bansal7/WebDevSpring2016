@@ -208,7 +208,7 @@ module.exports = function(app, userModel,LocalStrategy) {
             .then(
                 function(doc){
                     console.log(doc);
-                    req.user = user;
+                    req.user = newUser;
                     res.json(doc);
                 },
                 function(err){
@@ -238,10 +238,10 @@ module.exports = function(app, userModel,LocalStrategy) {
     }
 
     function localStrategy(username, password, done){
-        var user = null;
+        //var user = null;
 
-        var credentials = {"username" : username,
-            "password" : password};
+        //var credentials = {"username" : username,
+        //    "password" : password};
         //console.log(credentials.username + " " + credentials.password );
         userModel
             .findUserByUsername(username)
@@ -251,7 +251,7 @@ module.exports = function(app, userModel,LocalStrategy) {
                     if(user && bcrypt.compareSync(password, user.password)) {
                         return done(null, user);
                     } else {
-                        return done(null, false);
+                        return done(null, user);
                     }
 
                 },

@@ -10,11 +10,14 @@
         var vm = this;
         vm.update = update;
 
+        var currentUser;
+
         function init(){
                 UserService
                 .getCurrentUser()
                     .then(function(response){
                         //console.log(response.data);
+                        currentUser = response.data;
                         vm.loggedUser = response.data;
                         vm.loggedUser.emails = response.data.emails.join(",");
                     });
@@ -23,17 +26,27 @@
         init();
 
         function update (user) {
-            // console.log("updating user" + us);
+            var updatedUserObj = {
+                "_id": currentUser._id,
+                "username": currentUser.username,
+                "password": user.password,
+                "firstName": user.firstName,
+                "lastName": user.lastName,
+                "emails": user.emails.split(','),
+                "roles": currentUser.roles
+            };
+
             UserService
-                .updateUser(user._id, user)
-                .then(function() {
-                    return UserService.findUserByCredentials(user.username, user.password);
-                })
+                .updateUser(currentUser._id, updatedUserObj)
+                //.then(function() {
+                //    return UserService.findUserByCredentials(user.username, user.password);
+                //})
                 .then(function(response){
                     if (response.data){
-                        UserService.setCurrentUser(response.data);
+                        console.log(response.data);
+                        UserService.setCurrentUser(updatedUserObj);
                         UserService.getCurrentUser();
-                        console.log("hooray!");
+                        //console.log("hooray!");
                     }
                 });
         }

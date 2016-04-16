@@ -12,9 +12,10 @@
         function login(user) {
 
             UserService
-                .findUserByCredentials(user.username, user.password)
+                //.findUserByCredentials(user.username, user.password)
+                .login({username: user.username, password: user.password})
                 .then(function(response){
-                    //console.log(response.data);
+                    console.log(response);
                     if(response.data){
                         UserService.setCurrentUser(response.data);
                         $location.path('/profile');

@@ -8,7 +8,7 @@
 
         var model = {
             findUserByUsername: findUserByUsername,
-            findUserByCredentials : findUserByCredentials,
+            //findUserByCredentials : findUserByCredentials,
             findUserById : findUserById,
             findAllUsers : findAllUsers,
             createUser : createUser,
@@ -18,8 +18,9 @@
             updateUserAdmin : updateUserAdmin,
             setCurrentUser: setCurrentUser,
             getCurrentUser: getCurrentUser,
-            logout : logout
-        }
+            logout : logout,
+            login: login
+        };
 
         return model;
 
@@ -27,15 +28,19 @@
             return $http.post("/api/assignment/logout");
         }
 
+        function login(user){
+            return $http.post("/api/assignment/login", user);
+        }
+
         function findUserByUsername(username) {
             return $http.get("/api/assignment/user?username=" + username);
         }
 
         // funtion finds the user based on username and password
-        function findUserByCredentials(username, password) {
-            //console.log("inside login");
-            return $http.post("/api/assignment/login?username=" + username + "&password=" + password);
-        }
+        //function findUserByCredentials(username, password) {
+        //    //console.log("inside login");
+        //    return $http.post("/api/assignment/login?username=" + username + "&password=" + password);
+        //}
 
         function findUserById(userId){
             return $http.get("/api/assignment/admin/user/" + userId);

@@ -39,9 +39,9 @@ module.exports = function(app,db,mongoose) {
                     "emails" : user.emails,
                     "roles" : user.roles
                 }},
-                function (err, stats) {
+                function (err, doc) {
                     if (!err) {
-                        deferred.resolve(stats);
+                        deferred.resolve(doc);
                         //console.log(stats);
                     } else {
                         deferred.reject(err);
