@@ -45,7 +45,7 @@
                     if (response.data){
                         console.log(response.data);
                         UserService.setCurrentUser(updatedUserObj);
-                        UserService.getCurrentUser();
+                        init();
                         //console.log("hooray!");
                     }
                 });

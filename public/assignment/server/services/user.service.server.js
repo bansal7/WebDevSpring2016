@@ -251,7 +251,7 @@ module.exports = function(app, userModel,LocalStrategy) {
                     if(user && bcrypt.compareSync(password, user.password)) {
                         return done(null, user);
                     } else {
-                        return done(null, user);
+                        return done(null, false);
                     }
 
                 },
