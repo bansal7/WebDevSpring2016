@@ -12,7 +12,8 @@ module.exports = function(mongoose) {
             description: "Wonderland"},
         email: {type : String,
             description: "alice@wonderland.com"},
-        roles: [String],
+        roles: {type : String,
+            description: "User can be actor or admin"},
 
     }, {collection: 'actor'});
     return ActorSchema;

@@ -18,7 +18,6 @@
     <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <!-- Custom CSS -->
     <link href="assets/css/business-frontpage.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="assets/css/zabuto_calendar.css">
     <link rel="stylesheet" type="text/css" href="assets/js/gritter/css/jquery.gritter.css" />
     <link rel="stylesheet" type="text/css" href="assets/lineicons/style.css" />
     <link rel="stylesheet" type="text/css" href="assets/css/angucomplete-alt.css" />
@@ -59,26 +58,18 @@
 </head>
 
 <body ng-controller="MainController">
+<div ng-include="'views/header/header.view.html'"></div>
 
-<section id="container">
-
-    <div ng-include="'views/header/header.view.html'"></div>
-
-    <div>
-        <div class="row">
-            <div>
-                <div ng-include="'views/sidebar/sidebar.view.html'"></div>
-            </div>
-            <div>
-                <section id="main-content">
-                    <section class="wrapper">
-                        <div ng-view></div>
-                    </section>
-                </section>
-            </div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <div ng-include="'views/sidebar/sidebar.view.html'"></div>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" style="padding-top: 50px; padding-left: 30px;">
+            <div style="padding-left: initial;" ng-view></div>
         </div>
     </div>
-</section>
+</div>
 
 
 <!-- js placed at the end of the document so the pages load faster -->

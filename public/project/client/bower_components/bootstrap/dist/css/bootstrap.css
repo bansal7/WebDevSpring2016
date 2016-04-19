@@ -19,7 +19,6 @@ figcaption,
 figure,
 footer,
 header,
-hgroup,
 main,
 menu,
 nav,
@@ -3818,7 +3817,8 @@ tbody.collapse.in {
 }
 .input-group {
   position: relative;
-  display: table;
+  /*display: table;*/
+  float: inherit;
   border-collapse: separate;
 }
 .input-group[class*="col-"] {

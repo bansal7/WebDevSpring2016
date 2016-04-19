@@ -59,6 +59,7 @@ module.exports = function(app,db,mongoose) {
 
     // function creates a new user
     function createUser(newUser){
+        newUser.roles = "user";
         var deferred = q.defer();
         actors.create(newUser, function (err, doc) {
             if (err) {
