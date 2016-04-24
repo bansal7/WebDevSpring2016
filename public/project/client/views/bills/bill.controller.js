@@ -4,7 +4,7 @@
         .module("SplitUpApp")
         .controller("BillController",BillController);
 
-    function BillController($scope,BillService,UserService) {
+    function BillController(BillService,UserService) {
 
         var vm = this;
 
@@ -13,7 +13,9 @@
         function init(){
             UserService.getCurrentUser()
                 .then(function(response){
+
                     var user = response.data;
+                    console.log(user);
                     BillService
                         .findBillsByUserId(user._id)
                         .then(function(response){

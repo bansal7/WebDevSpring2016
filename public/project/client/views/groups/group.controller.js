@@ -11,11 +11,13 @@
         var tempMembers = [];
         var name;
 
-            function init(){
-                tempMembers = [];
+        function init(){
+            tempMembers = [];
             UserService.getCurrentUser()
                 .then(function(response){
+console.log(response.data);
                     name = response.data.firstName;
+                    console.log(name);
                     GroupService
                         .findGroupsByUser(name)
                         .then(function(response){
@@ -54,9 +56,15 @@
                     "members" : group.members.split(",")
                 };
                 //console.log(newGroup.members);
-                if(newGroup.members.indexOf(name) < 0){
-                    newGroup.members.push(name);
-                }
+                UserService.getCurrentUser()
+                    .then(function(response) {
+
+                        name = response.data.firstName;
+                        console.log(name);
+                        if (newGroup.members.indexOf(name) < 0) {
+                            newGroup.members.push(name);
+                        }
+                    });
                 GroupService
                     .createGroup(newGroup)
                     .then(function(response){
@@ -108,7 +116,7 @@
             GroupService
                 .deleteGroupById(group._id)
                 .then(function(response){
-                   init();
+                    init();
                 });
         }
 

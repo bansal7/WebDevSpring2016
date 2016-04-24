@@ -15,7 +15,7 @@
                 controller : "UserController",
                 controllerAs: "model",
                 resolve : {
-                    getLoggedIn : getLoggedIn
+                    checkLoggedIn : checkLoggedIn
                 }
             })
             .when("/bill",{
@@ -48,7 +48,7 @@
                 controller : "ProfileController",
                 controllerAs: "model",
                 resolve: {
-                    checkLoggedIn: checkLoggedIn
+                    getLoggedIn: getLoggedIn
                 }
             })
             .when("/register",{

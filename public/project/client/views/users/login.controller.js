@@ -22,7 +22,7 @@
 
                         var a = URL.replace("USERNAME", user.username);
                         var b = a.replace("PASSWORD", user.password);
-                        UserService.setCurrentUser(user);
+
                         if (user != null) {
                             var req = {
                                 method: 'POST',
@@ -34,10 +34,11 @@
 
                             $http(req).success(function(response){
                                 var token = response.response.token;
-                                console.log(token);
+                                //console.log(token);
                                 UserService.setToken(token)
                                     .then(function(response){
-                                        console.log(" "  + response.data);
+                                        //console.log(" "  + response.data);
+                                        UserService.setCurrentUser(user);
                                         $location.path("/profile");
                                     });
 
