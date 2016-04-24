@@ -1,6 +1,6 @@
 <div ng-controller="TransactionController" class="table-responsive">
-    <h2> Transaction </h2>
-    <section ng-show="model.data">
+    <h2> Transactions </h2>
+    <section ng-show="model.data" class="hidden-xs">
 
         <h3> Search Results</h3>
         <table class="table table-striped table-hover table-bordered">
@@ -27,4 +27,11 @@
             <a href="#/addtransaction" class="btn btn-primary"> Add a transaction</a>
         </div>
     </section>
+    <div class="embossed-box visible-xs" ng-show="model.data" ng-repeat="transaction in model.data">
+        <h4 ng-show="transaction.description"><a href="#/details/{{transaction.id}}"><b>Description :  {{transaction.description}}</b></a></h4>
+        <h4 ng-show="transaction.normalizedDate">Date &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{transaction.normalizedDate}}</h4>
+        <h4 ng-show="transaction.type">Type &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{transaction.type}}</h4>
+        <h4 ng-show="transaction.amount">Amount  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{transaction.amount}}</h4>
+        <a href="#/addtransaction" class="btn btn-primary"> Add a transaction</a>
+    </div>
 </div>

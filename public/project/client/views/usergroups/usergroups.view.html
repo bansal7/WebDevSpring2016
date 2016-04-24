@@ -1,18 +1,23 @@
 <div ng-controller="UserGroupsController" class="table-responsive">
-    <h2> Groups </h2>
-    <section ng-show="model.data">
-        <h3> Search Results</h3>
-        <table class="table table-striped table-hover table-bordered">
-            <thead>
-            <tr>
-                <th>Group Name</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="group in model.data">
-                <td><a href="#/groupdetails/{{group.id}}">{{group.name}}</a></td>
-            </tr>
-            </tbody>
-        </table>
-    </section>
+    <h1> Groups </h1>
+    <!--<section ng-show="model.data">-->
+        <!--<h3> Search Results</h3>-->
+        <!--<table class="table table-striped table-hover table-bordered">-->
+            <!--<thead>-->
+            <!--<tr>-->
+                <!--<th>Group Name</th>-->
+            <!--</tr>-->
+            <!--</thead>-->
+            <!--<tbody>-->
+            <!--<tr ng-repeat="group in model.data">-->
+                <!--<td><a href="#/groupdetails/{{group.id}}">{{group.name}}</a></td>-->
+            <!--</tr>-->
+            <!--</tbody>-->
+        <!--</table>-->
+    <!--</section>-->
+
+    <div class="embossed-box" ng-show="model.data" ng-repeat="group in model.data">
+      <h3><strong>{{group.name}}</strong></h3>
+        <h4>Members : {{group.members.toString()}}</h4>
+    </div>
 </div>

@@ -27,10 +27,39 @@
         }
 
         init();
-        function renderGroups(response){
+        //function renderGroups(response){
+        //    var groups = (response.response.groups);
+        //    //console.log(groups);
+        //    vm.data = groups;
+        //}
+
+        function renderGroups(response) {
+            //var number = response.response.numTransactions;
             var groups = (response.response.groups);
-            //console.log(groups);
-            vm.data = groups;
+            console.log(groups);
+            var groupObj = [];
+            //vm.data = groups;
+            for (var index in groups){
+                groupObj.push ({
+                    id : groups[index].id,
+                    name: groups[index].name,
+                    members : members(groups[index].members)
+                });
+            }
+            vm.data = groupObj;
+        }
+
+        function members(list){
+            var membersList = [];
+            for(var index in list){
+                if (list[index].name == null) {
+                    membersList.push("You");
+                }
+                else{
+                    membersList.push(list[index].name);
+                }
+            }
+            return membersList;
         }
     }
 })();

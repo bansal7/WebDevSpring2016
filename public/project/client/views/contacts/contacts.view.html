@@ -1,22 +1,42 @@
 <div ng-controller="ContactsController" class="table-responsive">
-    <h2> Contacts </h2>
-    <section ng-show="model.data">
-        <h3> Results</h3>
-        <table class="table table-striped table-hover table-bordered">
-            <thead>
-            <tr>
-                <th>Contact Id</th>
-                <th>Contact Name</th>
-                <th>Contact Balance</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="contact in model.data">
-                <td><a href="#">{{contact.id}}</a></td>
-                <td><a href="#">{{contact.name}}</a></td>
-                <td><a href="#">{{contact.balance}}</a></td>
-            </tr>
-            </tbody>
-        </table>
-    </section>
+    <h1> Contacts </h1>
+    <!--<section ng-show="model.data">-->
+        <!--<h3> Results</h3>-->
+        <!--<table class="table table-striped table-hover table-bordered">-->
+            <!--<thead>-->
+            <!--<tr>-->
+                <!--<th>Contact Id</th>-->
+                <!--<th>Contact Name</th>-->
+                <!--<th>Contact Balance</th>-->
+            <!--</tr>-->
+            <!--</thead>-->
+            <!--<tbody>-->
+            <!--<tr ng-repeat="contact in model.data">-->
+                <!--<td><a href="#">{{contact.id}}</a></td>-->
+                <!--<td><a href="#">{{contact.name}}</a></td>-->
+                <!--<td><a href="#">{{contact.balance}}</a></td>-->
+            <!--</tr>-->
+            <!--</tbody>-->
+        <!--</table>-->
+    <!--</section>-->
+
+    <div clas="row" ng-show="model.data">
+        <div class="col-md-6">
+            <h2 style="color: darkgreen;">You are OWED</h2>
+            <div class="embossed-box" ng-show="model.data && contact.balance > 0" ng-repeat="contact in model.data">
+                <h3><strong>{{contact.name}}</strong></h3>
+                <!--<h4 style="color: red;" ng-show="contact.balance < 0">You OWE : &dollar;{{contact.balance}}</h4>-->
+                <h4 style="color: darkgreen;">You are OWED : &dollar;{{contact.balance}}</h4>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h2 style="color: red;">You OWE</h2>
+            <div class="embossed-box" ng-show="model.data && contact.balance < 0" ng-repeat="contact in model.data">
+                <h3><strong>{{contact.name}}</strong></h3>
+                <h4 style="color: red;">You OWE : &dollar;{{contact.balance}}</h4>
+                <!--<h4 style="color: darkgreen;" ng-show="contact.balance > 0">You are OWED : &dollar;{{contact.balance}}</h4>-->
+            </div>
+        </div>
+    </div>
+
 </div>

@@ -1,6 +1,21 @@
 @import url(http://fonts.googleapis.com/css?family=Ruda:400,700,900);
 
 /* BASIC THEME CONFIGURATION */
+.embossed-box{
+    /*width: auto;*/
+    /*height: auto;*/
+    /*border-width: 1px;*/
+    /*border-color: black;*/
+    /*border-style: solid;*/
+    /*padding:10px;*/
+    margin-bottom: 20px;
+    padding: 30px 15px;
+    background: #fff;
+    background: rgba(225,225,234,0.9);
+
+}
+
+
 body {
     color: #797979;
 	background: #f2f2f2;
@@ -502,7 +517,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
     /* Safari and Chrome */
     .dropdown-menu.extended  {
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.176) !important;
-    };
+    }
     }
 
 .dropdown-menu.extended li p {
@@ -687,7 +702,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 }
 
 .log-arrow-up {
-    background: url("../img/arrow-up.png") no-repeat;
+    /*background: url("../img/arrow-up.png") no-repeat;*/
     width: 20px;
     height: 11px;
     position: absolute;
@@ -809,12 +824,12 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 	font-size: 11px;
 }
 
-.ds p > muted {
-	font-size: 9px;
-	text-transform: uppercase;
-	font-style: italic;
-	color: #666666
-}
+/*.ds p > muted {*/
+	/*font-size: 9px;*/
+	/*text-transform: uppercase;*/
+	/*font-style: italic;*/
+	/*color: #666666*/
+/*}*/
 
 .ds a {
 	color: #68dff0;
@@ -1311,7 +1326,7 @@ PANELS CONFIGURATIONS
 #spotify {
 	background: url(../img/lorde.jpg) no-repeat center top;
 	margin-top: -15px;
-	background-attachment: relative;
+	/*background-attachment: relative;*/
 	background-position: center center;
 	min-height: 220px;
 	width: 100%;
@@ -1355,7 +1370,7 @@ PANELS CONFIGURATIONS
 #blog-bg {
 	background: url(../img/blog-bg.jpg) no-repeat center top;
 	margin-top: -15px;
-	background-attachment: relative;
+	/*background-attachment: relative;*/
 	background-position: center center;
 	min-height: 150px;
 	width: 100%;
@@ -1480,7 +1495,7 @@ PANELS CONFIGURATIONS
 #profile-01 {
 	background: url(../img/profile-01.jpg) no-repeat center top;
 	margin-top: -15px;
-	background-attachment: relative;
+	/*background-attachment: relative;*/
 	background-position: center center;
 	min-height: 150px;
 	width: 100%;
@@ -1528,7 +1543,7 @@ PANELS CONFIGURATIONS
 #profile-02 {
 	background: url(../img/profile-02.jpg) no-repeat center top;
 	margin-top: -15px;
-	background-attachment: relative;
+	/*background-attachment: relative;*/
 	background-position: center center;
 	min-height: 200px;
 	width: 100%;
@@ -2093,7 +2108,7 @@ label {
     /* Safari and Chrome */
     .panel-footer.revenue-foot {
         margin-bottom: -4px;
-    };
+    }
     }
 
 

@@ -1,30 +1,38 @@
 <div ng-controller="DetailsController">
-    <h2> Search </h2>
-    <section ng-show="transaction">
-        <h3> Search Results</h3>
-        <table class="table table-striped table-responsive">
-            <thead>
-            <tr>
-                <th>Description</th>
-                <th>Date of Transaction</th>
-                <th>Type of Transaction</th>
-                <th>Amount</th>
-                <th>Expense Amount For You</th>
-                <th>Status</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>{{transaction.description}}</td>
-                <td>
-                    {{transaction.normalizedDate}}
-                </td>
-                <td>{{transaction.type}}</td>
-                <td>{{transaction.amount}}</td>
-                <td>{{transaction.expenseAmount}}</td>
-                <td>{{transaction.status}}</td>
-            </tr>
-            </tbody>
-        </table>
-    </section>
+    <h2> Details </h2>
+    <!--<section ng-show="transaction">-->
+        <!--<table class="table table-striped table-responsive">-->
+            <!--<thead>-->
+            <!--<tr>-->
+                <!--<th>Description</th>-->
+                <!--<th>Date of Transaction</th>-->
+                <!--<th>Type of Transaction</th>-->
+                <!--<th>Amount</th>-->
+                <!--<th>Expense Amount For You</th>-->
+                <!--<th>Status</th>-->
+            <!--</tr>-->
+            <!--</thead>-->
+            <!--<tbody>-->
+            <!--<tr>-->
+                <!--<td>{{transaction.description}}</td>-->
+                <!--<td>-->
+                    <!--{{transaction.normalizedDate}}-->
+                <!--</td>-->
+                <!--<td>{{transaction.type}}</td>-->
+                <!--<td>{{transaction.amount}}</td>-->
+                <!--<td>{{transaction.expenseAmount}}</td>-->
+                <!--<td>{{transaction.status}}</td>-->
+            <!--</tr>-->
+            <!--</tbody>-->
+        <!--</table>-->
+    <!--</section>-->
+    <div class="embossed-box" ng-show="transaction">
+        <h4 ng-show="transaction.description"><b>Description :  {{transaction.description}}</b></h4>
+        <h4 ng-show="transaction.normalizedDate">Date &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{transaction.normalizedDate}}</h4>
+        <h4 ng-show="transaction.type">Type &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{transaction.type}}</h4>
+        <h4 ng-show="transaction.amount">Amount  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{transaction.amount}}</h4>
+        <h4 ng-show="transaction.expenseAmount">Expense <br>Amount <br>For You  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{transaction.expenseAmount}}</h4>
+        <h4 ng-show="transaction.amount">Status  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{transaction.status}}</h4>
+
+    </div>
 </div>

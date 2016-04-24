@@ -1,11 +1,4 @@
-.box{
-    width: auto;
-    height: auto;
-    border-width: 1px;
-    border-color: black;
-    border-style: solid;
-    padding:10px;
-}
+
 
 .sameline {
     white-space: nowrap
