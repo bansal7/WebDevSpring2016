@@ -15,7 +15,7 @@ module.exports = function(app, userModel) {
     function searchUser(req, res) {
 
         var firstName = req.params.firstName;
-        console.log(firstName);
+        //console.log(firstName);
         userModel
             .searchUser(firstName)
             .then(
@@ -42,7 +42,7 @@ module.exports = function(app, userModel) {
     }
 
     function getToken(req,res){
-        console.log("rssd  " + req.session.token);
+        //console.log("rssd  " + req.session.token);
         res.json(req.session.token);
     }
 
@@ -51,9 +51,9 @@ module.exports = function(app, userModel) {
         userModel.setToken(req.params.token)
             .then(function(response){
                 req.session.token = req.params.token;
-                console.log(req.session.token);
+                //console.log(req.session.token);
                 res.json();
-                console.log(" after model " + req.session.token);
+                //console.log(" after model " + req.session.token);
             });
     }
 

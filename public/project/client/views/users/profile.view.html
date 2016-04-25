@@ -3,8 +3,6 @@ MAIN CONTENT
 *********************************************************************************************************************************************************** -->
 
 <div id="login-page" ng-controller="ProfileController as model">
-    <div class="container">
-
         <form class="form-login">
             <h2 class="form-login-heading">profile</h2>
             <div class="login-wrap">
@@ -24,12 +22,7 @@ MAIN CONTENT
                 <input type="password" ng-model="model.user.password" readonly class="form-control" placeholder="Password">
                 <br>
                 <a ng-click="model.updateUser(model.user)" class="btn btn-theme btn-block btn-success" type="submit"><i class="fa fa-upload"></i> Update</a>
-
-
             </div>
-
         </form>
-
-    </div>
 </div>
 

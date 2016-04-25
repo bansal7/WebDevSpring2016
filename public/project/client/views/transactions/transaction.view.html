@@ -27,11 +27,15 @@
             <a href="#/addtransaction" class="btn btn-primary"> Add a transaction</a>
         </div>
     </section>
-    <div class="embossed-box visible-xs" ng-show="model.data" ng-repeat="transaction in model.data">
-        <h4 ng-show="transaction.description"><a href="#/details/{{transaction.id}}"><b>Description :  {{transaction.description}}</b></a></h4>
-        <h4 ng-show="transaction.normalizedDate">Date &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{transaction.normalizedDate}}</h4>
-        <h4 ng-show="transaction.type">Type &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{transaction.type}}</h4>
-        <h4 ng-show="transaction.amount">Amount  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{transaction.amount}}</h4>
-        <a href="#/addtransaction" class="btn btn-primary"> Add a transaction</a>
-    </div>
+    <section class="visible-xs">
+        <div class="embossed-box visible-xs" ng-show="model.data" ng-repeat="transaction in model.data">
+            <h4 ng-show="transaction.description"><a href="#/details/{{transaction.id}}"><b>Description :  {{transaction.description}}</b></a></h4>
+            <h4 ng-show="transaction.normalizedDate">Date &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{transaction.normalizedDate}}</h4>
+            <h4 ng-show="transaction.type">Type &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{transaction.type}}</h4>
+            <h4 ng-show="transaction.amount">Amount  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{transaction.amount}}</h4>
+        </div>
+        <div style="text-align: center">
+            <a href="#/addtransaction" class="btn btn-primary"> Add a transaction</a>
+        </div>
+    </section>
 </div>

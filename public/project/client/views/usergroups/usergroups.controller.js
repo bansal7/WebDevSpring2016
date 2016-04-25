@@ -36,7 +36,7 @@
         function renderGroups(response) {
             //var number = response.response.numTransactions;
             var groups = (response.response.groups);
-            console.log(groups);
+            //console.log(groups);
             var groupObj = [];
             //vm.data = groups;
             for (var index in groups){

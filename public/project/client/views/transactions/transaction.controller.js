@@ -12,7 +12,7 @@
             UserService.getToken()
                 .then(function(response){
                     var token = response.data;
-                    console.log("Inside Transaction Controller ... here iss the token   " + token);
+                    //console.log("Inside Transaction Controller ... here iss the token   " + token);
                     var URL="https://www.buxfer.com/api/transactions?&token="+ token;
 
                     var req = {

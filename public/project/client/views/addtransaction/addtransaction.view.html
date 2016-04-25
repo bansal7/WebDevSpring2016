@@ -1,6 +1,4 @@
 <div id="login-page" ng-controller="AddTransactionController">
-    <div class="container">
-
         <form class="form-login">
             <h2 class="form-login-heading">Add Transaction</h2>
             <div class="login-wrap">
@@ -17,11 +15,7 @@
                 <input class="form-control" placeholder="E-mail" ng-model="model.transaction.date" type="date">
                 <br>
                 <a ng-click="model.addTransaction(model.transaction)" class="btn btn-theme btn-block btn-success" type="submit"><i class="fa fa-upload"></i> Add</a>
-
-
+                <!--<a class="btn btn-block btn-danger" type="submit"><i class="fa fa-strikethrough"></i> Cancel</a>-->
             </div>
-
         </form>
-
-    </div>
 </div>

@@ -15,7 +15,7 @@
                 .then(function(response){
 
                     var user = response.data;
-                    console.log(user);
+                    //console.log(user);
                     BillService
                         .findBillsByUserId(user._id)
                         .then(function(response){
@@ -80,7 +80,7 @@
                         "amount": bill.amount,
                         "date": bill.date
                     };
-                    console.log(newBill);
+                    //console.log(newBill);
                     BillService
                         .updateBill(selectedBill._id, newBill)
                         .then(function (response) {

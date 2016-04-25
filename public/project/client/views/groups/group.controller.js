@@ -15,9 +15,7 @@
             tempMembers = [];
             UserService.getCurrentUser()
                 .then(function(response){
-console.log(response.data);
                     name = response.data.firstName;
-                    console.log(name);
                     GroupService
                         .findGroupsByUser(name)
                         .then(function(response){
@@ -60,7 +58,7 @@ console.log(response.data);
                     .then(function(response) {
 
                         name = response.data.firstName;
-                        console.log(name);
+                        //console.log(name);
                         if (newGroup.members.indexOf(name) < 0) {
                             newGroup.members.push(name);
                         }

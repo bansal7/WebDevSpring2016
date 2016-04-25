@@ -32,7 +32,7 @@
             //var cid = $routeParams.id;
             //var number = response.response.numTransactions;
             var contacts = (response.response.contacts);
-            console.log(contacts);
+            //console.log(contacts);
             vm.data = contacts;
         }
     }
