@@ -6,6 +6,7 @@ module.exports = function(app,db,mongoose) {
     // stores the data about all the users
     var api = {
         findUserByCredentials : findUserByCredentials,
+        findUserByUsername: findUserByUsername,
         findAllUsers : findAllUsers,
         findUserById : findUserById,
         createUser : createUser,
@@ -49,6 +50,22 @@ module.exports = function(app,db,mongoose) {
                 }
             }
         );
+        return deferred.promise;
+    }
+
+    function findUserByUsername (username) {
+        var deferred = q.defer ();
+        actors
+            .findOne (
+                {username: username},
+                function (err, user) {
+                    if (!err) {
+                        deferred.resolve(user);
+                    } else {
+                        deferred.reject(err);
+                    }
+                }
+            );
         return deferred.promise;
     }
 

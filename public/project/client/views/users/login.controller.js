@@ -7,8 +7,6 @@
     function LoginController($scope,UserService,$http, $location) {
 
         var vm = this;
-        vm.user = {username:"bansalshah1993@gmail.com",
-            password:"webdev2016"};
         vm.login = login;
 
 
@@ -34,7 +32,7 @@
 
                             $http(req).success(function(response){
                                 var token = response.response.token;
-                                //console.log(token);
+                                console.log(token);
                                 UserService.setToken(token)
                                     .then(function(response){
                                         //console.log(" "  + response.data);

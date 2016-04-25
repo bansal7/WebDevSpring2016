@@ -1,4 +1,7 @@
 module.exports = function(app, userModel) {
+
+    var bcrypt = require("bcrypt-nodejs");
+
     app.post("/api/project/user", createUser);
     app.get("/api/project/user?username=username&password=password", getUserByCredentials);
     app.get("/api/project/user", getAllUsers);
@@ -59,17 +62,53 @@ module.exports = function(app, userModel) {
 
     function createUser(req, res) {
         var newUser = req.body;
+        //userModel
+        //    .createUser(newUser)
+        //    .then(
+        //        function(doc){
+        //            res.json(doc);
+        //        },
+        //        // send error if promise rejected
+        //        function(err ){
+        //            res.status(400).send(err);
+        //        }
+        //    );
+
         userModel
-            .createUser(newUser)
+            .findUserByUsername(newUser.username)
             .then(
-                function(doc){
-                    res.json(doc);
+                function(user){
+                    // if the user does not already exist
+                    if(user == null) {
+                        // create a new user
+                        newUser.password = bcrypt.hashSync(newUser.password);
+                        return userModel.createUser(newUser)
+                            .then(
+                                // fetch all the users
+                                function(){
+                                    return userModel.findAllUsers();
+                                },
+                                function(err){
+                                    res.status(400).send(err);
+                                }
+                            );
+                        // if the user already exists, then just fetch all the users
+                    } else {
+                        return userModel.findAllUsers();
+                    }
                 },
-                // send error if promise rejected
-                function(err ){
+                function(err){
                     res.status(400).send(err);
                 }
-            );
+            )
+            .then(
+                function(users){
+                    res.json(users);
+                },
+                function(){
+                    res.status(400).send(err);
+                }
+            )
     }
 
     function getUsers(req, res) {
@@ -116,16 +155,37 @@ module.exports = function(app, userModel) {
             password: req.query.password
         };
         //console.log("I am in user service in server" + cred);
+        //userModel
+        //    .findUserByCredentials(cred)
+        //    .then(function(doc){
+        //            //console.log("in user service server   "+doc);
+        //            req.session.currentActor = doc;
+        //            res.json(doc);
+        //        },
+        //        function(err){
+        //            res.status(400).send(err);
+        //        });
         userModel
-            .findUserByCredentials(cred)
-            .then(function(doc){
-                    //console.log("in user service server   "+doc);
-                    req.session.currentActor = doc;
-                    res.json(doc);
+            .findUserByUsername(cred.username)
+            .then(
+                function (user) {
+                    //req.session.currentUser = user;
+                    console.log(user + "   " + cred.password);
+                    if(user && bcrypt.compareSync(cred.password, user.password)) {
+                        req.session.currentActor = user;
+                        res.json(doc);
+                    } else {
+                        res.status(400).send(err);
+                    }
+
                 },
-                function(err){
-                    res.status(400).send(err);
-                });
+                // reject promise if error
+                function(err) {
+                    if (err) {
+                        res.status(400).send(err);
+                    }
+                }
+            );
     }
 
     function getUserByUsername(req, res) {

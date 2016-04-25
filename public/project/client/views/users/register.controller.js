@@ -28,15 +28,17 @@
 
                 $http(req).success(function(response) {
                     var token = response.response.token;
-                    //console.log(token);
+                    console.log(token);
                     UserService.setToken(token);
                     UserService.createUser(user)
                         .then(function (response) {
                             if (response.data) {
-                                var user = response.data;
+                                //var user = response.data;
+                                console.log(user);
                                 UserService.findUserByCredentials(user.username, user.password)
                                     .then(
                                         function (user) {
+                                            console.log(user);
                                             UserService.setCurrentUser(user);
                                             $location.path("/profile");
                                         });
