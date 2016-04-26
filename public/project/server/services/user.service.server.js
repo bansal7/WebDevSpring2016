@@ -31,7 +31,6 @@ module.exports = function(app, userModel) {
             )
     }
 
-
     function getAllUsers(req, res) {
         if (req.query.username && req.query.password) {
             getUserByCredentials(req, res);
@@ -62,18 +61,6 @@ module.exports = function(app, userModel) {
 
     function createUser(req, res) {
         var newUser = req.body;
-        //userModel
-        //    .createUser(newUser)
-        //    .then(
-        //        function(doc){
-        //            res.json(doc);
-        //        },
-        //        // send error if promise rejected
-        //        function(err ){
-        //            res.status(400).send(err);
-        //        }
-        //    );
-
         userModel
             .findUserByUsername(newUser.username)
             .then(
@@ -141,6 +128,7 @@ module.exports = function(app, userModel) {
         userModel
             .updateUser(userId, user)
             .then(function(doc){
+                    req.session.currentActor = user;
                     res.json(doc);
                 },
                 //send error if promise rejected
@@ -154,26 +142,15 @@ module.exports = function(app, userModel) {
             username: req.query.username,
             password: req.query.password
         };
-        //console.log("I am in user service in server" + cred);
-        //userModel
-        //    .findUserByCredentials(cred)
-        //    .then(function(doc){
-        //            //console.log("in user service server   "+doc);
-        //            req.session.currentActor = doc;
-        //            res.json(doc);
-        //        },
-        //        function(err){
-        //            res.status(400).send(err);
-        //        });
         userModel
             .findUserByUsername(cred.username)
             .then(
                 function (user) {
                     //req.session.currentUser = user;
-                    console.log(user + "   " + cred.password);
+                    //console.log(user + "   " + cred.password);
                     if(user && bcrypt.compareSync(cred.password, user.password)) {
                         req.session.currentActor = user;
-                        res.json(doc);
+                        res.json(user);
                     } else {
                         res.status(400).send(err);
                     }

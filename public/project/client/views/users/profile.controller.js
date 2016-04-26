@@ -34,11 +34,8 @@
             UserService.updateUser(user._id, user)
                 .then(function(response){
                     if (response) {
-                        UserService.findUserByCredentials(user.username, user.password)
-                            .then(function(response){
-                                UserService.setCurrentUser(response.data);
+                        UserService.setCurrentUser(user);
                                 init();
-                            });
                     }
                     else{
                         //console.log(response);
