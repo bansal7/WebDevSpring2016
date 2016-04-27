@@ -32,7 +32,7 @@ module.exports = function(app, groupModel) {
     // function creates a new user
     function createGroup(req, res) {
         var newGroup = req.body;
-        //console.log("newGroup" + newGroup);
+        //console.log(newGroup);
         groupModel
             .createGroup(newGroup)
             .then(

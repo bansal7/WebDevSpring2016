@@ -60,15 +60,19 @@
                         name = response.data.firstName;
                         //console.log(name);
                         if (newGroup.members.indexOf(name) < 0) {
+                            //console.log(newGroup.members);
+
                             newGroup.members.push(name);
+                            //console.log(newGroup.members);
+                            GroupService
+                                .createGroup(newGroup)
+                                .then(function(response){
+                                    vm.group = null;
+                                    init();
+                                });
                         }
                     });
-                GroupService
-                    .createGroup(newGroup)
-                    .then(function(response){
-                        vm.group = null;
-                        init();
-                    });
+
             }
             else {
                 alert("Please Enter a proper value in the fields.\nNames and Members cannot be empty")

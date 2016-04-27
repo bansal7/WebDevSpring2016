@@ -39,7 +39,7 @@
                     name: group.name,
                     members : group.members
                 };
-                //console.log("  " + newGroup);
+                //console.log(newGroup);
                 groups.create(newGroup, function (err, doc) {
                     if (err) {
                         deferred.reject (err);
